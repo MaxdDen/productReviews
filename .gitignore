@@ -10,9 +10,9 @@ venv/
 env/
 reviewsvenv/
 
-# SQLite
-*.db
-*.sqlite3
+# APP
+app/static/uploads/*
+!app/static/uploads/.gitkeep
 
 # PostgreSQL dumps
 *.sql
