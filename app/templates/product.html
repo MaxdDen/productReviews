@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+  <html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Продукт</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="{{ url_for('static', path='css/main.css') }}">
+  </head>
+  <body class="bg-gray-50 min-h-screen flex">
+  
+    <!-- Backdrop -->
+    <div class="backdrop" onclick="closeMobileMenu()"></div>
+  
+    <!-- Mobile Menu -->
+    <div id="mobileMenu">
+      <div class="text-xl font-bold mb-4">AI</div>
+      <nav class="space-y-4">
+        <a href="{{ url_for('dashboard') }}" class="flex items-center gap-2 text-gray-700 hover:text-black">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+          </svg>
+          Главная
+        </a>
+        <a href="{{ url_for('directory_page', directory_name='brand') }}" class="flex items-center gap-2 text-gray-700 hover:text-black">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+          </svg>
+          Бренды
+        </a>
+        <a href="{{ url_for('directory_page', directory_name='category') }}" class="flex items-center gap-2 text-gray-700 hover:text-black">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+          </svg>
+          Категории
+        </a>
+        <a href="{{ url_for('directory_page', directory_name='promt') }}" class="flex items-center gap-2 text-gray-700 hover:text-black">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+          </svg>
+          Промты
+        </a>
+        <a href="{{ url_for('logout') }}" class="flex items-center gap-2 text-gray-700 hover:text-black">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+          </svg>
+          Выход
+        </a>
+      </nav>
+    </div>
+  
+    <!-- Sidebar -->
+    <aside id="sidebar" class="bg-white shadow w-60 transition-all duration-300 ease-in-out overflow-hidden flex flex-col min-h-screen">
+      <div id="sidebar-header" class="flex items-center justify-between px-4 py-4 border-b" onclick="expandSidebar()">
+        <span class="text-xl font-bold">AI</span>
+        <button onclick="event.stopPropagation(); toggleSidebar();">
+          <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+      <div class="flex-1">
+        <nav class="mt-4 space-y-2">
+          <a href="{{ url_for('dashboard') }}" class="flex items-center px-4 py-2 hover:bg-gray-100">
+            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+            </svg>
+            <span class="ml-3 nav-label">Главная</span>
+          </a>
+          <a href="{{ url_for('directory_page', directory_name='brand') }}" class="flex items-center px-4 py-2 hover:bg-gray-100">
+            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+            </svg>
+            <span class="ml-3 nav-label">Бренды</span>
+          </a>
+          <a href="{{ url_for('directory_page', directory_name='category') }}" class="flex items-center px-4 py-2 hover:bg-gray-100">
+            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+            </svg>
+            <span class="ml-3 nav-label">Категории</span>
+          </a>
+          <a href="{{ url_for('directory_page', directory_name='promt') }}" class="flex items-center px-4 py-2 hover:bg-gray-100">
+            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+            </svg>
+            <span class="ml-3 nav-label">Промты</span>
+          </a>
+        </nav>
+      </div>
+      <div class="mt-auto">
+        <a href="{{ url_for('logout') }}" class="flex items-center px-4 py-2 hover:bg-gray-100">
+          <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+          </svg>
+          <span class="ml-3 nav-label">Выход</span>
+        </a>
+      </div>
+  </aside>
+
+  <!-- Основной контент -->
+  <main class="flex-1 p-6">
+    <div class="container bg-white p-6 rounded shadow">
+      
+      <form id="product-form" method="post" action="{{ url_for('save_product') }}" enctype="multipart/form-data" class="space-y-4"> 
+
+        {% if product %}
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+        {% endif %}
+        {% for k, v in return_params.items() %}
+            <input type="hidden" name="return_param_{{ k }}" value="{{ v }}">
+        {% endfor %}
+
+        <!-- Название -->
+        <div>
+          <label for="name" class="block font-semibold">Название</label>
+          <input type="text" id="name" name="name" value="{{ product.name if product else '' }}" placeholder="Название" class="input w-full border-2 border-solid" required>
+        </div>
+      
+        <!-- Описание -->
+        <div>
+          <label for="description" class="block font-semibold">Описание</label>
+          <textarea id="description" name="description" class="textarea w-full border-2 border-solid">{{ product.description if product else '' }}</textarea>
+        </div>
+      
+        <!-- Бренд -->
+        <div>
+          <label for="brand_id" class="block font-semibold">Бренд</label>
+          <select id="brand_id" name="brand_id" class="select w-full border-2 border-solid">
+            <option value="">-- Без бренда --</option>
+            {% for brand in brands %}
+              <option value="{{ brand.id }}" {% if product and product.brand_id == brand.id %}selected{% endif %}>
+                {{ brand }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- Категория -->
+        <div>
+          <label for="category_id" class="block font-semibold">Категория</label>
+          <select id="category_id" name="category_id" class="select w-full border-2 border-solid">
+            <option value="">-- Без категории --</option>
+            {% for category in categories %}
+              <option value="{{ category.id }}" {% if product and product.category_id == category.id %}selected{% endif %}>
+                {{ category }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+      
+        <!-- UPC -->
+        <div>
+          <label for="upc" class="block font-semibold">UPC</label>
+          <input type="text" id="upc" name="upc" value="{{ product.upc if product else '' }}" class="input w-full border-2 border-solid">
+        </div>
+
+        <!-- EAN -->
+        <div>
+          <label for="ean" class="block font-semibold">EAN</label>
+          <input type="text" id="ean" name="ean" value="{{ product.ean if product else '' }}" class="input w-full border-2 border-solid">
+        </div>
+      
+        <!-- Основное изображение -->
+        <div>
+          <label class="block font-semibold mb-2">Основное изображение</label>
+        
+          <!-- Скрытый input для загрузки -->
+          <input type="file" name="main_image" id="main_image_input" accept="image/*" class="hidden" />
+        
+          <!-- Обёртка для клика -->
+          <div class="cursor-pointer w-[200px] h-[200px]" onclick="document.getElementById('main_image_input').click()">
+            <img 
+            id="main_image_preview" 
+            src="{% if main_image_path %}/static/uploads/{{ main_image_path }}{% else %}/static/images/placeholder.png{% endif %}" 
+            alt="Основное изображение" 
+            class="border rounded shadow w-full h-full object-cover" />
+          </div>
+        </div>
+
+        <!-- Кнопки -->
+        <div class="flex gap-4">
+          <button id="save-btn" type="submit" class="btn btn-primary bg-gray-300 text-white p-2 rounded hover:bg-gray-500 mr-3">
+            {% if product %}
+              Сохранить изменения
+            {% else %}
+              Создать продукт
+            {% endif %}
+          </button>
+          <a href="{{ url_for('dashboard') }}?{{ return_params|urlencode }}" class="btn btn-secondary bg-gray-300 text-white p-2 rounded hover:bg-gray-500">Назад</a>
+        </div>
+        
+      </form>
+
+    </div>
+  </main>
+  
+  <script>
+    // Передадим URL для fetch как data-атрибут, чтобы JS мог им пользоваться
+    document.getElementById('product-form').setAttribute('data-save-url', "{{ url_for('save_product') }}");
+  </script>
+  
+  <script src="{{ url_for('static', path='js/main.js') }}"></script>
+  <script src="{{ url_for('static', path='js/utils.js') }}"></script>
+  <script src="{{ url_for('static', path='js/product.js') }}"></script>
+  
+</body>
+</html>

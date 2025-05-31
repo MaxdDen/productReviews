@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+venv/
+env/
+reviewsvenv/
+
+# SQLite
+*.db
+*.sqlite3
+
+# PostgreSQL dumps
+*.sql
+*.dump
+
+# Environments
+.env
+.env.*
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# MacOS
+.DS_Store
+
+# Logs
+*.log
+
+# Mypy, Pylint, Coverage
+.mypy_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# FastAPI static/media uploads
+static/uploads/
+media/
+
+# Node/NPM (если есть фронт)
+node_modules/
+*.tsbuildinfo
+
+# HTML/CSS build (если генерация)
+build/
+dist/
+
+# Others
+*.bak
+*.orig
+*.tmp
+

@@ -1,0 +1,1 @@
+from app.api.private.routes import router

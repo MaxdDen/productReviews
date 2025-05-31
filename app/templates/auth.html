@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ "Вход" if mode == "login" else "Регистрация" }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 bg-gray-50 text-gray-900 flex items-center justify-center h-screen">
+    <section class="py-20 px-4 bg-gradient-to-br to-indigo-700 text-center">
+        {% if mode == "login" %}
+        <form id="login-form" autocomplete="off" class="bg-white p-8 rounded shadow-md w-80">
+            <h2 class="text-xl font-bold mb-4">Вход</h2>
+            {% if next %}
+                <input type="hidden" name="next" value="{{ next }}">
+            {% else %}
+                <input type="hidden" name="next" value="/dashboard">
+            {% endif %}
+            <input type="text" name="username" placeholder="Имя пользователя" required class="w-full border px-3 py-2 mb-4 rounded">
+            <input type="password" name="password" placeholder="Пароль" required class="w-full border px-3 py-2 mb-4 rounded">
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">Войти</button>
+            <p class="mt-4 text-sm">Нет аккаунта? <a href="/register" class="text-blue-500 hover:underline">Зарегистрироваться</a></p>
+        </form>
+        <div id="login-error"></div>
+        {% elif mode == "register" %}
+        <form id="register-form" autocomplete="off" class="bg-white p-8 rounded shadow-md w-80">
+            <h2 class="text-xl font-bold mb-4">Регистрация</h2>
+            <input type="text" name="username" placeholder="Имя пользователя" required class="w-full border px-3 py-2 mb-4 rounded">
+            <input type="password" name="password" placeholder="Пароль" required class="w-full border px-3 py-2 mb-4 rounded">
+            <button type="submit" class="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600">Создать аккаунт</button>
+            <p class="mt-4 text-sm">Уже есть аккаунт? <a href="/login" class="text-blue-500 hover:underline">Войти</a></p>
+        </form>
+        <div id="register-error"></div>
+        {% endif %}
+    </section>
+    <script src="{{ url_for('static', path='js/utils.js') }}"></script>
+    <script src="{{ url_for('static', path='js/auth.js') }}"></script>
+</body>
+</html>

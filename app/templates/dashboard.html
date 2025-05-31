@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Личный кабинет — AI Review Analyzer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{{ url_for('static', path='css/main.css') }}">
+</head>
+<body class="h-screen overflow-hidden flex">
+
+  <!-- Backdrop -->
+  <div class="backdrop" onclick="closeMobileMenu()"></div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu">
+    <div class="text-xl font-bold mb-4">AI</div>
+    <nav class="space-y-4">
+      <a href="{{ url_for('dashboard') }}" class="flex items-center gap-2 text-gray-700 hover:text-black">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+        </svg>
+        Главная
+      </a>
+      <a href="{{ url_for('directory_page', directory_name='brand') }}" class="flex items-center gap-2 text-gray-700 hover:text-black">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+        </svg>
+        Бренды
+      </a>
+      <a href="{{ url_for('directory_page', directory_name='category') }}" class="flex items-center gap-2 text-gray-700 hover:text-black">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+        </svg>
+        Категории
+      </a>
+      <a href="{{ url_for('directory_page', directory_name='promt') }}" class="flex items-center gap-2 text-gray-700 hover:text-black">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+        </svg>
+        Промты
+      </a>
+      <a href="{{ url_for('logout') }}" class="flex items-center gap-2 text-gray-700 hover:text-black">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+        </svg>
+        Выход
+      </a>
+    </nav>
+  </div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="bg-white shadow transition-all duration-300 ease-in-out overflow-hidden flex flex-col min-h-screen">
+    <div id="sidebar-header" class="flex items-center justify-between px-4 py-4 border-b">
+      <span class="text-xl font-bold">AI</span>
+      <button id="toggle-aside">
+        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+    <div class="flex-1">
+      <nav class="mt-4 space-y-2">
+        <a href="{{ url_for('dashboard') }}" class="flex items-center px-4 py-2 hover:bg-gray-100">
+          <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+          </svg>
+          <span class="ml-3 nav-label">Главная</span>
+        </a>
+        <a href="{{ url_for('directory_page', directory_name='brand') }}" class="flex items-center px-4 py-2 hover:bg-gray-100">
+          <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+          </svg>
+          <span class="ml-3 nav-label">Бренды</span>
+        </a>
+        <a href="{{ url_for('directory_page', directory_name='category') }}" class="flex items-center px-4 py-2 hover:bg-gray-100">
+          <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+          </svg>
+          <span class="ml-3 nav-label">Категории</span>
+        </a>
+        <a href="{{ url_for('directory_page', directory_name='promt') }}" class="flex items-center px-4 py-2 hover:bg-gray-100">
+          <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+          </svg>
+          <span class="ml-3 nav-label">Промты</span>
+        </a>
+      </nav>
+    </div>
+    <div class="mt-auto">
+      <a href="{{ url_for('logout') }}" class="flex items-center px-4 py-2 hover:bg-gray-100">
+        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+        </svg>
+        <span class="ml-3 nav-label">Выход</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Основной контент -->
+  <main class="flex-1 flex flex-col h-screen">
+    <header class="p-5">
+      <button id="mobile-toggle" class="md:hidden block p-2 rounded bg-white shadow">
+        <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      <h1 class="text-2xl font-bold mb-1">Анализируемые товары</h1>
+    </header>
+    
+    <div class="bg-white flex-1 p-4 flex flex-col min-h-0">
+      <div class="mb-1 flex flex-wrap justify-between items-center">
+        <div class="mb-4 flex flex-wrap items-center gap-4">
+          <a href="/product/new/form{{ '?' + return_params if return_params else '' }}" id="new_product" class="btn btn-primary bg-gray-300 text-white p-2 rounded hover:bg-gray-500 mr-2">+ Новый товар</a>
+        </div>
+        <div class="mb-4 flex items-center gap-3">
+          <button id="reset-sort-btn" class="ml-2 text-gray-500 hover:text-black" title="Доступна сортировка">
+            <span id="sort-icon" class="inline-block align-middle">
+              <!-- сюда будем менять иконку через JS -->
+              <svg id="sort-default-icon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+            </span>
+          </button>
+          <a href="#" id="toggle-filter-row" class="text-blue-600 hover:underline">Вкл. отбор</a>
+          <span class="text-gray-500 text-xs" id="filter-hint" style="display:none;">Введите значения и нажмите <kbd>Enter</kbd> для поиска</span>
+        </div>
+      </div>
+      <div class="overflow-x-auto flex-1 min-h-0">
+        <!-- Таблица товаров -->
+        <table id="productTable" class="min-w-full table-auto">
+          <thead class="bg-gray-100 text-left">
+            <tr>
+              <th>Фото</th>
+              <th><a id="tab_sort_name" href="#" data-sort="name">⇅</a>Название</th>
+              <th><a id="tab_sort_ean" href="#" data-sort="ean">⇅</a>EAN</th>
+              <th><a id="tab_sort_upc" href="#" data-sort="upc">⇅</a>UPC</th>
+              <th><a id="tab_sort_brand" href="#" data-sort="brand">⇅</a>Бренд</th>
+              <th><a id="tab_sort_category" href="#" data-sort="category">⇅</a>Категория</th>
+              <th>Действия</th>
+            </tr>
+            <tr id="tab_search" class="hidden">
+              <th></th>
+              <th><input type="text" id="tab_search_name" class="form-input"></th>
+              <th><input type="text" id="tab_search_ean" class="form-input"></th>
+              <th><input type="text" id="tab_search_upc" class="form-input"></th>
+              <th>
+                <select id="tab_search_brand" class="form-select">
+                  <option value="">-- Все бренды --</option>
+                  <option value="null">-- Без бренда --</option>
+                  {% for brand in brands %}
+                  <option value="{{ brand.id }}">{{ brand.name }}</option>
+                  {% endfor %}
+                </select>
+              </th>
+              <th>
+                <select id="tab_search_category" class="form-select">
+                  <option value="">-- Все категории --</option>
+                  <option value="null">-- Без категории --</option>
+                  {% for category in categories %}
+                  <option value="{{ category.id }}">{{ category.name }}</option>
+                  {% endfor %}
+                </select>
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="product-tbody">
+            {% for product in products %}
+            <tr id="product-row-{{ product.id }}" data-id="{{ product.id }}" class="h-20 hover:bg-gray-100 cursor-pointer">
+              <td>
+                {% if product.main_image_filename %}
+                <img src="/static/uploads/{{ product.main_image_filename }}" alt="Фото" class="w-20 h-20 object-cover rounded shadow">
+                {% else %}
+                <img src="/static/images/placeholder.png" alt="Фото" class="w-20 h-20 object-cover rounded shadow">
+                {% endif %}
+              </td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.ean }}</td>
+              <td>{{ product.upc }}</td>
+              <td>{{ product.brand.name if product.brand else "" }}</td>
+              <td>{{ product.category.name if product.category else "" }}</td>
+              <td class="space-x-2">
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <!-- Pagination -->
+      <div id="pagination" class="sticky bottom-0 bg-white pt-4 z-10">
+        <div class="flex justify-between items-center mt-4">
+          <span class="text-sm text-gray-500" id="pagination-info"></span>
+          <div class="text-sm rounded px-2 py-1 border ml-2">
+            <select id="page-limit-select" class="px-2 py-2 border border-gray-300 rounded">
+              <option value="3">3 на странице</option>
+              <option value="10">10 на странице</option>
+              <option value="25">25 на странице</option>
+              <option value="50">50 на странице</option>
+            </select>
+          </div>
+          <div class="flex items-center space-x-2" id="pagination-controls"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="{{ url_for('static', path='js/main.js') }}"></script>
+  <script src="{{ url_for('static', path='js/utils.js') }}"></script>
+  <script src="{{ url_for('static', path='js/dashboard.js') }}"></script>
+  
+</body>
+</html>

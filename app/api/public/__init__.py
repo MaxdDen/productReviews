@@ -1,0 +1,1 @@
+from app.api.public.routes import router

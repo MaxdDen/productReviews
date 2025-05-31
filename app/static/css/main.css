@@ -1,0 +1,65 @@
+
+aside {
+  width: 200px;
+  min-width: 56px;
+  max-width: 200px;
+  transition: width 0.3s;
+}
+
+aside.collapsed {
+  width: 56px !important; /* только иконки */
+}
+aside.collapsed .nav-label { 
+  display: none !important; 
+}
+aside.collapsed #sidebar-header button { display: none; }
+aside.collapsed #sidebar-header { justify-content: center; cursor: pointer; }
+
+#mobileMenu {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  aside {
+    width: clamp(150px, 20vw, 200px);
+  }
+}
+
+@media (max-width: 768px) {
+  aside {
+    display: none !important;
+  }
+  #mobileMenu {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 16rem;
+    height: 100vh;
+    background-color: white;
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    padding: 1rem;
+  }
+  #mobileMenu.open {
+    transform: translateX(0);
+  }
+  .backdrop {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+  }
+  body.mobile-menu-open .backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

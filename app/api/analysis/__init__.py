@@ -1,0 +1,1 @@
+from app.api.analysis.routes import router
