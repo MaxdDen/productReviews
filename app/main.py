@@ -12,7 +12,7 @@ from contextlib import asynccontextmanager
 
 # --- Локальные импорты ---
 from app.templates import templates
-from app.core import settings
+from app.core.config import settings, is_production_env
 from app.database.session import get_db
 from app.database.crud import get_user_by_username
 from app.utils.headers_middleware import SecurityHeadersMiddleware
@@ -42,8 +42,8 @@ app.add_middleware(
     SessionMiddleware,
     secret_key=settings.SECRET_KEY,
     session_cookie="session",
-    https_only=settings.is_production,
-    same_site="strict" if settings.is_production else "lax"
+    https_only=is_production_env(settings),
+    same_site="strict" if is_production_env(settings) else "lax"
 )
 app.add_middleware(AuthMiddleware)
 app.add_middleware(SecurityHeadersMiddleware)
@@ -56,7 +56,7 @@ app.include_router(product_router)
 app.include_router(analysis_router)
 
 
-print(f"Running in {'production' if settings.is_production else 'development'} mode")
+print(f"Running in {'production' if is_production_env(settings) else 'development'} mode")
 
 
 # --- Обработка ошибок ---

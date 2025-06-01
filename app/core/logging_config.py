@@ -1,11 +1,11 @@
 import logging
-from app.core import settings
+from app.core.config import settings, is_production_env
 
 csrf_logger = logging.getLogger("csrf")
 auth_logger = logging.getLogger("auth")
 
 def setup_logging():
-    base_level = logging.INFO if settings.is_production else logging.WARNING
+    base_level = logging.INFO if is_production_env(settings) else logging.WARNING
 
     # --- Основная настройка ---
     logging.basicConfig(
@@ -24,6 +24,4 @@ def setup_logging():
         logger.addHandler(handler)
 
     # SQLAlchemy логирование
-    logging.getLogger("sqlalchemy.engine").setLevel(
-        logging.INFO if settings.is_production else logging.WARNING
-    )
+    logging.getLogger("sqlalchemy.engine").setLevel(base_level)

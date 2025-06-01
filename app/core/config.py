@@ -1,6 +1,9 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 import os
 
+def is_production_env(settings):
+    return getattr(settings, "ENVIRONMENT", "production").lower() == "production"
+
 class Settings(BaseSettings):
 
     ENVIRONMENT: str = "development"
@@ -20,13 +23,6 @@ class Settings(BaseSettings):
 
     model_config = SettingsConfigDict(env_file_encoding='utf-8')
 
-    @property
-    def is_development(self) -> bool:
-        return self.ENVIRONMENT.lower() == "development"
-
-    @property
-    def is_production(self) -> bool:
-        return self.ENVIRONMENT.lower() == "production"
 
 # Выбор нужного .env-файла
 env_file = ".env.production" if os.getenv("ENVIRONMENT") == "production" else ".env.development"

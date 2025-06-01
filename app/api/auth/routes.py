@@ -18,7 +18,7 @@ from app.utils.security import (
     hash_password, verify_password, create_jwt_token,
     ensure_csrf_token, csrf_protect, template_with_csrf
 )
-from app.core.logging_config import csrf_logger, auth_logger
+from app.core.config import settings, is_production_env
 import secrets
 
 
@@ -87,8 +87,8 @@ async def login(
         key="access_token",
         value=jwt_token,
         httponly=True,
-        secure=settings.is_production,
-        samesite="Strict" if settings.is_production else "Lax",
+        secure=is_production_env(settings),
+        samesite="Strict" if is_production_env(settings) else "Lax",
         max_age=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
         path="/"
     )

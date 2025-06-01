@@ -6,11 +6,13 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+
+# Virtualenv
 venv/
 env/
 reviewsvenv/
 
-# APP
+# Uploads
 app/static/uploads/*
 !app/static/uploads/.gitkeep
 
@@ -27,9 +29,11 @@ app/static/uploads/*
 
 # PyCharm
 .idea/
+*.swp
 
 # MacOS
 .DS_Store
+Thumbs.db
 
 # Logs
 *.log
