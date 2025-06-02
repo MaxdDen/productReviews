@@ -10,7 +10,15 @@ from app.database.base import Base
 from app.models import *
 from dotenv import load_dotenv
 # Выбери какой файл подгружать: development или production
-env_file = os.getenv("ENV_FILE", ".env.development")
+#env_file = os.getenv("ENV_FILE", ".env.development")
+# Получаем переменную окружения ENVIRONMENT
+environment = os.getenv("ENVIRONMENT", "development").lower()
+
+# Выбираем нужный .env-файл по окружению
+if environment == "production":
+    env_file = ".env.production"
+else:
+    env_file = ".env.development"
 
 # Абсолютный путь к env-файлу (обычно на уровень выше alembic/)
 dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', env_file))
