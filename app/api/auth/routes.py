@@ -83,7 +83,8 @@ async def login(
     if not user or not verify_password(login_input.password, user.hashed_password):
         return JSONResponse(status_code=401, content={"detail": "Неверные данные"})
     jwt_token = create_jwt_token({"sub": str(user.id)})
-    response.set_cookie(
+    json_resp = JSONResponse(content={"next": "/dashboard"})
+    json_resp.set_cookie(
         key="access_token",
         value=jwt_token,
         httponly=True,
@@ -92,7 +93,7 @@ async def login(
         max_age=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
         path="/"
     )
-    return {"next": "/dashboard"}
+    return json_resp
 
 
 
