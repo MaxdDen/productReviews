@@ -63,3 +63,8 @@ aside.collapsed #sidebar-header { justify-content: center; cursor: pointer; }
     pointer-events: auto;
   }
 }
+
+#filter-hint,
+#filter-hint {
+  display:none;
+}
