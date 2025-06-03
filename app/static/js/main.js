@@ -50,23 +50,27 @@ window.addEventListener('DOMContentLoaded', handleAsideResize);
 
 
 // Mobile меню
-const mobileToggle = document.getElementById('mobile-toggle');
-const mobileMenu = document.getElementById('mobileMenu');
-const mobileBackdrop = document.getElementById('mobile-backdrop');
+document.addEventListener("DOMContentLoaded", function() {
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileBackdrop = document.getElementById('mobile-backdrop');
 
-function openMobileMenu() {
-  document.body.classList.add('mobile-menu-open');
-  mobileMenu.classList.add('open');
-  mobileBackdrop.classList.add('show');
-}
-function closeMobileMenu() {
-  document.body.classList.remove('mobile-menu-open');
-  mobileMenu.classList.remove('open');
-  mobileBackdrop.classList.remove('show');
-}
+  function openMobileMenu() {
+    document.body.classList.add('mobile-menu-open');
+    if (mobileMenu) mobileMenu.classList.add('open');
+    if (mobileBackdrop) mobileBackdrop.classList.add('show');
+  }
 
-if (mobileToggle) mobileToggle.addEventListener('click', openMobileMenu);
-if (mobileBackdrop) mobileBackdrop.addEventListener('click', closeMobileMenu);
+  function closeMobileMenu() {
+    document.body.classList.remove('mobile-menu-open');
+    if (mobileMenu) mobileMenu.classList.remove('open');
+    if (mobileBackdrop) mobileBackdrop.classList.remove('show');
+  }
+
+  if (mobileToggle) mobileToggle.addEventListener('click', openMobileMenu);
+  if (mobileBackdrop) mobileBackdrop.addEventListener('click', closeMobileMenu);
+});
+
 
 
 // Выделение строки таблицы

@@ -1,18 +1,27 @@
-// Обработчик превью основного изображения
-const input_image = document.getElementById('main_image_input');
-const preview_image = document.getElementById('main_image_preview');
-if (input_image && preview_image) {
-  input_image.addEventListener('change', () => {
-    const file = input_image.files[0];
-    if (file) {
-      const objectUrl = URL.createObjectURL(file);
-      preview_image.src = objectUrl;
-    }
-  });
-}
-
-// Сохранение данных на сервере при нажатии на кнопку "Сохранить"
 document.addEventListener("DOMContentLoaded", function() {
+  // 1. Открытие диалога выбора файла по клику на wrapper
+  const imageWrapper = document.getElementById('main_image_wrapper');
+  const imageInput = document.getElementById('main_image_input');
+  const previewImage = document.getElementById('main_image_preview');
+
+  if (imageWrapper && imageInput) {
+    imageWrapper.addEventListener('click', function() {
+      imageInput.click();
+    });
+  }
+
+  // 2. Превью выбранного изображения
+  if (imageInput && previewImage) {
+    imageInput.addEventListener('change', () => {
+      const file = imageInput.files[0];
+      if (file) {
+        const objectUrl = URL.createObjectURL(file);
+        previewImage.src = objectUrl;
+      }
+    });
+  }
+
+  // 3. Сохранение данных на сервере при нажатии на кнопку "Сохранить"
   const form = document.getElementById('product-form');
   if (!form) return;
 
@@ -22,8 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Собираем FormData с формы
     const formData = new FormData(form);
 
-    // Получаем URL для сохранения (например: /product/save)
-    const saveUrl = form.dataset.saveUrl;
+    const saveUrl = form.getAttribute('data-save-url');
 
     try {
       const response = await fetch(saveUrl, {
@@ -35,12 +43,18 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       });
 
-      const data = await response.json();
+      // Проверяем, что ответ именно JSON
+      let data;
+      try {
+        data = await response.json();
+      } catch (e) {
+        alert("Ошибка: сервер вернул не JSON");
+        return;
+      }
+
       if (response.ok && data.url) {
         window.location.href = data.url;
       } else {
-        // Покажи ошибку от сервера
-        const data = await response.json();
         alert(data.detail || 'Ошибка при сохранении');
       }
 

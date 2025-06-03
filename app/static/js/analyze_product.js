@@ -443,7 +443,7 @@ reviewForm.addEventListener('submit', async function(e) {
     max_rating: this.max_rating.value,
     normalized_rating: this.normalized_rating.value
   };
-  console.log("data", data);
+
   try {
     const resp = await fetch(url, {
       method,

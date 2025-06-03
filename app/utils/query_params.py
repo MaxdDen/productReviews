@@ -19,16 +19,6 @@ def extract_dashboard_filters(request: Request):
                     params[key] = None 
     return params
 
-def extract_dashboard_return_params111(request: Request):
-    """
-    Возвращает параметры для возврата на главную с сохранением фильтров/сортировки.
-    """
-    params = dict(request.query_params)
-    # Можно отфильтровать только те параметры, которые тебе нужны
-    allowed111 = {'sort_by', 'sort_dir', 'page', 'brand_id', 'category_id', 'name', 'ean', 'upc', 'limit', 'highlight_id'}
-    return {k: v for k, v in params.items() if k in allowed111}
-
-
 async def extract_dashboard_return_params(request: Request) -> dict:
     # 1. Сначала пробуем забрать из query_params
     params = dict(request.query_params)

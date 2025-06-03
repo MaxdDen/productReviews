@@ -175,10 +175,7 @@ async def save_product(
     # Получить return_params (фильтры/сортировки) из запроса, если они приходят
     return_params = await extract_dashboard_return_params(request)
     params_str = "&".join(f"{k}={v}" for k, v in return_params.items()) if return_params else ""
-    print("return_params ", return_params)
-    print("params_str ", params_str)
     url = f"/dashboard?highlight_id={product.id}&{params_str}" if params_str else f"/dashboard?highlight_id={product.id}"
-    print("url ", url)
 
     return JSONResponse({"url": url, "product_id": product.id})
 

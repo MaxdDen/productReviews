@@ -10,7 +10,7 @@
 <body class="h-screen overflow-hidden flex">
 
   <!-- Backdrop -->
-  <div class="backdrop" onclick="closeMobileMenu()"></div>
+  <div class="backdrop" id="mobile-backdrop"></div>
 
   <!-- Mobile Menu -->
   <div id="mobileMenu">
@@ -203,6 +203,7 @@
     </div>
   </main>
 
+  
   <script src="{{ url_for('static', path='js/main.js') }}"></script>
   <script src="{{ url_for('static', path='js/utils.js') }}"></script>
   <script src="{{ url_for('static', path='js/dashboard.js') }}"></script>
