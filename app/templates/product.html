@@ -101,7 +101,14 @@
   <main class="flex-1 p-6">
     <div class="container bg-white p-6 rounded shadow">
       
-      <form id="product-form" method="post" action="{{ url_for('save_product') }}" enctype="multipart/form-data" class="space-y-4"> 
+      <form
+        id="product-form"
+        method="post"
+        action="{{ url_for('save_product') }}"
+        enctype="multipart/form-data"
+        class="space-y-4"
+        data-save-url="{{ url_for('save_product') }}"
+      >
 
         {% if product %}
             <input type="hidden" name="product_id" value="{{ product.id }}">
@@ -194,11 +201,7 @@
     </div>
   </main>
   
-  <script>
-    // Передадим URL для fetch как data-атрибут, чтобы JS мог им пользоваться
-    document.getElementById('product-form').setAttribute('data-save-url', "{{ url_for('save_product') }}");
-  </script>
-  
+ 
   <script src="{{ url_for('static', path='js/main.js') }}"></script>
   <script src="{{ url_for('static', path='js/utils.js') }}"></script>
   <script src="{{ url_for('static', path='js/product.js') }}"></script>
