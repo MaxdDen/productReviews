@@ -65,7 +65,8 @@ def template_with_csrf(
 ) -> Response:
     csrf_token = ensure_csrf_token(request)
     context["csrf_token"] = csrf_token
-    response = templates.TemplateResponse(template_name, context)
+    # Pass request as the first argument to TemplateResponse
+    response = templates.TemplateResponse(request, template_name, context)
     response.set_cookie(
         "csrf_token",
         csrf_token,

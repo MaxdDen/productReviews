@@ -4,204 +4,256 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Продукт</title>
-  <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', path='css/main.css') }}">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', path='images/public/favicon.png') }}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', path='images/public/favicon.png') }}" />
+  <script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="{{ url_for('static', path='css/main.css') }}">
 </head>
-<body class="h-screen overflow-hidden flex">
-
+<body class="min-h-screen flex items-start lg:items-center justify-center font-sans bg-[#F5F6FA]">
+  
   <!-- Backdrop -->
-  <div class="backdrop" id="mobile-backdrop"></div>
+  <div class="backdrop" onclick="closeMobileMenu()"></div>
 
   <!-- Mobile Menu -->
   <div id="mobileMenu">
     <div class="text-xl font-bold mb-4">AI</div>
     <nav class="space-y-4">
-      <a href="{{ url_for('dashboard') }}" class="flex items-center gap-2 text-gray-700 hover:text-black">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+      <a href="{{ url_for('dashboard') }}" 
+        class="flex items-center p-[10px] rounded-lg gap-3 transition-all
+              {% if active_menu == 'dashboard' %}bg-[#A3B8F8] text-white font-semibold active{% else %}text-gray-700 hover:bg-[#E6E9F5]{% endif %}">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7.5 13.333C8.20833 13.858 9.07083 14.1663 10 14.1663C10.9292 14.1663 11.7917 13.858 12.5 13.333" stroke="white" stroke-linecap="round"/>
+          <path d="M18.0318 10.7982L17.7993 12.4123C17.3935 15.2357 17.1902 16.6465 16.211 17.4898C15.2318 18.3332 13.796 18.3332 10.9235 18.3332H9.08018C6.20768 18.3332 4.77184 18.3332 3.79268 17.4898C2.81351 16.6465 2.61018 15.2357 2.20434 12.4123L1.97184 10.7982C1.65518 8.60067 1.49684 7.5015 1.94768 6.56234C2.39768 5.62317 3.35684 5.0515 5.27434 3.90984L6.42851 3.22234C8.16851 2.18484 9.04018 1.6665 10.0018 1.6665C10.9635 1.6665 11.8343 2.18484 13.5752 3.22234L14.7293 3.90984C16.646 5.0515 17.6052 5.62317 18.056 6.56234" stroke="white" stroke-linecap="round"/>
         </svg>
-        Главная
+        Goods
       </a>
-      <a href="{{ url_for('directory_page', directory_name='brand') }}" class="flex items-center gap-2 text-gray-700 hover:text-black">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+      <a href="{{ url_for('directory_page', directory_name='brand') }}" 
+        class="flex items-center p-[10px] rounded-lg gap-3 transition-all
+              {% if active_menu == 'brand' %}bg-[#A3B8F8] text-white font-semibold active{% else %}text-gray-700 hover:bg-[#E6E9F5]{% endif %}">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.5013 9.16699L13.3346 14.167M7.5013 9.16699L6.66797 14.167M7.5013 5.00033V4.16699C7.5013 3.50395 7.76469 2.86807 8.23353 2.39923C8.70238 1.93038 9.33826 1.66699 10.0013 1.66699C10.6643 1.66699 11.3002 1.93038 11.7691 2.39923C12.2379 2.86807 12.5013 3.50395 12.5013 4.16699V5.00033" stroke="#1F2125" stroke-width="0.9375" stroke-linecap="round"/>
+          <path d="M16.8527 10.4388C16.3644 7.83799 16.121 6.53715 15.1944 5.76882C14.2702 5.00049 12.9469 5.00049 10.2994 5.00049H9.69936C7.0527 5.00049 5.72936 5.00049 4.80353 5.76882C3.8777 6.53715 3.63436 7.83799 3.14603 10.4388C2.4602 14.0963 2.1177 15.9247 3.1177 17.1297C4.1177 18.3347 5.9777 18.3338 9.69853 18.3338H10.3002C14.021 18.3338 15.8819 18.3338 16.881 17.1297C17.461 16.4297 17.5894 15.5213 17.461 14.1672" stroke="#1F2125" stroke-width="0.9375" stroke-linecap="round"/>
         </svg>
-        Бренды
+        Brands
       </a>
-      <a href="{{ url_for('directory_page', directory_name='category') }}" class="flex items-center gap-2 text-gray-700 hover:text-black">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+      <a href="{{ url_for('directory_page', directory_name='category') }}" 
+        class="flex items-center p-[10px] rounded-lg gap-3 transition-all
+              {% if active_menu == 'category' %}bg-[#A3B8F8] text-white font-semibold active{% else %}text-gray-700 hover:bg-[#E6E9F5]{% endif %}">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M8.28708 1.04199H11.7121C12.8521 1.04199 13.7704 1.04199 14.4929 1.13949C15.2429 1.23949 15.8746 1.45616 16.3763 1.95699C16.8779 2.45866 17.0929 3.09033 17.1946 3.84033C17.2913 4.56283 17.2913 5.48199 17.2913 6.62116V13.3795C17.2913 14.5187 17.2913 15.4378 17.1946 16.1603C17.0938 16.9103 16.8779 17.542 16.3763 18.0437C15.8746 18.5453 15.2429 18.7603 14.4929 18.862C13.7704 18.9587 12.8513 18.9587 11.7121 18.9587H8.28708C7.14792 18.9587 6.22875 18.9587 5.50625 18.862C4.75625 18.7603 4.12458 18.5453 3.62292 18.0437C3.12125 17.542 2.90625 16.9103 2.80542 16.1603C2.77231 15.8994 2.74952 15.6372 2.73708 15.3745C2.70373 15.2687 2.69913 15.156 2.72375 15.0478C2.71004 14.4918 2.70476 13.9357 2.70792 13.3795V6.62116C2.70792 5.48199 2.70792 4.56283 2.80542 3.84033C2.90542 3.09033 3.12208 2.45866 3.62375 1.95699C4.12458 1.45533 4.75708 1.24033 5.50708 1.13949C6.22875 1.04199 7.14792 1.04199 8.28708 1.04199ZM3.98042 15.2087C3.99292 15.5028 4.01292 15.762 4.04375 15.9937C4.12625 16.6053 4.27708 16.9287 4.50708 17.1595C4.73792 17.3903 5.06208 17.5403 5.67375 17.6228C6.30292 17.707 7.13708 17.7087 8.33292 17.7087H11.6663C12.8629 17.7087 13.6971 17.707 14.3263 17.6228C14.9379 17.5403 15.2613 17.3895 15.4929 17.1595C15.6563 16.9962 15.7788 16.7853 15.8663 16.4587H6.66625C6.50049 16.4587 6.34152 16.3928 6.22431 16.2756C6.1071 16.1584 6.04125 15.9994 6.04125 15.8337C6.04125 15.6679 6.1071 15.5089 6.22431 15.3917C6.34152 15.2745 6.50049 15.2087 6.66625 15.2087H16.0188C16.0346 14.8495 16.0396 14.4378 16.0404 13.9587H6.58125C5.76625 13.9587 5.48125 13.9637 5.26292 14.0228C4.9689 14.1014 4.69842 14.2503 4.47483 14.4568C4.25124 14.6632 4.08127 14.921 3.97958 15.2078M16.0404 12.7078H6.48458C5.80292 12.7078 5.33792 12.7078 4.93875 12.8145C4.58803 12.9093 4.25624 13.0638 3.95792 13.2712V6.66699C3.95792 5.47116 3.95958 4.63616 4.04375 4.00699C4.12625 3.39533 4.27708 3.07199 4.50708 2.84116C4.73792 2.61033 5.06208 2.46033 5.67375 2.37783C6.30292 2.29366 7.13708 2.29199 8.33292 2.29199H11.6663C12.8629 2.29199 13.6971 2.29366 14.3263 2.37783C14.9379 2.46033 15.2613 2.61116 15.4929 2.84116C15.7229 3.07199 15.8729 3.39533 15.9554 4.00783C16.0404 4.63616 16.0413 5.47116 16.0413 6.66699L16.0404 12.7078ZM6.04125 5.83366C6.04125 5.6679 6.1071 5.50893 6.22431 5.39172C6.34152 5.27451 6.50049 5.20866 6.66625 5.20866H13.3329C13.4987 5.20866 13.6576 5.27451 13.7749 5.39172C13.8921 5.50893 13.9579 5.6679 13.9579 5.83366C13.9579 5.99942 13.8921 6.15839 13.7749 6.2756C13.6576 6.39281 13.4987 6.45866 13.3329 6.45866H6.66625C6.50049 6.45866 6.34152 6.39281 6.22431 6.2756C6.1071 6.15839 6.04125 5.99942 6.04125 5.83366ZM6.04125 8.75033C6.04125 8.58457 6.1071 8.42559 6.22431 8.30838C6.34152 8.19117 6.50049 8.12533 6.66625 8.12533H10.8329C10.9987 8.12533 11.1576 8.19117 11.2749 8.30838C11.3921 8.42559 11.4579 8.58457 11.4579 8.75033C11.4579 8.91609 11.3921 9.07506 11.2749 9.19227C11.1576 9.30948 10.9987 9.37533 10.8329 9.37533H6.66625C6.50049 9.37533 6.34152 9.30948 6.22431 9.19227C6.1071 9.07506 6.04125 8.91609 6.04125 8.75033Z" fill="#1F2125"/>
         </svg>
-        Категории
+        Categories
       </a>
-      <a href="{{ url_for('directory_page', directory_name='promt') }}" class="flex items-center gap-2 text-gray-700 hover:text-black">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+      <a href="{{ url_for('directory_page', directory_name='promt') }}" 
+        class="flex items-center p-[10px] rounded-lg gap-3 transition-all
+              {% if active_menu == 'promt' %}bg-[#A3B8F8] text-white font-semibold active{% else %}text-gray-700 hover:bg-[#E6E9F5]{% endif %}">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15.4115 7.50016H13.7448M13.7448 7.50016H12.0781M13.7448 7.50016V5.8335M13.7448 7.50016V9.16683" stroke="#1F2125" stroke-width="0.9375" stroke-linecap="round"/>
+          <path d="M9.9974 4.64512L9.54073 5.07178C9.5992 5.13436 9.66991 5.18425 9.74847 5.21836C9.82702 5.25247 9.91175 5.27007 9.9974 5.27007C10.083 5.27007 10.1678 5.25247 10.2463 5.21836C10.3249 5.18425 10.3956 5.13436 10.4541 5.07178L9.9974 4.64512ZM2.2074 11.4018C2.24863 11.4744 2.304 11.5381 2.37026 11.589C2.43651 11.6399 2.51229 11.6769 2.59311 11.698C2.67394 11.7191 2.75818 11.7238 2.84085 11.7118C2.92352 11.6998 3.00294 11.6713 3.07442 11.6281C3.1459 11.5849 3.20799 11.5277 3.25701 11.4601C3.30604 11.3925 3.34101 11.3157 3.35985 11.2343C3.3787 11.1529 3.38103 11.0686 3.36673 10.9863C3.35242 10.904 3.32176 10.8254 3.27656 10.7551L2.2074 11.4018ZM5.4449 13.4759C5.38843 13.414 5.32008 13.3641 5.24393 13.3291C5.16777 13.2942 5.08537 13.2749 5.00161 13.2724C4.91785 13.2699 4.83444 13.2843 4.75636 13.3147C4.67827 13.3451 4.60709 13.3909 4.54706 13.4494C4.48703 13.5079 4.43937 13.5778 4.40692 13.6551C4.37446 13.7323 4.35787 13.8153 4.35813 13.8991C4.3584 13.9829 4.37551 14.0658 4.40845 14.1428C4.4414 14.2199 4.4895 14.2895 4.5499 14.3476L5.4449 13.4759ZM2.28906 7.76512C2.28906 5.34428 3.34573 3.84845 4.6524 3.33595C5.95656 2.82512 7.78073 3.19012 9.54073 5.07178L10.4541 4.21845C8.46406 2.09012 6.12156 1.41845 4.19656 2.17178C2.27406 2.92512 1.03906 4.99345 1.03906 7.76512H2.28906ZM12.9224 16.6334C14.1666 15.6243 15.6566 14.2718 16.8416 12.7609C18.0141 11.2659 18.9557 9.52845 18.9557 7.76345H17.7057C17.7057 9.10678 16.9724 10.5668 15.8574 11.9893C14.7541 13.3968 13.3441 14.6826 12.1357 15.6626L12.9224 16.6334ZM18.9557 7.76345C18.9557 4.99262 17.7207 2.92428 15.7974 2.17178C13.8724 1.41762 11.5307 2.08845 9.54073 4.21762L10.4541 5.07178C12.2141 3.19012 14.0382 2.82428 15.3424 3.33512C16.6491 3.84678 17.7057 5.34345 17.7057 7.76345H18.9557ZM7.0724 16.6343C8.13073 17.4943 8.86573 18.1251 9.9974 18.1251V16.8751C9.3949 16.8751 9.0199 16.6051 7.85906 15.6634L7.0724 16.6343ZM12.1357 15.6626C10.9749 16.6043 10.5999 16.8751 9.9974 16.8751V18.1251C11.1291 18.1251 11.8649 17.4943 12.9232 16.6343L12.1357 15.6626ZM3.2774 10.7551C2.65323 9.72512 2.28906 8.71262 2.28906 7.76512H1.03906C1.03906 9.02512 1.51906 10.2651 2.2074 11.4018L3.2774 10.7551ZM7.85906 15.6634C7.01305 14.9812 6.207 14.2508 5.4449 13.4759L4.5499 14.3476C5.34522 15.1583 6.18804 15.9218 7.0724 16.6343L7.85906 15.6634Z" fill="#1F2125"/>
         </svg>
-        Промты
+        Promts
       </a>
       <a href="{{ url_for('logout') }}" class="flex items-center gap-2 text-gray-700 hover:text-black">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+        <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 13.1668L6 8.50016L7 7.3335M10 3.8335L8.66667 5.38883" stroke="#1F2125" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        Выход
+        Exit
       </a>
     </nav>
   </div>
 
-  <!-- Sidebar -->
-  <aside id="sidebar" class="bg-white shadow transition-all duration-300 ease-in-out overflow-hidden flex flex-col min-h-screen">
-    <div id="sidebar-header" class="flex items-center justify-between px-4 py-4 border-b">
-      <span class="text-xl font-bold">AI</span>
-      <button id="toggle-aside">
-        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-    </div>
-    <div class="flex-1">
-      <nav class="mt-4 space-y-2">
-        <a href="{{ url_for('dashboard') }}" class="flex items-center px-4 py-2 hover:bg-gray-100">
-          <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+  <div class="flex w-full max-w-[1600px] lg:shadow-[0_2px_6px_0px_rgba(0,0,0,0.25)] lg:border-r">
+
+	  <!-- Sidebar -->
+    <aside id="sidebar" class="flex flex-col min-h-screen w-[200px] min-w-[64px] max-w-[200px] flex-shrink-0 bg-[#E5E5E5] p-[10px] shadow-[0_2px_6px_0px_rgba(0,0,0,0.25)] border-r border-sidebar">
+      <div id="sidebar-header" class="flex items-center justify-center border-b border-gray-200">
+        <button id="toggle-aside" class="rounded hover:bg-gray-200 transition-all">
+          <span class="sidebar-full text-2xl font-black tracking-tight text-[#7B7FD1]">AI Review Analyzer</span>
+          <span class="sidebar-collapsed hidden text-2xl font-black text-[#7B7FD1]">AI</span>
+        </button>
+      </div>
+      <div class="flex-1">
+        <nav class="mt-6 space-y-2">
+          <a href="{{ url_for('dashboard') }}"
+            class="flex items-center p-[10px] rounded-lg gap-3 transition-all
+                   {% if active_menu == 'dashboard' %}bg-[#A3B8F8] text-white font-semibold active{% else %}text-gray-700 hover:bg-[#E6E9F5]{% endif %}">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.5 13.333C8.20833 13.858 9.07083 14.1663 10 14.1663C10.9292 14.1663 11.7917 13.858 12.5 13.333" stroke="white" stroke-linecap="round"/>
+              <path d="M18.0318 10.7982L17.7993 12.4123C17.3935 15.2357 17.1902 16.6465 16.211 17.4898C15.2318 18.3332 13.796 18.3332 10.9235 18.3332H9.08018C6.20768 18.3332 4.77184 18.3332 3.79268 17.4898C2.81351 16.6465 2.61018 15.2357 2.20434 12.4123L1.97184 10.7982C1.65518 8.60067 1.49684 7.5015 1.94768 6.56234C2.39768 5.62317 3.35684 5.0515 5.27434 3.90984L6.42851 3.22234C8.16851 2.18484 9.04018 1.6665 10.0018 1.6665C10.9635 1.6665 11.8343 2.18484 13.5752 3.22234L14.7293 3.90984C16.646 5.0515 17.6052 5.62317 18.056 6.56234" stroke="white" stroke-linecap="round"/>
+            </svg>
+            <span class="nav-label">Goods</span>
+          </a>
+          <a href="{{ url_for('directory_page', directory_name='brand') }}"
+            class="flex items-center p-[10px] rounded-lg gap-3 transition-all
+                   {% if active_menu == 'brand' %}bg-[#A3B8F8] text-white font-semibold active{% else %}text-gray-700 hover:bg-[#E6E9F5]{% endif %}">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12.5013 9.16699L13.3346 14.167M7.5013 9.16699L6.66797 14.167M7.5013 5.00033V4.16699C7.5013 3.50395 7.76469 2.86807 8.23353 2.39923C8.70238 1.93038 9.33826 1.66699 10.0013 1.66699C10.6643 1.66699 11.3002 1.93038 11.7691 2.39923C12.2379 2.86807 12.5013 3.50395 12.5013 4.16699V5.00033" stroke="#1F2125" stroke-width="0.9375" stroke-linecap="round"/>
+              <path d="M16.8527 10.4388C16.3644 7.83799 16.121 6.53715 15.1944 5.76882C14.2702 5.00049 12.9469 5.00049 10.2994 5.00049H9.69936C7.0527 5.00049 5.72936 5.00049 4.80353 5.76882C3.8777 6.53715 3.63436 7.83799 3.14603 10.4388C2.4602 14.0963 2.1177 15.9247 3.1177 17.1297C4.1177 18.3347 5.9777 18.3338 9.69853 18.3338H10.3002C14.021 18.3338 15.8819 18.3338 16.881 17.1297C17.461 16.4297 17.5894 15.5213 17.461 14.1672" stroke="#1F2125" stroke-width="0.9375" stroke-linecap="round"/>
+            </svg>
+            <span class="nav-label">Brands</span>
+          </a>
+          <a href="{{ url_for('directory_page', directory_name='category') }}"
+            class="flex items-center p-[10px] rounded-lg gap-3 transition-all
+                   {% if active_menu == 'category' %}bg-[#A3B8F8] text-white font-semibold active{% else %}text-gray-700 hover:bg-[#E6E9F5]{% endif %}">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M8.28708 1.04199H11.7121C12.8521 1.04199 13.7704 1.04199 14.4929 1.13949C15.2429 1.23949 15.8746 1.45616 16.3763 1.95699C16.8779 2.45866 17.0929 3.09033 17.1946 3.84033C17.2913 4.56283 17.2913 5.48199 17.2913 6.62116V13.3795C17.2913 14.5187 17.2913 15.4378 17.1946 16.1603C17.0938 16.9103 16.8779 17.542 16.3763 18.0437C15.8746 18.5453 15.2429 18.7603 14.4929 18.862C13.7704 18.9587 12.8513 18.9587 11.7121 18.9587H8.28708C7.14792 18.9587 6.22875 18.9587 5.50625 18.862C4.75625 18.7603 4.12458 18.5453 3.62292 18.0437C3.12125 17.542 2.90625 16.9103 2.80542 16.1603C2.77231 15.8994 2.74952 15.6372 2.73708 15.3745C2.70373 15.2687 2.69913 15.156 2.72375 15.0478C2.71004 14.4918 2.70476 13.9357 2.70792 13.3795V6.62116C2.70792 5.48199 2.70792 4.56283 2.80542 3.84033C2.90542 3.09033 3.12208 2.45866 3.62375 1.95699C4.12458 1.45533 4.75708 1.24033 5.50708 1.13949C6.22875 1.04199 7.14792 1.04199 8.28708 1.04199ZM3.98042 15.2087C3.99292 15.5028 4.01292 15.762 4.04375 15.9937C4.12625 16.6053 4.27708 16.9287 4.50708 17.1595C4.73792 17.3903 5.06208 17.5403 5.67375 17.6228C6.30292 17.707 7.13708 17.7087 8.33292 17.7087H11.6663C12.8629 17.7087 13.6971 17.707 14.3263 17.6228C14.9379 17.5403 15.2613 17.3895 15.4929 17.1595C15.6563 16.9962 15.7788 16.7853 15.8663 16.4587H6.66625C6.50049 16.4587 6.34152 16.3928 6.22431 16.2756C6.1071 16.1584 6.04125 15.9994 6.04125 15.8337C6.04125 15.6679 6.1071 15.5089 6.22431 15.3917C6.34152 15.2745 6.50049 15.2087 6.66625 15.2087H16.0188C16.0346 14.8495 16.0396 14.4378 16.0404 13.9587H6.58125C5.76625 13.9587 5.48125 13.9637 5.26292 14.0228C4.9689 14.1014 4.69842 14.2503 4.47483 14.4568C4.25124 14.6632 4.08127 14.921 3.97958 15.2078M16.0404 12.7078H6.48458C5.80292 12.7078 5.33792 12.7078 4.93875 12.8145C4.58803 12.9093 4.25624 13.0638 3.95792 13.2712V6.66699C3.95792 5.47116 3.95958 4.63616 4.04375 4.00699C4.12625 3.39533 4.27708 3.07199 4.50708 2.84116C4.73792 2.61033 5.06208 2.46033 5.67375 2.37783C6.30292 2.29366 7.13708 2.29199 8.33292 2.29199H11.6663C12.8629 2.29199 13.6971 2.29366 14.3263 2.37783C14.9379 2.46033 15.2613 2.61116 15.4929 2.84116C15.7229 3.07199 15.8729 3.39533 15.9554 4.00783C16.0404 4.63616 16.0413 5.47116 16.0413 6.66699L16.0404 12.7078ZM6.04125 5.83366C6.04125 5.6679 6.1071 5.50893 6.22431 5.39172C6.34152 5.27451 6.50049 5.20866 6.66625 5.20866H13.3329C13.4987 5.20866 13.6576 5.27451 13.7749 5.39172C13.8921 5.50893 13.9579 5.6679 13.9579 5.83366C13.9579 5.99942 13.8921 6.15839 13.7749 6.2756C13.6576 6.39281 13.4987 6.45866 13.3329 6.45866H6.66625C6.50049 6.45866 6.34152 6.39281 6.22431 6.2756C6.1071 6.15839 6.04125 5.99942 6.04125 5.83366ZM6.04125 8.75033C6.04125 8.58457 6.1071 8.42559 6.22431 8.30838C6.34152 8.19117 6.50049 8.12533 6.66625 8.12533H10.8329C10.9987 8.12533 11.1576 8.19117 11.2749 8.30838C11.3921 8.42559 11.4579 8.58457 11.4579 8.75033C11.4579 8.91609 11.3921 9.07506 11.2749 9.19227C11.1576 9.30948 10.9987 9.37533 10.8329 9.37533H6.66625C6.50049 9.37533 6.34152 9.30948 6.22431 9.19227C6.1071 9.07506 6.04125 8.91609 6.04125 8.75033Z" fill="#1F2125"/>
+            </svg>
+            <span class="nav-label">Categories</span>
+          </a>
+          <a href="{{ url_for('directory_page', directory_name='promt') }}"
+            class="flex items-center p-[10px] rounded-lg gap-3 transition-all
+                   {% if active_menu == 'promt' %}bg-[#A3B8F8] text-white font-semibold active{% else %}text-gray-700 hover:bg-[#E6E9F5]{% endif %}">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15.4115 7.50016H13.7448M13.7448 7.50016H12.0781M13.7448 7.50016V5.8335M13.7448 7.50016V9.16683" stroke="#1F2125" stroke-width="0.9375" stroke-linecap="round"/>
+              <path d="M9.9974 4.64512L9.54073 5.07178C9.5992 5.13436 9.66991 5.18425 9.74847 5.21836C9.82702 5.25247 9.91175 5.27007 9.9974 5.27007C10.083 5.27007 10.1678 5.25247 10.2463 5.21836C10.3249 5.18425 10.3956 5.13436 10.4541 5.07178L9.9974 4.64512ZM2.2074 11.4018C2.24863 11.4744 2.304 11.5381 2.37026 11.589C2.43651 11.6399 2.51229 11.6769 2.59311 11.698C2.67394 11.7191 2.75818 11.7238 2.84085 11.7118C2.92352 11.6998 3.00294 11.6713 3.07442 11.6281C3.1459 11.5849 3.20799 11.5277 3.25701 11.4601C3.30604 11.3925 3.34101 11.3157 3.35985 11.2343C3.3787 11.1529 3.38103 11.0686 3.36673 10.9863C3.35242 10.904 3.32176 10.8254 3.27656 10.7551L2.2074 11.4018ZM5.4449 13.4759C5.38843 13.414 5.32008 13.3641 5.24393 13.3291C5.16777 13.2942 5.08537 13.2749 5.00161 13.2724C4.91785 13.2699 4.83444 13.2843 4.75636 13.3147C4.67827 13.3451 4.60709 13.3909 4.54706 13.4494C4.48703 13.5079 4.43937 13.5778 4.40692 13.6551C4.37446 13.7323 4.35787 13.8153 4.35813 13.8991C4.3584 13.9829 4.37551 14.0658 4.40845 14.1428C4.4414 14.2199 4.4895 14.2895 4.5499 14.3476L5.4449 13.4759ZM2.28906 7.76512C2.28906 5.34428 3.34573 3.84845 4.6524 3.33595C5.95656 2.82512 7.78073 3.19012 9.54073 5.07178L10.4541 4.21845C8.46406 2.09012 6.12156 1.41845 4.19656 2.17178C2.27406 2.92512 1.03906 4.99345 1.03906 7.76512H2.28906ZM12.9224 16.6334C14.1666 15.6243 15.6566 14.2718 16.8416 12.7609C18.0141 11.2659 18.9557 9.52845 18.9557 7.76345H17.7057C17.7057 9.10678 16.9724 10.5668 15.8574 11.9893C14.7541 13.3968 13.3441 14.6826 12.1357 15.6626L12.9224 16.6334ZM18.9557 7.76345C18.9557 4.99262 17.7207 2.92428 15.7974 2.17178C13.8724 1.41762 11.5307 2.08845 9.54073 4.21762L10.4541 5.07178C12.2141 3.19012 14.0382 2.82428 15.3424 3.33512C16.6491 3.84678 17.7057 5.34345 17.7057 7.76345H18.9557ZM7.0724 16.6343C8.13073 17.4943 8.86573 18.1251 9.9974 18.1251V16.8751C9.3949 16.8751 9.0199 16.6051 7.85906 15.6634L7.0724 16.6343ZM12.1357 15.6626C10.9749 16.6043 10.5999 16.8751 9.9974 16.8751V18.1251C11.1291 18.1251 11.8649 17.4943 12.9232 16.6343L12.1357 15.6626ZM3.2774 10.7551C2.65323 9.72512 2.28906 8.71262 2.28906 7.76512H1.03906C1.03906 9.02512 1.51906 10.2651 2.2074 11.4018L3.2774 10.7551ZM7.85906 15.6634C7.01305 14.9812 6.207 14.2508 5.4449 13.4759L4.5499 14.3476C5.34522 15.1583 6.18804 15.9218 7.0724 16.6343L7.85906 15.6634Z" fill="#1F2125"/>
+            </svg>
+            <span class="nav-label">Promts</span>
+          </a>
+		    </nav>
+      </div>
+      <div class="mt-auto">
+        <a href="{{ url_for('logout') }}" class="flex items-center p-[10px] rounded-lg text-gray-500 hover:bg-[#E6E9F5] gap-3 transition-all">
+          <svg width="20" height="20" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 13.1668L6 8.50016L7 7.3335M10 3.8335L8.66667 5.38883" stroke="#1F2125" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <span class="ml-3 nav-label">Главная</span>
+          <span class="nav-label">Exit</span>
         </a>
-        <a href="{{ url_for('directory_page', directory_name='brand') }}" class="flex items-center px-4 py-2 hover:bg-gray-100">
-          <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="flex flex-col w-full">
+      <header class="flex items-center px-[20px] py-[10px] bg-transparent border-b border-gray-100">
+        <button id="mobile-toggle" class="lg:hidden block p-2 rounded bg-white shadow mr-4">
+          <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
-          <span class="ml-3 nav-label">Бренды</span>
-        </a>
-        <a href="{{ url_for('directory_page', directory_name='category') }}" class="flex items-center px-4 py-2 hover:bg-gray-100">
-          <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-          </svg>
-          <span class="ml-3 nav-label">Категории</span>
-        </a>
-        <a href="{{ url_for('directory_page', directory_name='promt') }}" class="flex items-center px-4 py-2 hover:bg-gray-100">
-          <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-          </svg>
-          <span class="ml-3 nav-label">Промты</span>
-        </a>
-      </nav>
-    </div>
-    <div class="mt-auto">
-      <a href="{{ url_for('logout') }}" class="flex items-center px-4 py-2 hover:bg-gray-100">
-        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-        </svg>
-        <span class="ml-3 nav-label">Выход</span>
-      </a>
-    </div>
-  </aside>
+        </button>
+        <h1 class="text-3xl font-black text-gray-900 leading-tight">Product card</h1>
+      </header>
 
-  <!-- Основной контент -->
-  <main class="flex-1 flex flex-col h-screen">
-    <div class="flex-1 container bg-white p-6 rounded shadow">
+      <div class="flex flex-1 flex-col lg:flex-row w-full h-full p-[20px] gap-[20px]">
+        <!-- Left column: form -->
+        <div class="flex flex-col justify-between w-full lg:basis-1/2 lg:w-auto">
       
-      <form
-        id="product-form"
-        method="post"
-        action="{{ url_for('save_product') }}"
-        enctype="multipart/form-data"
-        class="space-y-4"
-        data-save-url="{{ url_for('save_product') }}"
-      >
+          <form id="product-form" method="post" action="{{ url_for('save_product') }}" enctype="multipart/form-data" class="flex flex-col gap-4 flex-1"> 
 
-        {% if product %}
-            <input type="hidden" name="product_id" value="{{ product.id }}">
-        {% endif %}
-        {% for k, v in return_params.items() %}
-            <input type="hidden" name="return_param_{{ k }}" value="{{ v }}">
-        {% endfor %}
-
-        <!-- Название -->
-        <div>
-          <label for="name" class="block font-semibold">Название</label>
-          <input type="text" id="name" name="name" value="{{ product.name if product else '' }}" placeholder="Название" class="input w-full border-2 border-solid" required>
-        </div>
-      
-        <!-- Описание -->
-        <div>
-          <label for="description" class="block font-semibold">Описание</label>
-          <textarea id="description" name="description" class="textarea w-full border-2 border-solid">{{ product.description if product else '' }}</textarea>
-        </div>
-      
-        <!-- Бренд -->
-        <div>
-          <label for="brand_id" class="block font-semibold">Бренд</label>
-          <select id="brand_id" name="brand_id" class="select w-full border-2 border-solid">
-            <option value="">-- Без бренда --</option>
-            {% for brand in brands %}
-              <option value="{{ brand.id }}" {% if product and product.brand_id == brand.id %}selected{% endif %}>
-                {{ brand }}
-              </option>
-            {% endfor %}
-          </select>
-        </div>
-
-        <!-- Категория -->
-        <div>
-          <label for="category_id" class="block font-semibold">Категория</label>
-          <select id="category_id" name="category_id" class="select w-full border-2 border-solid">
-            <option value="">-- Без категории --</option>
-            {% for category in categories %}
-              <option value="{{ category.id }}" {% if product and product.category_id == category.id %}selected{% endif %}>
-                {{ category }}
-              </option>
-            {% endfor %}
-          </select>
-        </div>
-      
-        <!-- UPC -->
-        <div>
-          <label for="upc" class="block font-semibold">UPC</label>
-          <input type="text" id="upc" name="upc" value="{{ product.upc if product else '' }}" class="input w-full border-2 border-solid">
-        </div>
-
-        <!-- EAN -->
-        <div>
-          <label for="ean" class="block font-semibold">EAN</label>
-          <input type="text" id="ean" name="ean" value="{{ product.ean if product else '' }}" class="input w-full border-2 border-solid">
-        </div>
-      
-        <!-- Основное изображение -->
-        <div>
-          <label class="block font-semibold mb-2">Основное изображение</label>
-        
-          <!-- Скрытый input для загрузки -->
-          <input type="file" name="main_image" id="main_image_input" accept="image/*" class="hidden" />
-        
-          <!-- Обёртка для клика -->
-          <div class="cursor-pointer w-[200px] h-[200px]" id="main_image_wrapper">
-            <img 
-              id="main_image_preview" 
-              src="{% if main_image_path %}/static/uploads/{{ main_image_path }}{% else %}/static/images/placeholder.png{% endif %}" 
-              alt="Основное изображение" 
-              class="border rounded shadow w-full h-full object-cover" />
-          </div>
-        </div>
-
-        <!-- Кнопки -->
-        <div class="flex gap-4">
-          <button id="save-btn" type="submit" class="btn btn-primary bg-gray-300 text-white p-2 rounded hover:bg-gray-500 mr-3">
             {% if product %}
-              Сохранить изменения
-            {% else %}
-              Создать продукт
+              <input type="hidden" name="product_id" value="{{ product.id }}">
             {% endif %}
-          </button>
-          <a href="{{ url_for('dashboard') }}?{{ return_params|urlencode }}" class="btn btn-secondary bg-gray-300 text-white p-2 rounded hover:bg-gray-500">Назад</a>
-        </div>
-        
-      </form>
+            {% for k, v in return_params.items() %}
+              <input type="hidden" name="return_param_{{ k }}" value="{{ v }}">
+            {% endfor %}
 
-    </div>
-  </main>
+            <!-- Name -->
+            <div>
+              <label class="block font-bold text-sm mb-1" for="name">Name <span class="text-red-500">*</span></label>
+              <input id="name" type="text" name="name" value="{{ product.name if product else '' }}" class="w-full rounded-lg border border-gray-200 px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#A3B8F8] transition" placeholder="Enter name..." required />
+            </div>
+      
+            <!-- UPC -->
+            <div>
+              <label class="block font-bold text-sm mb-1" for="upc">UPC</label>
+              <input id="upc" type="text" name="upc" value="{{ product.upc if product else '' }}" class="w-full rounded-lg border border-gray-200 px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#A3B8F8] transition" placeholder="Enter UPC..." />
+            </div>
+
+            <!-- EAN -->
+            <div>
+              <label class="block font-bold text-sm mb-1" for="ean">EAN</label>
+              <input id="ean" type="text" name="ean" value="{{ product.ean if product else '' }}" class="w-full rounded-lg border border-gray-200 px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#A3B8F8] transition" placeholder="Enter EAN..." />
+            </div>
+      
+            <!-- Brand -->
+            <div>
+              <label class="block font-bold text-sm mb-1" for="brand_id">Brand</label>
+              <select id="brand_id" name="brand_id" class="w-full rounded-lg border border-gray-200 px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#A3B8F8] transition">
+                <option value="">-- No brand --</option>
+                {% for brand in brands %}
+                  <option value="{{ brand.id }}" {% if product and product.brand_id == brand.id %}selected{% endif %}>
+                    {{ brand }}
+                  </option>
+              {% endfor %}
+              </select>
+            </div>
+
+            <!-- Category -->
+            <div>
+              <label class="block font-bold text-sm mb-1" for="category_id">Category</label>
+              <select id="category_id" name="category_id" class="w-full rounded-lg border border-gray-200 px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#A3B8F8] transition">
+                <option value="">-- Uncategorized --</option>
+                {% for category in categories %}
+                  <option value="{{ category.id }}" {% if product and product.category_id == category.id %}selected{% endif %}>
+                    {{ category }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+
+ 			      <!-- Description -->
+            <div class="flex-1">
+              <label class="block font-bold text-sm mb-1" for="description">Description</label>
+              <textarea id="description" name="description" class="w-full rounded-lg border border-gray-200 px-4 py-2 bg-white min-h-[120px] focus:outline-none focus:ring-2 focus:ring-[#A3B8F8] transition" placeholder="Enter description..."></textarea>
+            </div>
+      
+            <!-- Picture/Download -->
+            <div class="w-full mt-2 lg:hidden">
+              <label class="block font-semibold mb-2">Main image</label>
+              <div class="relative w-full aspect-[4/3] sm:aspect-square bg-[#F5F6FA] border-2 border-dashed border-[#A3B8F8] rounded-xl flex items-center justify-center overflow-hidden">
+                <!-- Hidden input for loading -->
+                <input type="file" name="main_image" id="main_image_input" accept="image/*" class="hidden" />
+                <!-- Click wrapper -->
+                <div class="cursor-pointer w-[200px] h-[200px]">
+                  <img 
+                    src="{% if main_image_path %}/static/uploads/{{ main_image_path }}{% else %}/static/images/placeholder.png{% endif %}" 
+                    alt="Main image" 
+                    class="main_image_preview border rounded shadow w-full h-full object-cover" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex flex-row gap-4 mt-6">
+              <button id="save-btn" type="submit" class="bg-[#A3B8F8] hover:bg-[#7B7FD1] text-white font-semibold px-6 py-2 rounded-full shadow transition w-full sm:w-auto">
+                {% if product %}
+                  Save changes
+                {% else %}
+                  Create a product
+                {% endif %}
+              </button>
+              <a href="{{ url_for('dashboard') }}{{ '?' + return_params_str if return_params_str else '' }}" class="border border-[#A3B8F8] text-[#7B7FD1] font-semibold px-6 py-2 rounded-full bg-white hover:bg-[#F5F6FA] transition w-full sm:w-auto">Cancel</a>
+            </div>
+
+          </form>
+
+
+        </div>
+		
+        <!-- Right column: picture -->
+        <div class="flex justify-center items-center w-full lg:basis-1/2 lg:w-auto min-w-0 hidden lg:flex">
+          <div class="w-full max-w-[700px] aspect-[1.2/1] bg-white rounded-xl shadow-lg flex items-center justify-center overflow-hidden">
+            <!-- Hidden input for loading -->
+            <input type="file" name="main_image" id="main_image_input" accept="image/*" class="hidden" />
+            <!-- Click wrapper -->
+            <div class="cursor-pointer w-[200px] h-[200px]">
+              <img 
+                src="{% if main_image_path %}/static/uploads/{{ main_image_path }}{% else %}/static/images/placeholder.png{% endif %}" 
+                alt="Main image" 
+                class="main_image_preview border rounded shadow w-full h-full object-cover" />
+            </div>
+		      </div>
+        </div>
+
+      </div>
+	  
+    </main>
+  </div>
   
- 
+  <script>
+    // Передадим URL для fetch как data-атрибут, чтобы JS мог им пользоваться
+    document.getElementById('product-form').setAttribute('data-save-url', "{{ url_for('save_product') }}");
+  </script>
+  
   <script src="{{ url_for('static', path='js/main.js') }}"></script>
   <script src="{{ url_for('static', path='js/utils.js') }}"></script>
   <script src="{{ url_for('static', path='js/product.js') }}"></script>

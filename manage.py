@@ -2,18 +2,23 @@ import sys
 import subprocess
 import os
 
+
 # Базовые параметры
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
 ALEMBIC_CFG = os.path.join(BASE_DIR, "alembic.ini")
 
 def run_dev():
     """Запуск dev-сервера FastAPI"""
+    os.environ["ENVIRONMENT"] = "development"
     subprocess.run([
         "uvicorn", "app.main:app", "--reload", "--host", "127.0.0.1", "--port", "8000"
     ])
 
 def run_prod():
     """Запуск FastAPI без автоперезагрузки (prod)"""
+    os.environ["ENVIRONMENT"] = "production"
     subprocess.run([
         "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"
     ])
@@ -31,9 +36,10 @@ def downgrade():
     subprocess.run(["alembic", "-c", ALEMBIC_CFG, "downgrade", "-1"])
 
 def test():
-    """Запустить pytest"""
-    subprocess.run(["pytest", "tests/"])
-
+    """Запустить pytest для всех тестов с нужным окружением"""
+    os.environ["ENVIRONMENT"] = "test"
+    subprocess.run(["pytest", "tests", "-v"])
+    
 def createsuperuser():
     """Создать суперпользователя (пример для интерактивного скрипта)"""
     subprocess.run([sys.executable, "scripts/create_superuser.py"])

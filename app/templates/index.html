@@ -1,114 +1,664 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Review Analyzer</title>
-  <link rel="stylesheet" href="/static/css/style.css">
-</head>
-<body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
-  <!-- Hero Section with integrated header and burger menu -->
-  <section class="relative text-white bg-gray-900 overflow-hidden">
-    <!-- <img src="https://images.unsplash.com/photo-1591696331117-cc5f3c0c3b49?auto=format&fit=crop&w=1920&q=80" alt="AI Background" class="absolute inset-0 w-full h-full object-cover opacity-40"> -->
-    <div class="relative z-10">
-      <!-- Integrated Header with burger -->
-      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <a href="/" class="text-gray-200 hover:text-white">
-          <h1 class="text-xl font-bold text-white">AI Review Analyzer</h1>
-        </a>
-        <button id="burger-button" class="md:hidden text-white">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
-        <nav class="hidden md:flex justify-between items-center space-x-4 text-sm md:text-base">
-          <a href="/about" class="text-gray-200 hover:text-white">О нас</a>
-          <a href="/contacts" class="text-gray-200 hover:text-white">Контакты</a>
-          <a href="/login" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Вход</a>
-        </nav>
-      </div>
-      <!-- Mobile Menu -->
-      <div id="mobile-menu" class="md:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 hidden z-50">
-        <div class="bg-gray-900 p-6 rounded shadow-md w-11/12 max-w-sm mx-auto mt-20 relative">
-          <button id="close-button" class="absolute top-4 right-4 text-gray-300 hover:text-white">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-          <nav class="flex flex-col space-y-4 text-white text-lg">
-            <a href="/" class="hover:underline">Главная</a>
-            <a href="/about" class="hover:underline">О нас</a>
-            <a href="/contacts" class="hover:underline">Контакты</a>
-            <a href="/login" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-center">Вход</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Review Analyzer — Product Feedback & Insights</title>
+    <meta name="description" content="AI Review Analyzer — автоматический анализ отзывов, выявление слабых мест продукта и принятие решений на основе данных. Быстро, удобно, без кода." />
+    <meta name="keywords" content="AI, анализ отзывов, product feedback, data-driven, автоматизация, insights, аналитика, бизнес" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://yourdomain.com/" />
+    <meta name="theme-color" content="#7B7FD1" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yourdomain.com/" />
+    <meta property="og:title" content="AI Review Analyzer — Product Feedback & Insights" />
+    <meta property="og:description" content="AI Review Analyzer — автоматический анализ отзывов, выявление слабых мест продукта и принятие решений на основе данных." />
+    <meta property="og:image" content="https://yourdomain.co/static/images/public/og-image.png" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://yourdomain.com/" />
+    <meta name="twitter:title" content="AI Review Analyzer — Product Feedback & Insights" />
+    <meta name="twitter:description" content="AI Review Analyzer — автоматический анализ отзывов, выявление слабых мест продукта и принятие решений на основе данных." />
+    <meta name="twitter:image" content="https://yourdomain.co/static/images/public/og-image.png" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/images/public/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/images/public/favicon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/css/public.css">
+  </head>
+  <body class="font-sans bg-white text-gray-900">
+        
+    <svg style="display:none;">
+      <symbol id="icon-query" viewBox="0 0 58 92">
+        <path d="M36.9005 86.7621L20.9208 86.756L20.9317 71.2794L36.9113 71.2865L36.9005 86.7621ZM28.2525 1.44137C37.2491 1.43977 44.2833 3.277 49.4073 6.89842C54.4738 10.4793 57.0502 16.295 57.0487 24.4708L57.0488 24.4798C57.0881 26.8084 56.8156 29.1317 56.2384 31.388C55.7401 33.2783 54.9368 35.0745 53.86 36.706C52.7386 38.365 51.4112 39.8748 49.9097 41.1997L49.907 41.2031C48.3322 42.6143 46.5393 44.0832 44.5283 45.6108C43.1149 46.6734 41.7805 47.8368 40.5349 49.091L40.0074 49.6328C38.8976 50.7925 37.9915 52.1314 37.3276 53.5928L37.3252 53.5993C36.7181 54.9851 36.323 56.4543 36.1532 57.9577L36.1526 57.9606C35.9908 59.4641 35.907 60.9748 35.9014 62.4868L21.4474 62.4326C21.4002 58.6278 21.7802 54.8292 22.5824 51.1086C23.3603 48.1127 24.8307 45.3411 26.876 43.0178L26.8849 43.0088C28.0999 41.556 29.5083 40.2765 31.0722 39.2084L31.073 39.2096C32.6369 38.146 34.1244 36.9732 35.5238 35.7008L35.523 35.6997C36.8831 34.48 38.0585 33.0686 39.0096 31.5088L39.0194 31.4909C40.0631 29.6082 40.5671 27.4738 40.4762 25.3231C40.4656 21.1477 39.323 18.0855 36.8808 16.3152L36.8747 16.3109L36.4121 15.9979C34.0717 14.4866 31.3284 13.7076 28.5348 13.7675C24.019 13.7594 20.7488 14.9878 18.9504 17.6986L18.9414 17.7126C17.1186 20.6696 16.0288 24.0163 15.7562 27.4746L0.508931 27.4655C0.518908 23.8715 1.18999 20.3086 2.49224 16.9558L2.49149 16.9546C3.72514 13.7858 5.64075 10.9263 8.10069 8.57844L8.09994 8.57729C10.4558 6.36743 13.2226 4.64469 16.2399 3.50354L16.8469 3.28312C20.5093 2.00806 24.367 1.3844 28.2446 1.44071L28.2525 1.44137Z" stroke="black"/>
+      </symbol>
+      <symbol id="icon-arrow-down" viewBox="0 0 20 20">
+        <path d="M4.16602 7.97217L9.99935 13.8055L15.8327 7.97217" stroke="#1F2125" stroke-width="1.70146" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+    </svg>
+
+    <!-- Первый экран: Header + Hero -->
+    <section class="min-h-[700px] flex flex-col justify-between bg-[url('/static/images/public/img_bg_default.svg')] bg-center bg-cover pt-0">
+      <!-- Header внутри первого экрана -->
+      <div class="w-full py-[22px] fixed md:static md:top-0 md:left-0 bg-[url('/static/images/public/bg_menu_mob.png')] bg-center bg-cover md:bg-none z-50 transition-all">
+        <div class="max-w-[1200px] w-full mx-auto flex items-center justify-between px-[14px] md:px-[24px] xl:px-0">
+          <div class="font-black text-[24px] text-[#6B6397] text-balance">
+            AI Review Analyzer
+          </div>
+          <nav class="hidden md:flex flex-wrap justify-center text-center gap-x-8 gap-y-2 min-w-0 text-[16px] font-semibold text-gray-700">
+            <a href="#demo" class="hover:text-[#7B7FD1] outline-none focus:outline-none">Demo</a>
+            <a href="#how" class="hover:text-[#7B7FD1] outline-none focus:outline-none">How does it work?</a>
+            <a href="#faq" class="hover:text-[#7B7FD1] outline-none focus:outline-none">FAQ</a>
+            <a href="#testimonials" class="hover:text-[#7B7FD1] outline-none focus:outline-none">Testimonials</a>
           </nav>
+          <a href="/login" class="flex-shrink-0 min-w-[85px] px-[20px] py-[10px] bg-[#88A6F0] rounded-[20px] shadow hover:bg-[#7B7FD1] transition text-[15px] text-white font-semibold leading-[18px] hidden md:inline-block outline-none focus:outline-none">
+            Sign in
+          </a>
+          <!-- Гамбургер для мобилки -->
+          <button class="ml-2 flex md:hidden w-[38px] h-[38px] items-center justify-center rounded-lg bg-transparent border-0 cursor-pointer transition" id="burgerBtn" aria-label="Открыть меню">
+            <svg viewBox="0 0 32 32" fill="none" class="w-8 h-8"><rect y="6" width="32" height="4" rx="2" fill="#6B6397"/><rect y="14" width="32" height="4" rx="2" fill="#6B6397"/><rect y="22" width="32" height="4" rx="2" fill="#6B6397"/></svg>
+          </button>
         </div>
       </div>
-
-      <!-- Hero Content -->
-      <div class="max-w-7xl mx-auto px-4 py-20 md:py-28 flex flex-col items-center text-center animate-fadeInUp">
-        <img src="/static/images/4712100.png" alt="AI Icon" class="w-20 h-20 mb-6">
-        <h2 class="text-3xl sm:text-4xl font-extrabold mb-4 leading-tight">Анализируйте отзывы о товарах с помощью ИИ</h2>
-        <p class="text-base sm:text-lg text-gray-200 mb-6 max-w-2xl">Получите ключевые инсайты, выявите слабые стороны продукта и принимайте решения на основе данных.</p>
-        <a href="/register" class="bg-blue-600 text-white px-8 py-3 rounded text-lg font-semibold hover:bg-blue-700">Попробовать</a>
+      <!-- Overlay меню для мобилки -->
+      <div class="fixed inset-0 z-[100] bg-[#7B7FD1]/[0.97] flex-col justify-start items-center hidden transition-all" id="mobileMenu">
+        <button class="absolute top-7 right-7 bg-none border-0 text-white text-[36px] cursor-pointer z-[101]" id="closeMenu" aria-label="Закрыть меню">&times;</button>
+        <nav class="flex flex-col gap-8 mt-[90px] w-full items-center">
+          <a href="#demo" class="text-[24px] font-bold text-white hover:text-[#d1d5fa]">Demo</a>
+          <a href="#how" class="text-[24px] font-bold text-white hover:text-[#d1d5fa]">How does it work?</a>
+          <a href="#faq" class="text-[24px] font-bold text-white hover:text-[#d1d5fa]">FAQ</a>
+          <a href="#testimonials" class="text-[24px] font-bold text-white hover:text-[#d1d5fa]">Testimonials</a>
+        </nav>
+        <div class="absolute bottom-12 left-0 right-0 flex justify-center">
+          <a href="/login" class="px-11 py-3 bg-[#88A6F0] rounded-[20px] text-white text-[20px] font-semibold shadow hover:bg-[#7B7FD1] transition">Sign in</a>
+        </div>
       </div>
-    </div>
-  </section>
-  
-	<main class="flex-shrink-0">
-    <!-- О проекте -->
-    <section class="py-20 px-4 bg-gray-50 text-center bg-[url('/static/images/cubes.png')]">
-      <div class="max-w-4xl mx-auto">
-        <h3 class="text-2xl font-semibold mb-4">Как работает AI Review Analyzer?</h3>
-        <p class="text-gray-700 mb-6">Вы загружаете отзывы в любом удобном формате (CSV, JSON, XLSX), а наш искусственный интеллект анализирует их, выделяя ключевые фразы, основные плюсы и минусы, и формирует понятную сводку.</p>
+      <!-- Hero-контент -->
+      <div class="firstscreen__content flex flex-col-reverse md:flex-col-reverse lg:flex-row items-center justify-between max-w-[1200px] w-full mx-auto flex-1 mt-[80px] md:mt-0 mb-[40px] md:mb-[60px] lg:mb-[80px] gap-[20px] md:gap-[40px] px-[14px] md:px-[24px] xl:px-0 relative md:items-center md:justify-start">  
+        <!-- Левая колонка (текст) -->
+        <div class="hero__content flex-1 min-w-0 lg:max-w-[520px] md:w-full md:max-w-full text-center lg:text-left md:mb-8">
+          <h1 class="hero__title font-black text-[48px] leading-[59px] mb-[30px] text-gray-900 md:text-[36px] md:leading-[1.1] md:mb-[18px] sm:text-[24px] sm:mb-3">
+            Analyze product reviews <span class="text-[#6B6397]">using AI</span>
+          </h1>
+          <p class="hero__desc text-[20px] text-[#1F2125] mb-[50px] lg:max-w-[440px] leading-[24px] md:text-[18px] md:mb-8 md:max-w-full sm:text-[15px] sm:mb-4">
+            Gain key insights, identify product weaknesses, and make data-driven decisions
+          </p>
+          <a href="/register" class="hero__try px-[40px] py-[15px] bg-[#88A6F0] rounded-[20px] shadow hover:bg-[#7B7FD1] transition block w-max mx-auto lg:mx-0 md:text-[20px] sm:text-[16px]">
+            <span class="hero__try_btn text-[24px] text-[#FFFFFF] leading-[29px] font-semibold md:text-[20px] sm:text-[16px]"> 
+              To try
+            </span>
+          </a>
+        </div>
+        <!-- Правая колонка (картинка) -->
+        <div class="hero__image flex-1 min-w-0 flex items-center justify-center lg:max-w-[670px] md:w-full md:max-w-full md:mb-0">
+          <img src="/static/images/public/first_screen.png" alt="AI Illustration" class="max-w-full" />
+        </div>
+        <!-- Декоративные элементы (placeholder) -->
+        <!-- Верхний левый вопрос -->
+        <div class="question-mark absolute left-[7%] top-[1%] w-[60px] h-[60px] opacity-0 animate-fade-in-out"
+            style="--fade-duration: 2s; --fade-delay: 0s;">
+          <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full transform -rotate-15" style="transform: rotate(-20deg) scale(0.7);" />
+        </div>
+        <!-- Нижний левый вопрос -->
+        <div class="question-mark absolute right-[5%] lg:bottom-[1%] lg:left-[20%] lg:bottom-[1%] w-[100px] h-[100px] opacity-0 animate-fade-in-out"
+          style="--fade-duration: 2.5s; --fade-delay: 1s;">
+          <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full transform rotate-25" style="transform: rotate(25deg) scale(0.7);" />
+        </div>
       </div>
     </section>
 
-    <!-- Выгоды -->
-    <section class="py-20 px-4 bg-gradient-to-r from-gray-50 to-white">
-      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-        <div>
-          <h4 class="text-xl font-semibold mb-2">Быстро и удобно</h4>
-          <p class="text-gray-600">Автоматический анализ отзывов за считанные секунды.</p>
+    <!-- Advantages Section -->
+    <section id="demo" class="advantages flex flex-col justify-between bg-[url('/static/images/public/img_bg_contrast.svg')] bg-center bg-cover p-0">
+      <div class="advantages__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0"> 
+        <div class="advantages__list w-full mx-auto flex flex-wrap justify-around items-center gap-[40px] mb-[40px] md:mb-[60px] lg:mb-[80px]"> 
+          <div class="advantages__item flex flex-col items-center text-center max-w-[295px]">
+            <svg width="45" height="44" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="advantages__icon w-[56px] h-[56px] mb-[18px]">
+              <path d="M15.3681 21.7424C22.7587 28.7033 30.4072 32.8283 40.4619 34.3752M28.1633 14.7316C20.5244 9.79708 12.6181 13.3394 5.31342 5.60505C3.61186 3.80036 4.60014 25.8433 13.7439 34.1965C20.429 40.298 30.7509 39.6174 34.2314 33.6877C37.7119 27.758 35.8023 19.6653 28.1633 14.7316Z" stroke="#7D94CF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3 class="advantages__title text-[20px] font-bold mb-[8px]">Quick and convenient</h3>
+            <p class="advantages__desc text-[16px] text-gray-600">Automated analysis, minimal manual work.</p>
+          </div>
+          <div class="advantages__item flex flex-col items-center text-center max-w-[295px]">
+            <svg width="45" height="44" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="advantages__icon w-[56px] h-[56px] mb-[18px]">
+              <path d="M3.93074 12.8262L20.8948 21.0177C21.3365 21.2283 21.9261 21.3383 22.5096 21.3383C23.0931 21.3383 23.6826 21.2283 24.1235 21.0177L41.0875 12.8262C41.9796 12.3965 41.9796 11.6935 41.0875 11.2621L24.1235 3.07055C23.6826 2.86 23.0922 2.75 22.5096 2.75C21.9269 2.75 21.3365 2.86 20.8948 3.07055L3.93074 11.2621C3.03871 11.6935 3.03871 12.3948 3.93074 12.8262Z" fill="#7D94CF"/>
+              <path d="M41.0884 21.2181C41.0884 21.2181 37.9904 19.7245 37.5796 19.5234C37.1688 19.3223 37.0579 19.3335 36.6265 19.5337C36.1951 19.7339 24.114 25.5691 24.114 25.5691C23.6048 25.789 23.0547 25.8985 22.5001 25.8905C21.9183 25.8905 21.3271 25.7796 20.8862 25.5691C20.8862 25.5691 9.12566 19.8972 8.57395 19.6239C7.97668 19.336 7.8048 19.336 7.26082 19.5938L3.90926 21.2078C3.01723 21.6374 3.01723 22.3413 3.90926 22.7718L20.8759 30.9634C21.3168 31.1739 21.9071 31.2839 22.4898 31.2839C23.0725 31.2839 23.6629 31.1739 24.1046 30.9634L41.0686 22.7735C41.9804 22.3507 41.9804 21.6495 41.0884 21.2181Z" fill="#7D94CF"/>
+              <path d="M41.0874 31.1738C41.0874 31.1738 37.9894 29.6802 37.5786 29.4765C37.1678 29.2728 37.0569 29.2866 36.6255 29.4868C36.1941 29.6871 24.1233 35.5351 24.1233 35.5351C23.614 35.7546 23.064 35.8639 22.5094 35.8557C21.9276 35.8557 21.3364 35.7457 20.8947 35.5351C20.8947 35.5351 9.13412 29.8632 8.58326 29.59C7.9817 29.2986 7.80982 29.2986 7.26928 29.5599L3.91771 31.1738C3.02482 31.6035 3.02482 32.3064 3.91771 32.7379L20.8818 40.9294C21.3226 41.1494 21.913 41.25 22.4957 41.25C23.0783 41.25 23.6687 41.14 24.1096 40.9294L41.0771 32.7421C41.9794 32.3064 41.9794 31.6052 41.0874 31.1738Z" fill="#7D94CF"/>
+            </svg>
+            <h3 class="advantages__title text-[20px] font-bold mb-[8px]">Insights for growth</h3>
+            <p class="advantages__desc text-[16px] text-gray-600">Find weaknesses, prioritize product fixes.</p>
+          </div>
+          <div class="advantages__item flex flex-col items-center text-center max-w-[295px]">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg class="advantages__icon w-[56px] h-[56px] mb-[18px]"">
+              <path d="M22 19.9375V13.0625" stroke="#7D94CF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M22 7.5625V6.1875M11.3438 11.3438L10.3125 10.3125" stroke="#7D94CF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M22 26.125C23.5188 26.125 24.75 24.8938 24.75 23.375C24.75 21.8562 23.5188 20.625 22 20.625C20.4812 20.625 19.25 21.8562 19.25 23.375C19.25 24.8938 20.4812 26.125 22 26.125Z" stroke="#7D94CF" stroke-width="2" stroke-miterlimit="10"/>
+              <path d="M22 8.25C19.0086 8.25 16.0843 9.13707 13.597 10.799C11.1097 12.461 9.1711 14.8232 8.02633 17.5869C6.88155 20.3506 6.58203 23.3918 7.16563 26.3257C7.74923 29.2597 9.18975 31.9547 11.305 34.07C13.4203 36.1853 16.1153 37.6258 19.0493 38.2094C21.9832 38.793 25.0244 38.4935 27.7881 37.3487C30.5518 36.2039 32.914 34.2653 34.576 31.778C36.2379 29.2907 37.125 26.3664 37.125 23.375C37.125 19.3636 35.5315 15.5165 32.695 12.68C29.8585 9.84352 26.0114 8.25 22 8.25Z" stroke="#7D94CF" stroke-width="2" stroke-miterlimit="10"/>
+            </svg>
+            <h3 class="advantages__title text-[20px] font-bold mb-[8px]">Time saving</h3>
+            <p class="advantages__desc text-[16px] text-gray-600">Don't waste time on manual review analysis.</p>
+          </div>
         </div>
-        <div>
-          <h4 class="text-xl font-semibold mb-2">Инсайты для роста</h4>
-          <p class="text-gray-600">Находите слабые места и улучшайте продукт.</p>
-        </div>
-        <div>
-          <h4 class="text-xl font-semibold mb-2">Экономия времени</h4>
-          <p class="text-gray-600">Не тратьте часы на ручной анализ, ИИ всё сделает за вас.</p>
+        <div class="advantages__app w-full mx-auto flex justify-center items-center">
+          <img src="/static/images/public/advantages.png" alt="App Screenshot" class="advantages__image w-full max-w-[900px]" />
         </div>
       </div>
     </section>
 
-    <!-- Доверие  <img src="/static/images/placeholder.png" alt="Фото" class="w-20 h-20 object-cover rounded shadow">-->
-    <section class="py-20 px-4 bg-gray-100 text-center bg-[url('/static/images/connected.png')]">
-      <div class="max-w-4xl mx-auto">
-        <h3 class="text-2xl font-semibold mb-4">Нам доверяют</h3>
-        <p class="text-gray-700 mb-6">Наша платформа используется маркетологами, брендами и владельцами интернет-магазинов по всему миру.</p>
-        <div class="flex flex-wrap justify-center gap-6">
-          <img src="/static/images/placeholder.png" alt="Brand1" class="bg-white p-2 shadow rounded">
-          <img src="/static/images/placeholder.png" alt="Brand2" class="bg-white p-2 shadow rounded">
-          <img src="/static/images/placeholder.png" alt="Brand3" class="bg-white p-2 shadow rounded">
+    <!-- Analyze reviews without code... -->
+    <section class="analyze flex flex-col justify-between bg-[url('/static/images/public/img_bg_default.svg')] bg-center bg-cover pt-0">
+      <div class="analyze__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0"> 
+        <div class="analyze__wrap w-full mx-auto flex flex-col-reverse md:flex-col-reverse lg:flex-row items-center justify-between gap-[40px] relative">
+          <!-- Левая колонка -->
+          <div class="analyze__content flex-1 min-w-0 max-w-[450px] text-center lg:text-left">
+            <h2 class="analyze__title font-bold text-[36px] leading-[100%] tracking-[0] mb-[20px] text-gray-900">
+              Analyze reviews <span class="text-[#6B6397]">without code</span> and unnecessary steps
+            </h2>
+            <p class="analyze__desc text-[18px] text-gray-600 mb-[32px]">
+              With AI Review Analyzer, you can quickly organize reviews and gain useful insights without code and complicated settings. Conduct product analysis with ease and confidence.
+            </p>
+            <a href="/register" class="analyze__cta inline-block px-[40px] py-[15px] bg-[#88A6F0] rounded-[20px] shadow hover:bg-[#7B7FD1] transition">
+              <span class="hero__signin_btn text-[15px] text-[#FFFFFF] leading-[18px] font-semibold"> 
+                Try
+              </span>
+            </a>
+          </div>
+          <!-- Правая колонка -->
+          <div class="analyze__image flex-1 min-w-0 flex items-center justify-center">
+            <img src="/static/images/public/analysis_without_code.png" alt="Analyze Illustration" class="w-[420px] max-w-full" />
+          </div>
+          <!-- Декоративные элементы (placeholder) -->
+          <!-- Верхний левый вопрос -->
+          <div class="question-mark absolute left-[1%] lg:left-[15%] top-[5%] lg:top-[75%] w-[100px] h-[100px] opacity-0 animate-fade-in-out"
+              style="--fade-duration: 2s; --fade-delay: 0s;">
+            <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full transform rotate-20" style="transform: rotate(20deg) scale(0.7);" />
+          </div>
+          <!-- Нижний левый вопрос -->
+          <div class="question-mark absolute right-[5%] lg:right-[50%] bottom-[1%] lg:bottom-[80%] w-[60px] h-[60px] opacity-0 animate-fade-in-out"
+            style="--fade-duration: 2.5s; --fade-delay: 1s;">
+            <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full transform -rotate-25" style="transform: rotate(-25deg) scale(0.7);" />
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Призыв к действию -->
-    <section class="py-20 px-4 bg-gradient-to-br from-blue-600 to-indigo-700 text-white text-center">
-      <h3 class="text-2xl font-semibold mb-4">Готовы начать?</h3>
-      <p class="mb-6">Присоединяйтесь и получите первый анализ бесплатно.</p>
-      <a href="#" class="bg-white text-blue-600 px-6 py-3 rounded text-lg font-semibold hover:bg-gray-100">Создать аккаунт</a>
+    <!-- How it works -->
+    <section id="how" class="howitworks flex flex-col justify-between bg-[url('/static/images/public/img_bg_contrast.svg')] bg-center bg-cover pt-0">
+      <div class="howitworks__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0"> 
+        <div class="howitworks__wrap w-full mx-auto flex flex-col md:flex-col lg:flex-row items-center justify-between gap-[40px]">
+          <!--  <div class="analyze__wrap w-full mx-auto flex flex-col-reverse md:flex-col-reverse lg:flex-row items-center justify-between gap-[40px] relative">
+          Левая колонка -->
+          <div class="howitworks__image flex-1 min-w-0 lg:max-w-[420px] flex items-center justify-center">
+            <img src="/static/images/public/how_it_works.png" alt="How it works Illustration" class="max-w-full" />
+          </div>
+          <!-- Правая колонка -->
+          <div class="howitworks__steps flex-1 min-w-0 lg:max-w-[500px]">
+            <h2 class="howitworks__title text-[36px] font-bold leading-tight mb-[32px] text-gray-900">
+              How it works <span class="text-[#7B7FD1]">AI Review Analyzer?</span>
+            </h2>
+            <ol class="howitworks__list space-y-[24px] text-[18px]">
+              <li>
+                <span class="font-bold text-[#7B7FD1] mr-2">1.</span>
+                <span class="font-semibold">Add a product</span> — upload a product or paste a store url for analysis.
+              </li>
+              <li>
+                <span class="font-bold text-[#7B7FD1] mr-2">2.</span>
+                <span class="font-semibold">Download the testimonials</span> — export reviews from marketplace (just one click – process for analysis).
+              </li>
+              <li>
+                <span class="font-bold text-[#7B7FD1] mr-2">3.</span>
+                <span class="font-semibold">AI-assisted analysis</span> — get valuable insights and recommendations.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
     </section>
 
-  </main>
+    <!-- FAQ Section -->
+    <section id="faq" class="faq flex flex-col justify-between bg-[url('/static/images/public/img_bg_default.svg')] bg-center bg-cover pt-0">
+      <div class="faq__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0"> 
+        <div class="faq__container w-full mx-auto flex flex-col items-center justify-between relative">
+          <h2 class="faq__title text-[40px] font-bold text-center mb-[40px]">Frequently Asked Questions</h2>
+          <div class="faq__list space-y-[18px] max-w-[760px] w-full mx-auto">
+            <!-- FAQ item -->
+            <details class="group flex flex-col justify-between bg-white rounded-[16px] shadow p-[20px] mb-[20px] group transition-all duration-300">
+              <summary class="flex items-center cursor-pointer select-none text-[20px] font-bold text-gray-900">
+                <span class="group-open:hidden">
+                  <svg width="31" height="32" viewBox="0 0 31 32" fill="none">
+                    <rect y="0.791016" width="30.4175" height="30.4175" rx="8" fill="url(#paint0_linear_714_12419)"/>
+                    <path d="M7.76563 24.5073V23.4439C7.76562 22.4663 7.95817 21.4984 8.33226 20.5952C8.70635 19.6921 9.25466 18.8715 9.94589 18.1803C10.6371 17.489 11.4577 16.9407 12.3609 16.5666C13.264 16.1925 14.232 16 15.2095 16C16.1871 16 17.155 16.1925 18.0582 16.5666C18.9613 16.9407 19.7819 17.489 20.4731 18.1803C21.1644 18.8715 21.7127 19.6921 22.0868 20.5952C22.4608 21.4984 22.6534 22.4663 22.6534 23.4439V24.5073" stroke="#1F2125" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M15.2087 16C16.3369 16 17.4188 15.5518 18.2165 14.7541C19.0142 13.9564 19.4624 12.8745 19.4624 11.7463C19.4624 10.6182 19.0142 9.53625 18.2165 8.73854C17.4188 7.94083 16.3369 7.49268 15.2087 7.49268C14.0806 7.49268 12.9987 7.94083 12.2009 8.73854C11.4032 9.53625 10.9551 10.6182 10.9551 11.7463C10.9551 12.8745 11.4032 13.9564 12.2009 14.7541C12.9987 15.5518 14.0806 16 15.2087 16V16Z" stroke="#1F2125" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                    <linearGradient id="paint0_linear_714_12419" x1="-0.429423" y1="-0.128409" x2="38.3535" y2="8.93845" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="white"/>
+                    <stop offset="1" stop-color="#CCC3FF"/>
+                    </linearGradient>
+                    </defs>
+                  </svg>
+                </span>
+                <span class="hidden group-open:flex">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect width="32" height="32" rx="8.41621" fill="url(#paint0_linear_714_9137)"/>
+                    <rect x="0.380952" y="0.380952" width="31.2381" height="31.2381" rx="8.03525" stroke="#6477A8" stroke-opacity="0.8" stroke-width="0.761905"/>
+                    <path d="M16.0021 24.9501C17.7721 24.9498 19.5023 24.4247 20.9738 23.4412C22.4454 22.4576 23.5923 21.0598 24.2696 19.4245C24.9468 17.7892 25.1239 15.9898 24.7785 14.2538C24.4331 12.5178 23.5808 10.9232 22.3292 9.67166C21.0776 8.42008 19.483 7.56771 17.7471 7.22234C16.0111 6.87696 14.2117 7.05408 12.5763 7.7313C10.941 8.40852 9.54323 9.55543 8.55969 11.027C7.57616 12.4986 7.05106 14.2288 7.05078 15.9988C7.0506 17.1743 7.282 18.3384 7.73178 19.4245C8.18156 20.5106 8.8409 21.4975 9.67214 22.3287C10.5034 23.16 11.4902 23.8193 12.5763 24.2691C13.6625 24.7189 14.8265 24.9503 16.0021 24.9501V24.9501Z" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.5 18.8066H24.2486" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.5 13.1909H24.2486" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14.0685 7.25928C12.4622 13.0552 12.6986 19.2073 14.7452 24.8628" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M17.9311 7.25928C18.6328 9.78161 18.987 12.3879 18.984 15.006C18.9911 18.3668 18.4095 21.7028 17.2656 24.8628" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                    <linearGradient id="paint0_linear_714_9137" x1="-0.451764" y1="-0.967258" x2="40.3489" y2="8.57131" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="white"/>
+                    <stop offset="1" stop-color="#CCC3FF"/>
+                    </linearGradient>
+                    </defs>
+                  </svg>
+                </span>
+                <div class="pl-[10px] flex items-center justify-between w-full gap-4 select-none text-[20px] font-bold text-gray-900">
+                  Is it really free?
+                  <span class="ml-auto transition-transform duration-300 transform origin-center rotate-180 group-open:rotate-0">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="rotate-180">
+                      <use href="#icon-arrow-down"></use>
+                    </svg>
+                  </span>
+                </div>
+              </summary>
+              <div class="pl-[42px] pt-[10px] text-[14px] text-gray-700">
+                Yeah - totally free. No card linking, no subscriptions. Just upload a product and reviews - and get a report.
+              </div>
+            </details>
+            <details class="group flex flex-col justify-between bg-white rounded-[16px] shadow p-[20px] mb-[20px] group transition-all duration-300">
+              <summary class="flex items-center cursor-pointer select-none text-[20px] font-bold text-gray-900">
+                <span class="group-open:hidden">
+                  <svg width="31" height="32" viewBox="0 0 31 32" fill="none">
+                    <rect y="0.791016" width="30.4175" height="30.4175" rx="8" fill="url(#paint0_linear_714_12419)"/>
+                    <path d="M7.76563 24.5073V23.4439C7.76562 22.4663 7.95817 21.4984 8.33226 20.5952C8.70635 19.6921 9.25466 18.8715 9.94589 18.1803C10.6371 17.489 11.4577 16.9407 12.3609 16.5666C13.264 16.1925 14.232 16 15.2095 16C16.1871 16 17.155 16.1925 18.0582 16.5666C18.9613 16.9407 19.7819 17.489 20.4731 18.1803C21.1644 18.8715 21.7127 19.6921 22.0868 20.5952C22.4608 21.4984 22.6534 22.4663 22.6534 23.4439V24.5073" stroke="#1F2125" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M15.2087 16C16.3369 16 17.4188 15.5518 18.2165 14.7541C19.0142 13.9564 19.4624 12.8745 19.4624 11.7463C19.4624 10.6182 19.0142 9.53625 18.2165 8.73854C17.4188 7.94083 16.3369 7.49268 15.2087 7.49268C14.0806 7.49268 12.9987 7.94083 12.2009 8.73854C11.4032 9.53625 10.9551 10.6182 10.9551 11.7463C10.9551 12.8745 11.4032 13.9564 12.2009 14.7541C12.9987 15.5518 14.0806 16 15.2087 16V16Z" stroke="#1F2125" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                    <linearGradient id="paint0_linear_714_12419" x1="-0.429423" y1="-0.128409" x2="38.3535" y2="8.93845" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="white"/>
+                    <stop offset="1" stop-color="#CCC3FF"/>
+                    </linearGradient>
+                    </defs>
+                  </svg>
+                </span>
+                <span class="hidden group-open:flex">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect width="32" height="32" rx="8.41621" fill="url(#paint0_linear_714_9137)"/>
+                    <rect x="0.380952" y="0.380952" width="31.2381" height="31.2381" rx="8.03525" stroke="#6477A8" stroke-opacity="0.8" stroke-width="0.761905"/>
+                    <path d="M16.0021 24.9501C17.7721 24.9498 19.5023 24.4247 20.9738 23.4412C22.4454 22.4576 23.5923 21.0598 24.2696 19.4245C24.9468 17.7892 25.1239 15.9898 24.7785 14.2538C24.4331 12.5178 23.5808 10.9232 22.3292 9.67166C21.0776 8.42008 19.483 7.56771 17.7471 7.22234C16.0111 6.87696 14.2117 7.05408 12.5763 7.7313C10.941 8.40852 9.54323 9.55543 8.55969 11.027C7.57616 12.4986 7.05106 14.2288 7.05078 15.9988C7.0506 17.1743 7.282 18.3384 7.73178 19.4245C8.18156 20.5106 8.8409 21.4975 9.67214 22.3287C10.5034 23.16 11.4902 23.8193 12.5763 24.2691C13.6625 24.7189 14.8265 24.9503 16.0021 24.9501V24.9501Z" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.5 18.8066H24.2486" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.5 13.1909H24.2486" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14.0685 7.25928C12.4622 13.0552 12.6986 19.2073 14.7452 24.8628" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M17.9311 7.25928C18.6328 9.78161 18.987 12.3879 18.984 15.006C18.9911 18.3668 18.4095 21.7028 17.2656 24.8628" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                    <linearGradient id="paint0_linear_714_9137" x1="-0.451764" y1="-0.967258" x2="40.3489" y2="8.57131" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="white"/>
+                    <stop offset="1" stop-color="#CCC3FF"/>
+                    </linearGradient>
+                    </defs>
+                  </svg>
+                </span>
+                <div class="pl-[10px] flex items-center justify-between w-full gap-4 select-none text-[20px] font-bold text-gray-900">
+                  What exactly will I get after I analyze it?
+                  <span class="ml-auto transition-transform duration-300 transform origin-center rotate-180 group-open:rotate-0">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="rotate-180">
+                      <use href="#icon-arrow-down"></use>
+                    </svg>
+                  </span>
+                </div>
+              </summary>
+              <div class="pl-[42px] pt-[10px] text-[14px] text-gray-700">
+                You will receive a report with the main pains and pros of the product based on customer feedback. This will help you understand whether you should promote the product and what to improve.
+              </div>
+            </details>
+            <details class="group flex flex-col justify-between bg-white rounded-[16px] shadow p-[20px] mb-[20px] group transition-all duration-300">
+              <summary class="flex items-center cursor-pointer select-none text-[20px] font-bold text-gray-900">
+                <span class="group-open:hidden">
+                  <svg width="31" height="32" viewBox="0 0 31 32" fill="none">
+                    <rect y="0.791016" width="30.4175" height="30.4175" rx="8" fill="url(#paint0_linear_714_12419)"/>
+                    <path d="M7.76563 24.5073V23.4439C7.76562 22.4663 7.95817 21.4984 8.33226 20.5952C8.70635 19.6921 9.25466 18.8715 9.94589 18.1803C10.6371 17.489 11.4577 16.9407 12.3609 16.5666C13.264 16.1925 14.232 16 15.2095 16C16.1871 16 17.155 16.1925 18.0582 16.5666C18.9613 16.9407 19.7819 17.489 20.4731 18.1803C21.1644 18.8715 21.7127 19.6921 22.0868 20.5952C22.4608 21.4984 22.6534 22.4663 22.6534 23.4439V24.5073" stroke="#1F2125" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M15.2087 16C16.3369 16 17.4188 15.5518 18.2165 14.7541C19.0142 13.9564 19.4624 12.8745 19.4624 11.7463C19.4624 10.6182 19.0142 9.53625 18.2165 8.73854C17.4188 7.94083 16.3369 7.49268 15.2087 7.49268C14.0806 7.49268 12.9987 7.94083 12.2009 8.73854C11.4032 9.53625 10.9551 10.6182 10.9551 11.7463C10.9551 12.8745 11.4032 13.9564 12.2009 14.7541C12.9987 15.5518 14.0806 16 15.2087 16V16Z" stroke="#1F2125" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                    <linearGradient id="paint0_linear_714_12419" x1="-0.429423" y1="-0.128409" x2="38.3535" y2="8.93845" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="white"/>
+                    <stop offset="1" stop-color="#CCC3FF"/>
+                    </linearGradient>
+                    </defs>
+                  </svg>
+                </span>
+                <span class="hidden group-open:flex">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect width="32" height="32" rx="8.41621" fill="url(#paint0_linear_714_9137)"/>
+                    <rect x="0.380952" y="0.380952" width="31.2381" height="31.2381" rx="8.03525" stroke="#6477A8" stroke-opacity="0.8" stroke-width="0.761905"/>
+                    <path d="M16.0021 24.9501C17.7721 24.9498 19.5023 24.4247 20.9738 23.4412C22.4454 22.4576 23.5923 21.0598 24.2696 19.4245C24.9468 17.7892 25.1239 15.9898 24.7785 14.2538C24.4331 12.5178 23.5808 10.9232 22.3292 9.67166C21.0776 8.42008 19.483 7.56771 17.7471 7.22234C16.0111 6.87696 14.2117 7.05408 12.5763 7.7313C10.941 8.40852 9.54323 9.55543 8.55969 11.027C7.57616 12.4986 7.05106 14.2288 7.05078 15.9988C7.0506 17.1743 7.282 18.3384 7.73178 19.4245C8.18156 20.5106 8.8409 21.4975 9.67214 22.3287C10.5034 23.16 11.4902 23.8193 12.5763 24.2691C13.6625 24.7189 14.8265 24.9503 16.0021 24.9501V24.9501Z" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.5 18.8066H24.2486" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.5 13.1909H24.2486" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14.0685 7.25928C12.4622 13.0552 12.6986 19.2073 14.7452 24.8628" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M17.9311 7.25928C18.6328 9.78161 18.987 12.3879 18.984 15.006C18.9911 18.3668 18.4095 21.7028 17.2656 24.8628" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                    <linearGradient id="paint0_linear_714_9137" x1="-0.451764" y1="-0.967258" x2="40.3489" y2="8.57131" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="white"/>
+                    <stop offset="1" stop-color="#CCC3FF"/>
+                    </linearGradient>
+                    </defs>
+                  </svg>
+                </span>
+                <div class="pl-[10px] flex items-center justify-between w-full gap-4 select-none text-[20px] font-bold text-gray-900">
+                  Where does the feedback for analysis come from?
+                  <span class="ml-auto transition-transform duration-300 transform origin-center rotate-180 group-open:rotate-0">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="rotate-180">
+                      <use href="#icon-arrow-down"></use>
+                    </svg>
+                  </span>
+                </div>
+              </summary>
+              <div class="pl-[42px] pt-[10px] text-[14px] text-gray-700">
+                You can upload them manually or insert data collected from marketplaces (e.g. Amazon, Rozetka, Prom, etc.).
+              </div>
+            </details>
+            <details class="group flex flex-col justify-between bg-white rounded-[16px] shadow p-[20px] mb-[20px] group transition-all duration-300">
+              <summary class="flex items-center cursor-pointer select-none text-[20px] font-bold text-gray-900">
+                <span class="group-open:hidden">
+                  <svg width="31" height="32" viewBox="0 0 31 32" fill="none">
+                    <rect y="0.791016" width="30.4175" height="30.4175" rx="8" fill="url(#paint0_linear_714_12419)"/>
+                    <path d="M7.76563 24.5073V23.4439C7.76562 22.4663 7.95817 21.4984 8.33226 20.5952C8.70635 19.6921 9.25466 18.8715 9.94589 18.1803C10.6371 17.489 11.4577 16.9407 12.3609 16.5666C13.264 16.1925 14.232 16 15.2095 16C16.1871 16 17.155 16.1925 18.0582 16.5666C18.9613 16.9407 19.7819 17.489 20.4731 18.1803C21.1644 18.8715 21.7127 19.6921 22.0868 20.5952C22.4608 21.4984 22.6534 22.4663 22.6534 23.4439V24.5073" stroke="#1F2125" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M15.2087 16C16.3369 16 17.4188 15.5518 18.2165 14.7541C19.0142 13.9564 19.4624 12.8745 19.4624 11.7463C19.4624 10.6182 19.0142 9.53625 18.2165 8.73854C17.4188 7.94083 16.3369 7.49268 15.2087 7.49268C14.0806 7.49268 12.9987 7.94083 12.2009 8.73854C11.4032 9.53625 10.9551 10.6182 10.9551 11.7463C10.9551 12.8745 11.4032 13.9564 12.2009 14.7541C12.9987 15.5518 14.0806 16 15.2087 16V16Z" stroke="#1F2125" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                    <linearGradient id="paint0_linear_714_12419" x1="-0.429423" y1="-0.128409" x2="38.3535" y2="8.93845" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="white"/>
+                    <stop offset="1" stop-color="#CCC3FF"/>
+                    </linearGradient>
+                    </defs>
+                  </svg>
+                </span>
+                <span class="hidden group-open:flex">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect width="32" height="32" rx="8.41621" fill="url(#paint0_linear_714_9137)"/>
+                    <rect x="0.380952" y="0.380952" width="31.2381" height="31.2381" rx="8.03525" stroke="#6477A8" stroke-opacity="0.8" stroke-width="0.761905"/>
+                    <path d="M16.0021 24.9501C17.7721 24.9498 19.5023 24.4247 20.9738 23.4412C22.4454 22.4576 23.5923 21.0598 24.2696 19.4245C24.9468 17.7892 25.1239 15.9898 24.7785 14.2538C24.4331 12.5178 23.5808 10.9232 22.3292 9.67166C21.0776 8.42008 19.483 7.56771 17.7471 7.22234C16.0111 6.87696 14.2117 7.05408 12.5763 7.7313C10.941 8.40852 9.54323 9.55543 8.55969 11.027C7.57616 12.4986 7.05106 14.2288 7.05078 15.9988C7.0506 17.1743 7.282 18.3384 7.73178 19.4245C8.18156 20.5106 8.8409 21.4975 9.67214 22.3287C10.5034 23.16 11.4902 23.8193 12.5763 24.2691C13.6625 24.7189 14.8265 24.9503 16.0021 24.9501V24.9501Z" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.5 18.8066H24.2486" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.5 13.1909H24.2486" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14.0685 7.25928C12.4622 13.0552 12.6986 19.2073 14.7452 24.8628" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M17.9311 7.25928C18.6328 9.78161 18.987 12.3879 18.984 15.006C18.9911 18.3668 18.4095 21.7028 17.2656 24.8628" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                    <linearGradient id="paint0_linear_714_9137" x1="-0.451764" y1="-0.967258" x2="40.3489" y2="8.57131" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="white"/>
+                    <stop offset="1" stop-color="#CCC3FF"/>
+                    </linearGradient>
+                    </defs>
+                  </svg>
+                </span>
+                <div class="pl-[10px] flex items-center justify-between w-full gap-4 select-none text-[20px] font-bold text-gray-900">
+                  Do I need to understand AI or analytics?
+                  <span class="ml-auto transition-transform duration-300 transform origin-center rotate-180 group-open:rotate-0">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="rotate-180">
+                      <use href="#icon-arrow-down"></use>
+                    </svg>
+                  </span>
+                </div>
+              </summary>
+              <div class="pl-[42px] pt-[10px] text-[14px] text-gray-700">
+                No. Everything is organized simply: you add a product, upload reviews, choose a ready-made promt - and get the result in an understandable form.
+              </div>
+            </details>
+            <details class="group flex flex-col justify-between bg-white rounded-[16px] shadow p-[20px] mb-[20px] group transition-all duration-300">
+              <summary class="flex items-center cursor-pointer select-none text-[20px] font-bold text-gray-900">
+                <span class="group-open:hidden">
+                  <svg width="31" height="32" viewBox="0 0 31 32" fill="none">
+                    <rect y="0.791016" width="30.4175" height="30.4175" rx="8" fill="url(#paint0_linear_714_12419)"/>
+                    <path d="M7.76563 24.5073V23.4439C7.76562 22.4663 7.95817 21.4984 8.33226 20.5952C8.70635 19.6921 9.25466 18.8715 9.94589 18.1803C10.6371 17.489 11.4577 16.9407 12.3609 16.5666C13.264 16.1925 14.232 16 15.2095 16C16.1871 16 17.155 16.1925 18.0582 16.5666C18.9613 16.9407 19.7819 17.489 20.4731 18.1803C21.1644 18.8715 21.7127 19.6921 22.0868 20.5952C22.4608 21.4984 22.6534 22.4663 22.6534 23.4439V24.5073" stroke="#1F2125" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M15.2087 16C16.3369 16 17.4188 15.5518 18.2165 14.7541C19.0142 13.9564 19.4624 12.8745 19.4624 11.7463C19.4624 10.6182 19.0142 9.53625 18.2165 8.73854C17.4188 7.94083 16.3369 7.49268 15.2087 7.49268C14.0806 7.49268 12.9987 7.94083 12.2009 8.73854C11.4032 9.53625 10.9551 10.6182 10.9551 11.7463C10.9551 12.8745 11.4032 13.9564 12.2009 14.7541C12.9987 15.5518 14.0806 16 15.2087 16V16Z" stroke="#1F2125" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                    <linearGradient id="paint0_linear_714_12419" x1="-0.429423" y1="-0.128409" x2="38.3535" y2="8.93845" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="white"/>
+                    <stop offset="1" stop-color="#CCC3FF"/>
+                    </linearGradient>
+                    </defs>
+                  </svg>
+                </span>
+                <span class="hidden group-open:flex">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect width="32" height="32" rx="8.41621" fill="url(#paint0_linear_714_9137)"/>
+                    <rect x="0.380952" y="0.380952" width="31.2381" height="31.2381" rx="8.03525" stroke="#6477A8" stroke-opacity="0.8" stroke-width="0.761905"/>
+                    <path d="M16.0021 24.9501C17.7721 24.9498 19.5023 24.4247 20.9738 23.4412C22.4454 22.4576 23.5923 21.0598 24.2696 19.4245C24.9468 17.7892 25.1239 15.9898 24.7785 14.2538C24.4331 12.5178 23.5808 10.9232 22.3292 9.67166C21.0776 8.42008 19.483 7.56771 17.7471 7.22234C16.0111 6.87696 14.2117 7.05408 12.5763 7.7313C10.941 8.40852 9.54323 9.55543 8.55969 11.027C7.57616 12.4986 7.05106 14.2288 7.05078 15.9988C7.0506 17.1743 7.282 18.3384 7.73178 19.4245C8.18156 20.5106 8.8409 21.4975 9.67214 22.3287C10.5034 23.16 11.4902 23.8193 12.5763 24.2691C13.6625 24.7189 14.8265 24.9503 16.0021 24.9501V24.9501Z" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.5 18.8066H24.2486" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.5 13.1909H24.2486" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14.0685 7.25928C12.4622 13.0552 12.6986 19.2073 14.7452 24.8628" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M17.9311 7.25928C18.6328 9.78161 18.987 12.3879 18.984 15.006C18.9911 18.3668 18.4095 21.7028 17.2656 24.8628" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                    <linearGradient id="paint0_linear_714_9137" x1="-0.451764" y1="-0.967258" x2="40.3489" y2="8.57131" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="white"/>
+                    <stop offset="1" stop-color="#CCC3FF"/>
+                    </linearGradient>
+                    </defs>
+                  </svg>
+                </span>
+                <div class="pl-[10px] flex items-center justify-between w-full gap-4 select-none text-[20px] font-bold text-gray-900">
+                  Can multiple products be analyzed?
+                  <span class="ml-auto transition-transform duration-300 transform origin-center rotate-180 group-open:rotate-0">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="rotate-180">
+                      <use href="#icon-arrow-down"></use>
+                    </svg>
+                  </span>
+                </div>
+              </summary>
+              <div class="pl-[42px] pt-[10px] text-[14px] text-gray-700">
+                Yes, you can add several products to your personal cabinet and analyze them one by one. The first one is free of charge, further on according to the tariff.
+              </div>
+            </details>
+            <details class="group flex flex-col justify-between bg-white rounded-[16px] shadow p-[20px] mb-[20px] group transition-all duration-300">
+              <summary class="flex items-center cursor-pointer select-none text-[20px] font-bold text-gray-900">
+                <span class="group-open:hidden">
+                  <svg width="31" height="32" viewBox="0 0 31 32" fill="none">
+                    <rect y="0.791016" width="30.4175" height="30.4175" rx="8" fill="url(#paint0_linear_714_12419)"/>
+                    <path d="M7.76563 24.5073V23.4439C7.76562 22.4663 7.95817 21.4984 8.33226 20.5952C8.70635 19.6921 9.25466 18.8715 9.94589 18.1803C10.6371 17.489 11.4577 16.9407 12.3609 16.5666C13.264 16.1925 14.232 16 15.2095 16C16.1871 16 17.155 16.1925 18.0582 16.5666C18.9613 16.9407 19.7819 17.489 20.4731 18.1803C21.1644 18.8715 21.7127 19.6921 22.0868 20.5952C22.4608 21.4984 22.6534 22.4663 22.6534 23.4439V24.5073" stroke="#1F2125" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M15.2087 16C16.3369 16 17.4188 15.5518 18.2165 14.7541C19.0142 13.9564 19.4624 12.8745 19.4624 11.7463C19.4624 10.6182 19.0142 9.53625 18.2165 8.73854C17.4188 7.94083 16.3369 7.49268 15.2087 7.49268C14.0806 7.49268 12.9987 7.94083 12.2009 8.73854C11.4032 9.53625 10.9551 10.6182 10.9551 11.7463C10.9551 12.8745 11.4032 13.9564 12.2009 14.7541C12.9987 15.5518 14.0806 16 15.2087 16V16Z" stroke="#1F2125" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                    <linearGradient id="paint0_linear_714_12419" x1="-0.429423" y1="-0.128409" x2="38.3535" y2="8.93845" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="white"/>
+                    <stop offset="1" stop-color="#CCC3FF"/>
+                    </linearGradient>
+                    </defs>
+                  </svg>
+                </span>
+                <span class="hidden group-open:flex">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect width="32" height="32" rx="8.41621" fill="url(#paint0_linear_714_9137)"/>
+                    <rect x="0.380952" y="0.380952" width="31.2381" height="31.2381" rx="8.03525" stroke="#6477A8" stroke-opacity="0.8" stroke-width="0.761905"/>
+                    <path d="M16.0021 24.9501C17.7721 24.9498 19.5023 24.4247 20.9738 23.4412C22.4454 22.4576 23.5923 21.0598 24.2696 19.4245C24.9468 17.7892 25.1239 15.9898 24.7785 14.2538C24.4331 12.5178 23.5808 10.9232 22.3292 9.67166C21.0776 8.42008 19.483 7.56771 17.7471 7.22234C16.0111 6.87696 14.2117 7.05408 12.5763 7.7313C10.941 8.40852 9.54323 9.55543 8.55969 11.027C7.57616 12.4986 7.05106 14.2288 7.05078 15.9988C7.0506 17.1743 7.282 18.3384 7.73178 19.4245C8.18156 20.5106 8.8409 21.4975 9.67214 22.3287C10.5034 23.16 11.4902 23.8193 12.5763 24.2691C13.6625 24.7189 14.8265 24.9503 16.0021 24.9501V24.9501Z" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.5 18.8066H24.2486" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.5 13.1909H24.2486" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14.0685 7.25928C12.4622 13.0552 12.6986 19.2073 14.7452 24.8628" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M17.9311 7.25928C18.6328 9.78161 18.987 12.3879 18.984 15.006C18.9911 18.3668 18.4095 21.7028 17.2656 24.8628" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                    <linearGradient id="paint0_linear_714_9137" x1="-0.451764" y1="-0.967258" x2="40.3489" y2="8.57131" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="white"/>
+                    <stop offset="1" stop-color="#CCC3FF"/>
+                    </linearGradient>
+                    </defs>
+                  </svg>
+                </span>
+                <div class="pl-[10px] flex items-center justify-between w-full gap-4 select-none text-[20px] font-bold text-gray-900">
+                  Is it safe to upload testimonials?
+                  <span class="ml-auto transition-transform duration-300 transform origin-center rotate-180 group-open:rotate-0">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="rotate-180">
+                      <use href="#icon-arrow-down"></use>
+                    </svg>
+                  </span>
+                </div>
+              </summary>
+              <div class="pl-[42px] pt-[10px] text-[14px] text-gray-700">
+                Yes. All uploaded data is only used to generate the report. We do not share or publish your data.
+              </div>
+            </details>
+            <details class="group flex flex-col justify-between bg-white rounded-[16px] shadow p-[20px] mb-[20px] group transition-all duration-300">
+              <summary class="flex items-center cursor-pointer select-none text-[20px] font-bold text-gray-900">
+                <span class="group-open:hidden">
+                  <svg width="31" height="32" viewBox="0 0 31 32" fill="none">
+                    <rect y="0.791016" width="30.4175" height="30.4175" rx="8" fill="url(#paint0_linear_714_12419)"/>
+                    <path d="M7.76563 24.5073V23.4439C7.76562 22.4663 7.95817 21.4984 8.33226 20.5952C8.70635 19.6921 9.25466 18.8715 9.94589 18.1803C10.6371 17.489 11.4577 16.9407 12.3609 16.5666C13.264 16.1925 14.232 16 15.2095 16C16.1871 16 17.155 16.1925 18.0582 16.5666C18.9613 16.9407 19.7819 17.489 20.4731 18.1803C21.1644 18.8715 21.7127 19.6921 22.0868 20.5952C22.4608 21.4984 22.6534 22.4663 22.6534 23.4439V24.5073" stroke="#1F2125" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M15.2087 16C16.3369 16 17.4188 15.5518 18.2165 14.7541C19.0142 13.9564 19.4624 12.8745 19.4624 11.7463C19.4624 10.6182 19.0142 9.53625 18.2165 8.73854C17.4188 7.94083 16.3369 7.49268 15.2087 7.49268C14.0806 7.49268 12.9987 7.94083 12.2009 8.73854C11.4032 9.53625 10.9551 10.6182 10.9551 11.7463C10.9551 12.8745 11.4032 13.9564 12.2009 14.7541C12.9987 15.5518 14.0806 16 15.2087 16V16Z" stroke="#1F2125" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                    <linearGradient id="paint0_linear_714_12419" x1="-0.429423" y1="-0.128409" x2="38.3535" y2="8.93845" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="white"/>
+                    <stop offset="1" stop-color="#CCC3FF"/>
+                    </linearGradient>
+                    </defs>
+                  </svg>
+                </span>
+                <span class="hidden group-open:flex">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect width="32" height="32" rx="8.41621" fill="url(#paint0_linear_714_9137)"/>
+                    <rect x="0.380952" y="0.380952" width="31.2381" height="31.2381" rx="8.03525" stroke="#6477A8" stroke-opacity="0.8" stroke-width="0.761905"/>
+                    <path d="M16.0021 24.9501C17.7721 24.9498 19.5023 24.4247 20.9738 23.4412C22.4454 22.4576 23.5923 21.0598 24.2696 19.4245C24.9468 17.7892 25.1239 15.9898 24.7785 14.2538C24.4331 12.5178 23.5808 10.9232 22.3292 9.67166C21.0776 8.42008 19.483 7.56771 17.7471 7.22234C16.0111 6.87696 14.2117 7.05408 12.5763 7.7313C10.941 8.40852 9.54323 9.55543 8.55969 11.027C7.57616 12.4986 7.05106 14.2288 7.05078 15.9988C7.0506 17.1743 7.282 18.3384 7.73178 19.4245C8.18156 20.5106 8.8409 21.4975 9.67214 22.3287C10.5034 23.16 11.4902 23.8193 12.5763 24.2691C13.6625 24.7189 14.8265 24.9503 16.0021 24.9501V24.9501Z" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.5 18.8066H24.2486" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.5 13.1909H24.2486" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14.0685 7.25928C12.4622 13.0552 12.6986 19.2073 14.7452 24.8628" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M17.9311 7.25928C18.6328 9.78161 18.987 12.3879 18.984 15.006C18.9911 18.3668 18.4095 21.7028 17.2656 24.8628" stroke="#6B6397" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                    <linearGradient id="paint0_linear_714_9137" x1="-0.451764" y1="-0.967258" x2="40.3489" y2="8.57131" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="white"/>
+                    <stop offset="1" stop-color="#CCC3FF"/>
+                    </linearGradient>
+                    </defs>
+                  </svg>
+                </span>
+                <div class="pl-[10px] flex items-center justify-between w-full gap-4 select-none text-[20px] font-bold text-gray-900">
+                  How long does it take to analyze?
+                  <span class="ml-auto transition-transform duration-300 transform origin-center rotate-180 group-open:rotate-0">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="rotate-180">
+                      <use href="#icon-arrow-down"></use>
+                    </svg>
+                  </span>
+                </div>
+              </summary>
+              <div class="pl-[42px] pt-[10px] text-[14px] text-gray-700">
+                Typically, the report is generated in 1-2 minutes after the reviews are uploaded and the promt is selected.
+              </div>
+            </details>
+          </div>
+          <!-- Декоративные элементы (placeholder) -->
+          <!-- Верхний правый вопрос -->
+          <div class="question-mark absolute right-[5%] top-[5%] lg:top-[1%] w-[60px] h-[60px] opacity-0 animate-fade-in-out"
+              style="--fade-duration: 2s; --fade-delay: 0s;">
+            <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full transform -rotate-15" style="transform: rotate(-20deg) scale(0.7);" />
+          </div>
+          <!-- Левый вопрос -->
+          <div class="question-mark absolute left-[3%] top-[35%] w-[100px] h-[100px] opacity-0 animate-fade-in-out hidden lg:block"
+            style="--fade-duration: 2.5s; --fade-delay: 1s;">
+            <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full transform rotate-25" style="transform: rotate(25deg) scale(0.7);" />
+          </div>
+          <!-- Правый вопрос -->
+          <div class="question-mark absolute right-[7%] top-[80%] w-[120px] h-[120px] opacity-0 animate-fade-in-out hidden lg:block"
+              style="--fade-duration: 2s; --fade-delay: 0s;">
+            <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full transform -rotate-15" style="transform: rotate(-15deg) scale(0.7);" />
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <!-- Footer -->
-  <footer class="text-center text-gray-500 text-sm py-6 bg-white">
-    &copy; 2025 AI Review Analyzer. Все права защищены. <a href="/policy" class="underline hover:text-gray-700 ml-2">Политика безопасности</a>
-  </footer>
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials flex flex-col justify-between bg-[url('/static/images/public/img_bg_contrast.svg')] bg-center bg-cover pt-0">
+      <div class="testimonials__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0"> 
+        <div class="testimonials__container w-full mx-auto flex flex-col items-center justify-between">
+          <div id="testimonialsSlider" class="testimonials__list flex flex-row">
+            <div class="testimonials__item border-l border-r border-[rgba(100,119,168,0.8)] max-w-[592px] w-full p-[25px] flex flex-col items-center text-center">
+              <img src="/static/images/public/img_reviews1.png" alt="Dmitry Petrov" class="testimonials__avatar w-[72px] h-[72px] rounded-full mb-[20px]" />
+              <p class="testimonials__title font-bold text-[20px] leading-[24px] text-[#161C2D] text-center mb-[20px]">"Saves resources and speeds up decision making"</p>
+              <p class="testimonials__text text-[16px] leading-[24px] text-[#161C2D] text-center text-gray-500 mb-[20px]">Thanks to AI Review Analyzer, we stopped wasting time manually parsing reviews. Now we can see clear market signals in just a couple of minutes.</p>
+              <div class="testimonials__author-role flex flex-col justify-center">
+                <p class="testimonials__author font-bold text-[17px] leading-[21px] text-[#161C2D] text-center mb-[5px]">Dmitry Petrov</p>
+                <p class="testimonials__role text-[13px]">Marketplace product analyst</p>
+              </div>
+            </div>
+            <div class="testimonials__item border-l border-r border-[rgba(100,119,168,0.8)] max-w-[592px] w-full p-[25px] flex flex-col items-center text-center">
+              <img src="/static/images/public/img_reviews2.png" alt="Dmitry Petrov" class="testimonials__avatar w-[72px] h-[72px] rounded-full mb-[20px]" />
+              <p class="testimonials__title font-bold text-[20px] leading-[24px] text-[#161C2D] text-center mb-[20px]">"Got it right the first time."</p>
+              <p class="testimonials__text text-[16px] leading-[24px] text-[#161C2D] text-center text-gray-500 mb-[20px]">I've just started selling on a marketplace. I thought it would be difficult, but everything is clear with this site: upload reviews and you get a clear report.</p>
+              <div class="testimonials__author-role flex flex-col justify-center">
+                <p class="testimonials__author font-bold text-[17px] leading-[21px] text-[#161C2D] text-center mb-[5px]">Igor Solovey</p>
+                <p class="testimonials__role text-[13px]">Beginning Seller</p>
+              </div>
+            </div>
+            <div class="testimonials__item border-l border-r border-[rgba(100,119,168,0.8)] max-w-[592px] w-full p-[25px] flex flex-col items-center text-center">
+              <img src="/static/images/public/img_reviews3.png" alt="Dmitry Petrov" class="testimonials__avatar w-[72px] h-[72px] rounded-full mb-[20px]" />
+              <p class="testimonials__title font-bold text-[20px] leading-[24px] text-[#161C2D] text-center mb-[20px]">"Accurate analysis without effort."</p>
+              <p class="testimonials__text text-[16px] leading-[24px] text-[#161C2D] text-center text-gray-500 mb-[20px]">AI Review Analyzer has become an indispensable tool for us when launching new products. Its intuitive interface and high-quality reports save us hours of work.</p>
+              <div class="testimonials__author-role flex flex-col justify-center">
+                <p class="testimonials__author font-bold text-[17px] leading-[21px] text-[#161C2D] text-center mb-[5px]">Elena Morozova</p>
+                <p class="testimonials__role text-[13px]">Product Manager at eCom Lab</p>
+              </div>
+            </div>
+            <div class="testimonials__item hidden border-l border-r border-[rgba(100,119,168,0.8)] max-w-[592px] w-full p-[25px] flex flex-col items-center text-center">
+              <img src="/static/images/public/img_reviews4.png" alt="Dmitry Petrov" class="testimonials__avatar w-[72px] h-[72px] rounded-full mb-[20px]" />
+              <p class="testimonials__title font-bold text-[20px] leading-[24px] text-[#161C2D] text-center mb-[20px]">"It's like reading the customers' minds."</p>
+              <p class="testimonials__text text-[16px] leading-[24px] text-[#161C2D] text-center text-gray-500 mb-[20px]">The service shows not just reviews - but the essence. I saw what people really cared about, and it changed the presentation of my brand.</p>
+              <div class="testimonials__author-role flex flex-col justify-center">
+                <p class="testimonials__author font-bold text-[17px] leading-[21px] text-[#161C2D] text-center mb-[5px]">Anastasia Ivanova</p>
+                <p class="testimonials__role text-[13px]">Creative Producer</p>
+              </div>
+            </div>
+          </div>
+          <!-- Слайдер стрелки (placeholder) -->
+          <div class="testimonials__arrows flex justify-center gap-4 mt-[32px]">
+            <button id="sliderPrev" class="testimonials__arrow w-[40px] h-[40px] flex items-center justify-center rounded-full bg-[#A3B8F8] text-white hover:bg-[#7B7FD1] transition">
+              <span>&larr;</span>
+            </button>
+            <button id="sliderNext" class="testimonials__arrow w-[40px] h-[40px] flex items-center justify-center rounded-full bg-[#A3B8F8] text-white hover:bg-[#7B7FD1] transition">
+              <span>&rarr;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <script src="/static/js/public.js" defer></script>
+    <!-- Final CTA Section -->
+    <section class="finalcta flex flex-col justify-between bg-[url('/static/images/public/img_bg_default.svg')] bg-center bg-cover pt-0">
+      <div class="finalcta__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0"> 
+        <div class="finalcta__container w-full mx-auto flex flex-col md:flex-col lg:flex-row items-center justify-between gap-[40px] relative">
+          <!-- Левая колонка -->
+          <div class="finalcta__image flex-1 flex min-w-0 items-center justify-center">
+            <img src="/static/images/public/ready_to_get_started_.png" alt="Final CTA Illustration" class="w-[420px] max-w-full" />
+          </div>
+          <!-- Правая колонка -->
+          <div class="finalcta__content flex-1 h-full flex-1 min-w-0 max-w-[500px] text-center lg:text-left">
+            <h2 class="finalcta__title text-[36px] font-bold leading-tight mb-[20px] text-gray-900">
+              One click and you know whether the product is worth buying or not
+            </h2>
+            <p class="finalcta__desc text-[20px] text-gray-600 mb-[32px]">
+              Upload reviews and AI Review Analyzer will show you the key issues and strengths of the product.
+            </p>
+            <a href="/register" class="analyze__cta px-[40px] py-[15px] bg-[#88A6F0] rounded-[20px] shadow hover:bg-[#7B7FD1] transition">
+              <span class="hero__signin_btn text-[15px] text-[#FFFFFF] leading-[18px] font-semibold"> 
+                Try
+              </span>
+            </a>
+          </div>
+          <!-- Декор -->
+          <div class="question-mark absolute left-[7%] top-[1%] w-[60px] h-[60px] opacity-0 animate-fade-in-out"
+            style="--fade-duration: 2s; --fade-delay: 0s;">
+            <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full transform -rotate-15" style="transform: rotate(-20deg) scale(0.7);" />
+          </div>
+          <div class="question-mark absolute right-[1%] lg:right-[15%] bottom-[1%] lg:bottom-[5%] w-[100px] h-[100px] opacity-0 animate-fade-in-out"
+            style="--fade-duration: 2s; --fade-delay: 0s;">
+            <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full transform -rotate-15" style="transform: rotate(-20deg) scale(0.7);" />
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- Footer -->
+    <footer class="footer py-8 bg-gray-900 text-gray-400">
+      <div class="container max-w-[1200px] w-full mx-auto flex flex-wrap justify-around items-center gap-[20px] lg:gap-[40px] px-[14px] md:px-[24px] xl:px-0">
+        <div class="footer__copy mb-0">© 2024 AI Review Analyzer. All rights reserved.</div>
+        <div class="footer__policy"><a href="/policy" class="hover:text-white">Security Policy</a></div>
+      </div>
+    </footer> 
+
+    <script src="/static/js/public.js"></script>
 </body>
-</html>
+</html> 

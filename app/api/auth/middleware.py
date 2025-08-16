@@ -20,7 +20,8 @@ PUBLIC_PATHS = [
 
 PRIVATE_PATHS = [
     "/dashboard", "/analyze", "/analyze_product", "/profile", "/product", "/upload",
-    "/logout", "/directory", "/record", "/parse-reviews-file"
+    "/logout", "/directory", "/record", "/parse-reviews-file", 
+    "/identify", "/device"
 ]
 
 SERVICE_PREFIXES = [

@@ -1,27 +1,63 @@
+// Обработчик превью основного изображения
+const inputImage = document.getElementById('main_image_input');
+const previewImages = document.querySelectorAll('.main_image_preview');
+const dropZones = document.querySelectorAll('.main_image_preview');
+if (inputImage && previewImages.length) {
+  inputImage.addEventListener('change', () => {
+    const file = inputImage.files[0];
+    if (file) handleImageFile(file);
+  });
+  // Клик по любому превью вызывает выбор файла
+  previewImages.forEach(img => img.addEventListener('click', () => inputImage.click()));
+}
+
+function handleImageFile(file) {
+  const maxSize = 5 * 1024 * 1024;
+  if (!file.type.startsWith('image/')) {
+    alert('Можно загружать только изображения');
+    inputImage.value = '';
+    return;
+  }
+  if (file.size > maxSize) {
+    alert('Размер изображения не должен превышать 5 МБ');
+    inputImage.value = '';
+    return;
+  }
+  const objectUrl = URL.createObjectURL(file);
+  previewImages.forEach(img => {
+    img.src = objectUrl;
+    img.onload = () => URL.revokeObjectURL(objectUrl);
+  });
+}
+
+// Drag-and-drop поддержка
+previewImages.forEach(img => {
+  const zone = img.parentElement;
+  if (!zone) return;
+  zone.addEventListener('dragover', e => {
+    e.preventDefault();
+    zone.classList.add('ring-2', 'ring-[#A3B8F8]');
+  });
+  zone.addEventListener('dragleave', e => {
+    e.preventDefault();
+    zone.classList.remove('ring-2', 'ring-[#A3B8F8]');
+  });
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    zone.classList.remove('ring-2', 'ring-[#A3B8F8]');
+    if (!e.dataTransfer || !e.dataTransfer.files || e.dataTransfer.files.length === 0) return;
+    if (e.dataTransfer.files.length > 1) {
+      alert('Можно загрузить только один файл за раз');
+      return;
+    }
+    const file = e.dataTransfer.files[0];
+    inputImage.files = e.dataTransfer.files; // для отправки формы
+    handleImageFile(file);
+  });
+});
+
+// Сохранение данных на сервере при нажатии на кнопку "Сохранить"
 document.addEventListener("DOMContentLoaded", function() {
-  // 1. Открытие диалога выбора файла по клику на wrapper
-  const imageWrapper = document.getElementById('main_image_wrapper');
-  const imageInput = document.getElementById('main_image_input');
-  const previewImage = document.getElementById('main_image_preview');
-
-  if (imageWrapper && imageInput) {
-    imageWrapper.addEventListener('click', function() {
-      imageInput.click();
-    });
-  }
-
-  // 2. Превью выбранного изображения
-  if (imageInput && previewImage) {
-    imageInput.addEventListener('change', () => {
-      const file = imageInput.files[0];
-      if (file) {
-        const objectUrl = URL.createObjectURL(file);
-        previewImage.src = objectUrl;
-      }
-    });
-  }
-
-  // 3. Сохранение данных на сервере при нажатии на кнопку "Сохранить"
   const form = document.getElementById('product-form');
   if (!form) return;
 
@@ -31,7 +67,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // Собираем FormData с формы
     const formData = new FormData(form);
 
-    const saveUrl = form.getAttribute('data-save-url');
+    // Получаем URL для сохранения (например: /product/save)
+    const saveUrl = form.dataset.saveUrl;
 
     try {
       const response = await fetch(saveUrl, {
@@ -43,18 +80,12 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       });
 
-      // Проверяем, что ответ именно JSON
-      let data;
-      try {
-        data = await response.json();
-      } catch (e) {
-        alert("Ошибка: сервер вернул не JSON");
-        return;
-      }
-
+      const data = await response.json();
       if (response.ok && data.url) {
         window.location.href = data.url;
       } else {
+        // Покажи ошибку от сервера
+        const data = await response.json();
         alert(data.detail || 'Ошибка при сохранении');
       }
 

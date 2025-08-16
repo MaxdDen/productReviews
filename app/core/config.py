@@ -1,8 +1,10 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
 import os
+from pydantic_settings import BaseSettings, SettingsConfigDict
+from typing import Optional
 
-def is_production_env(settings):
-    return getattr(settings, "ENVIRONMENT", "production").lower() == "production"
+
+def get_env_file() -> str:
+    return ".env.development"
 
 class Settings(BaseSettings):
 
@@ -17,13 +19,23 @@ class Settings(BaseSettings):
     OPENAI_MODEL: str = "gpt-3.5-turbo"
     OPENAI_API_BASE: str = "https://api.openai.com/v1"
 
-    DATABASE_URL: str
+    DATABASE_URL: str # For async application operations
+    SYNC_DATABASE_URL: Optional[str] = None # For synchronous Alembic operations
 
     ROOT_PASSWORD: str = "root"
 
-    model_config = SettingsConfigDict(env_file_encoding='utf-8')
+    model_config = SettingsConfigDict(
+        env_file_encoding='utf-8',
+        extra='ignore',
+        populate_by_name=True
+    )
 
+    @property
+    def is_development(self) -> bool:
+        return self.ENVIRONMENT.lower() == "development"
 
-# Выбор нужного .env-файла
-env_file = ".env.production" if os.getenv("ENVIRONMENT") == "production" else ".env.development"
-settings = Settings(_env_file=env_file)
+    @property
+    def is_production(self) -> bool:
+        return self.ENVIRONMENT.lower() == "production"
+
+settings = Settings(_env_file=get_env_file())

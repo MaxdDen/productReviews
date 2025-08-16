@@ -2,7 +2,7 @@
 
 import re
 from typing import Optional
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 
 # ======= Функции безопасного преобразования =======
 
@@ -96,7 +96,7 @@ class ReviewUploadIn(BaseModel):
     max_rating: Optional[float] = Field(default=None, ge=0)
     normalized_rating: Optional[int] = Field(default=None, ge=0, le=100)
 
-    @validator("normalized_rating")
+    @field_validator("normalized_rating")
     def check_normalized_rating(cls, v):
         if v is not None and not (0 <= v <= 100):
             raise ValueError("normalized_rating должен быть от 0 до 100")

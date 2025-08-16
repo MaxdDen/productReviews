@@ -1,18 +1,42 @@
-from sqlalchemy import Column, Integer, String, Text, ForeignKey, Boolean
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String, Text, ForeignKey
+from sqlalchemy.orm import relationship, Mapped, mapped_column
+from typing import TYPE_CHECKING, List, Optional
+
 from app.database.base import Base
+
+if TYPE_CHECKING:
+    from .user import User
+    from .product import Product
+
 
 class Brand(Base):
     __tablename__ = "brands"
 
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=False)
-    description = Column(Text)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    name: Mapped[str] = mapped_column(String, nullable=False)
+    description: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
 
-    user_id = Column(Integer, ForeignKey("users.id"))
-    user = relationship("User", back_populates="brands")
+    user_id: Mapped[Optional[int]] = mapped_column(Integer, ForeignKey("users.id"), nullable=True) # Assuming user_id can be nullable
+    user: Mapped[Optional["User"]] = relationship("User", back_populates="brands")
 
-    products = relationship("Product", back_populates="brand")
+    products: Mapped[List["Product"]] = relationship("Product", back_populates="brand")
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
+
+    def __repr__(self) -> str:
+        return f"<Brand(id={self.id}, name='{self.name}')>"
+
+    def to_dict(self, include_user=False):
+        data = {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "user_id": self.user_id,
+        }
+        if include_user and self.user:
+            data["user"] = {
+                "id": self.user.id,
+                "username": self.user.username
+            }
+        return data

@@ -1,28 +1,33 @@
-from sqlalchemy import Column, Integer, String, Text, ForeignKey, Boolean, Float
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String, Text, ForeignKey, Float
+from sqlalchemy.orm import relationship, Mapped, mapped_column
+from typing import TYPE_CHECKING, Optional
 
 from app.database.base import Base
+
+if TYPE_CHECKING:
+    from .user import User
+    from .product import Product
 
 
 class Review(Base):
     __tablename__ = "reviews"
 
-    id = Column(Integer, primary_key=True, index=True)
-    importance = Column(Integer, nullable=True)
-    source = Column(Text)
-    text = Column(Text)
-    advantages = Column(Text)
-    disadvantages = Column(Text)
-    raw_rating = Column(Text)
-    rating = Column(Float, nullable=True)
-    max_rating = Column(Float, nullable=True)
-    normalized_rating = Column(Integer, nullable=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    importance: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    source: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    text: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    advantages: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    disadvantages: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    raw_rating: Mapped[Optional[str]] = mapped_column(Text, nullable=True) # Assuming Text is appropriate, could be String
+    rating: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    max_rating: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    normalized_rating: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
 
-    product_id = Column(Integer, ForeignKey("products.id"))
-    user_id = Column(Integer, ForeignKey("users.id")) 
+    product_id: Mapped[int] = mapped_column(Integer, ForeignKey("products.id"))
+    user_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"))
 
-    product = relationship("Product", back_populates="reviews")
-    user = relationship("User", back_populates="reviews")
+    product: Mapped["Product"] = relationship("Product", back_populates="reviews")
+    user: Mapped["User"] = relationship("User", back_populates="reviews")
 
     def to_dict(self):
         return {
@@ -39,3 +44,6 @@ class Review(Base):
             "max_rating": self.max_rating,
             "normalized_rating": self.normalized_rating,
         }
+
+    def __repr__(self) -> str:
+        return f"<Review(id={self.id}, product_id={self.product_id}, user_id={self.user_id})>"

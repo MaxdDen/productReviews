@@ -1,65 +1,148 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Политика</title>
-  <link rel="stylesheet" href="/static/css/style.css">
-</head>
-<body class="bg-gray-50 text-gray-900 flex flex-col min-h-screen">
-  <!-- Hero Section with integrated header and burger menu -->
-  <section class="relative text-white bg-gray-900 overflow-hidden">
-    <!-- <img src="https://images.unsplash.com/photo-1591696331117-cc5f3c0c3b49?auto=format&fit=crop&w=1920&q=80" alt="AI Background" class="absolute inset-0 w-full h-full object-cover opacity-40"> -->
-    <div class="relative z-10">
-      <!-- Integrated Header with burger -->
-      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <a href="/" class="text-gray-200 hover:text-white">
-          <h1 class="text-xl font-bold text-white">AI Review Analyzer</h1>
-        </a>
-        <button id="burger-button" class="md:hidden text-white">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
-        <nav class="hidden md:flex justify-between items-center space-x-4 text-sm md:text-base">
-          <a href="/about" class="text-gray-200 hover:text-white">О нас</a>
-          <a href="/contacts" class="text-gray-200 hover:text-white">Контакты</a>
-          <a href="/login" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Вход</a>
-        </nav>
-      </div>
-      <!-- Mobile Menu -->
-      <div id="mobile-menu" class="md:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 hidden z-50">
-        <div class="bg-gray-900 p-6 rounded shadow-md w-11/12 max-w-sm mx-auto mt-20 relative">
-          <button id="close-button" class="absolute top-4 right-4 text-gray-300 hover:text-white">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-          <nav class="flex flex-col space-y-4 text-white text-lg">
-            <a href="/" class="hover:underline">Главная</a>
-            <a href="/about" class="hover:underline">О нас</a>
-            <a href="/contacts" class="hover:underline">Контакты</a>
-            <a href="/login" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-center">Вход</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Review Analyzer — Security Policy</title>
+    <meta name="description" content="AI Review Analyzer — автоматический анализ отзывов, выявление слабых мест продукта и принятие решений на основе данных. Быстро, удобно, без кода." />
+    <meta name="keywords" content="AI, анализ отзывов, product feedback, data-driven, автоматизация, insights, аналитика, бизнес" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://yourdomain.com/" />
+    <meta name="theme-color" content="#7B7FD1" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yourdomain.com/" />
+    <meta property="og:title" content="AI Review Analyzer — Product Feedback & Insights" />
+    <meta property="og:description" content="AI Review Analyzer — автоматический анализ отзывов, выявление слабых мест продукта и принятие решений на основе данных." />
+    <meta property="og:image" content="https://yourdomain.co/static/images/public/og-image.png" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://yourdomain.com/" />
+    <meta name="twitter:title" content="AI Review Analyzer — Product Feedback & Insights" />
+    <meta name="twitter:description" content="AI Review Analyzer — автоматический анализ отзывов, выявление слабых мест продукта и принятие решений на основе данных." />
+    <meta name="twitter:image" content="https://yourdomain.co/static/images/public/og-image.png" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/images/public/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/images/public/favicon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/css/public.css">
+  </head>
+  <body class="font-sans bg-white text-gray-900">
+        
+    <!-- Первый экран: Header + Hero -->
+    <section class="min-h-[700px] flex flex-col justify-between bg-[url('/static/images/public/img_bg_default.svg')] bg-center bg-cover pt-0">
+      <!-- Header внутри первого экрана -->
+      <div class="w-full py-[22px] fixed md:static md:top-0 md:left-0 bg-[url('/static/images/public/bg_menu_mob.png')] bg-center bg-cover md:bg-none z-50 transition-all">
+        <div class="max-w-[1200px] w-full mx-auto flex items-center justify-between px-[14px] md:px-[24px] xl:px-0">
+          <div class="font-black text-[24px] text-[#6B6397] text-balance">
+            AI Review Analyzer
+          </div>
+          <nav class="hidden md:flex flex-wrap justify-center text-center gap-x-8 gap-y-2 min-w-0 text-[16px] font-semibold text-gray-700">
+            <a href="/#demo" class="hover:text-[#7B7FD1] outline-none focus:outline-none">Demo</a>
+            <a href="/#how" class="hover:text-[#7B7FD1] outline-none focus:outline-none">How does it work?</a>
+            <a href="/#faq" class="hover:text-[#7B7FD1] outline-none focus:outline-none">FAQ</a>
+            <a href="/#testimonials" class="hover:text-[#7B7FD1] outline-none focus:outline-none">Testimonials</a>
           </nav>
+          <a href="/login" class="flex-shrink-0 min-w-[85px] px-[20px] py-[10px] bg-[#88A6F0] rounded-[20px] shadow hover:bg-[#7B7FD1] transition text-[15px] text-white font-semibold leading-[18px] hidden md:inline-block outline-none focus:outline-none">
+            Sign in
+          </a>
+          <!-- Гамбургер для мобилки -->
+          <button class="ml-2 flex md:hidden w-[38px] h-[38px] items-center justify-center rounded-lg bg-transparent border-0 cursor-pointer transition" id="burgerBtn" aria-label="Открыть меню">
+            <svg viewBox="0 0 32 32" fill="none" class="w-8 h-8"><rect y="6" width="32" height="4" rx="2" fill="#6B6397"/><rect y="14" width="32" height="4" rx="2" fill="#6B6397"/><rect y="22" width="32" height="4" rx="2" fill="#6B6397"/></svg>
+          </button>
         </div>
       </div>
-    </div>
-  </section>
-
-  <main class="flex-shrink-0">
-
-    <!-- Политика -->
-    <section class="py-20 px-4 bg-gradient-to-r from-gray-50 to-white">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            Политика безопасности
+      <!-- Overlay меню для мобилки -->
+      <div class="fixed inset-0 z-[100] bg-[#7B7FD1]/[0.97] flex-col justify-start items-center hidden transition-all" id="mobileMenu">
+        <button class="absolute top-7 right-7 bg-none border-0 text-white text-[36px] cursor-pointer z-[101]" id="closeMenu" aria-label="Закрыть меню">&times;</button>
+        <nav class="flex flex-col gap-8 mt-[90px] w-full items-center">
+          <a href="/#demo" class="text-[24px] font-bold text-white hover:text-[#d1d5fa]">Demo</a>
+          <a href="/#how" class="text-[24px] font-bold text-white hover:text-[#d1d5fa]">How does it work?</a>
+          <a href="/#faq" class="text-[24px] font-bold text-white hover:text-[#d1d5fa]">FAQ</a>
+          <a href="/#testimonials" class="text-[24px] font-bold text-white hover:text-[#d1d5fa]">Testimonials</a>
+        </nav>
+        <div class="absolute bottom-12 left-0 right-0 flex justify-center">
+          <a href="/login" class="px-11 py-3 bg-[#88A6F0] rounded-[20px] text-white text-[20px] font-semibold shadow hover:bg-[#7B7FD1] transition">Sign in</a>
         </div>
+      </div>
+      <!-- Hero-контент -->
+      <div class="firstscreen__content flex flex-col items-center justify-between max-w-[1200px] w-full mx-auto flex-1 mt-[80px] md:mt-0 mb-[40px] md:mb-[60px] lg:mb-[80px] gap-[20px] md:gap-[40px] px-[14px] md:px-[24px] xl:px-0 relative md:items-center md:justify-start">  
+	    <h1 class="hero__title font-black text-[48px] leading-[59px] mb-[30px] text-gray-900 md:text-[36px] md:leading-[1.1] md:mb-[18px] sm:text-[24px] sm:mb-3">
+		  Security Policy
+	    </h1>
+        <div class="mt-10">
+			<h2 class="text-xl font-semibold border-l-4 border-blue-200 pl-4 mb-2">1. General Provisions</h2>
+			<ul class="list-disc pl-8 space-y-1">
+				<li>This security policy defines the main measures for protecting user data and application infrastructure.</li>
+				<li>The policy is mandatory for all users, employees, and developers working with this application.</li>
+			</ul>
+
+			<h2 class="text-xl font-semibold border-l-4 border-blue-200 pl-4 mb-2 mt-7">2. Data Storage and Processing</h2>
+			<ul class="list-disc pl-8 space-y-1">
+				<li>All users' personal data is stored in a secure database (PostgreSQL) with regular backups.</li>
+				<li>Access to data is limited to authorized users using a multi-level permissions system.</li>
+				<li>All files uploaded by users are stored in a separate secure storage and are accessible only to their owners and administrators.</li>
+			</ul>
+
+			<h2 class="text-xl font-semibold border-l-4 border-blue-200 pl-4 mb-2 mt-7">3. Authentication and Authorization</h2>
+			<ul class="list-disc pl-8 space-y-1">
+				<li>User authentication is implemented using modern standards: JWT tokens are stored only in secure httpOnly cookies.</li>
+				<li>Protection against CSRF attacks (cross-site request forgery) is implemented on all critical endpoints.</li>
+				<li>Strict user rights checking is applied for access to personal data and operations.</li>
+			</ul>
+
+			<h2 class="text-xl font-semibold border-l-4 border-blue-200 pl-4 mb-2 mt-7">4. Encryption and Communication Security</h2>
+			<ul class="list-disc pl-8 space-y-1">
+				<li>All data transmission between the client and the server is carried out over a secure HTTPS protocol.</li>
+				<li>User passwords are stored only in encrypted form (bcrypt or a similar algorithm).</li>
+			</ul>
+
+			<h2 class="text-xl font-semibold border-l-4 border-blue-200 pl-4 mb-2 mt-7">5. Development and Operations Security</h2>
+			<ul class="list-disc pl-8 space-y-1">
+				<li>Only up-to-date and trusted versions of third-party libraries and dependencies are used.</li>
+				<li>All changes undergo code review and testing before deployment.</li>
+				<li>Regular security audits and monitoring of suspicious activity are conducted.</li>
+			</ul>
+
+			<h2 class="text-xl font-semibold border-l-4 border-blue-200 pl-4 mb-2 mt-7">6. Backup and Recovery</h2>
+			<ul class="list-disc pl-8 space-y-1">
+				<li>The database and user files are regularly backed up to secure servers.</li>
+				<li>Fast data recovery procedures are implemented in case of failures.</li>
+			</ul>
+
+			<h2 class="text-xl font-semibold border-l-4 border-blue-200 pl-4 mb-2 mt-7">7. User Responsibility</h2>
+			<ul class="list-disc pl-8 space-y-1">
+				<li>Users are required to use strong passwords and not share their data with third parties.</li>
+				<li>Uploading malicious files or inappropriate content is strictly prohibited.</li>
+				<li>If a vulnerability or suspicious activity is discovered, the user must immediately notify the project administration.</li>
+			</ul>
+
+			<h2 class="text-xl font-semibold border-l-4 border-blue-200 pl-4 mb-2 mt-7">8. Incident Response</h2>
+			<ul class="list-disc pl-8 space-y-1">
+				<li>In the event of incidents or data breaches, an internal investigation is immediately conducted.</li>
+				<li>Users will be notified of any breaches or incidents as soon as possible via the contact information provided during registration.</li>
+			</ul>
+
+			<h2 class="text-xl font-semibold border-l-4 border-blue-200 pl-4 mb-2 mt-7">9. Changes to the Security Policy</h2>
+			<ul class="list-disc pl-8 space-y-1">
+				<li>The security policy may be amended, with users being notified via the website and/or email.</li>
+			</ul>
+        </div>
+      </div>
     </section>
 
-  </main>
+    <!-- Footer -->
+    <footer class="footer py-8 bg-gray-900 text-gray-400">
+      <div class="container max-w-[1200px] w-full mx-auto flex flex-wrap justify-around items-center gap-[20px] lg:gap-[40px] px-[14px] md:px-[24px] xl:px-0">
+        <div class="footer__copy mb-0">© 2024 AI Review Analyzer. All rights reserved.</div>
+        <div class="footer__policy"><a href="/policy" class="hover:text-white">Security Policy</a></div>
+      </div>
+    </footer> 
 
-  <!-- Footer -->
-  <footer class="text-center text-gray-500 text-sm py-6 bg-white mt-auto">
-    &copy; 2025 AI Review Analyzer. Все права защищены. <a href="/policy" class="underline hover:text-gray-700 ml-2">Политика безопасности</a>
-  </footer>
+    <script src="/static/js/public.js"></script>
+
 </body>
-</html>
+</html> 

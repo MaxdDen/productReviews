@@ -1,17 +1,72 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>500</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+  <meta charset="UTF-8">
+  <title>500</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', path='images/public/favicon.png') }}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', path='images/public/favicon.png') }}" />
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-red-50 flex items-center justify-center h-screen">
-    <div class="bg-white p-8 rounded-lg shadow-md max-w-md">
-        <h1 class="text-2xl font-bold text-red-600 mb-4">500</h1>
-        <p class="text-gray-700">{{ message }}</p>
-        <a href="/" class="mt-6 inline-block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-            Вернуться на главную
+<body class="font-sans bg-white text-gray-900">
+        
+    <!-- Первый экран: Header + Hero -->
+    <section class="min-h-[700px] flex flex-col justify-between bg-[url('/static/images/public/img_bg_default.svg')] bg-center bg-cover pt-0">
+      <!-- Header внутри первого экрана -->
+      <div class="w-full py-[22px] fixed md:static md:top-0 md:left-0 bg-[url('/static/images/public/bg_menu_mob.png')] bg-center bg-cover md:bg-none z-50 transition-all">
+        <div class="max-w-[1200px] w-full mx-auto flex items-center justify-between px-[14px] md:px-[24px] xl:px-0">
+          <div class="font-black text-[24px] text-[#6B6397] text-balance">
+            AI Review Analyzer
+          </div>
+          <nav class="hidden md:flex flex-wrap justify-center text-center gap-x-8 gap-y-2 min-w-0 text-[16px] font-semibold text-gray-700">
+            <a href="/#demo" class="hover:text-[#7B7FD1] outline-none focus:outline-none">Demo</a>
+            <a href="/#how" class="hover:text-[#7B7FD1] outline-none focus:outline-none">How does it work?</a>
+            <a href="/#faq" class="hover:text-[#7B7FD1] outline-none focus:outline-none">FAQ</a>
+            <a href="/#testimonials" class="hover:text-[#7B7FD1] outline-none focus:outline-none">Testimonials</a>
+          </nav>
+          <a href="/login" class="flex-shrink-0 min-w-[85px] px-[20px] py-[10px] bg-[#88A6F0] rounded-[20px] shadow hover:bg-[#7B7FD1] transition text-[15px] text-white font-semibold leading-[18px] hidden md:inline-block outline-none focus:outline-none">
+            Sign in
+          </a>
+          <!-- Гамбургер для мобилки -->
+          <button class="ml-2 flex md:hidden w-[38px] h-[38px] items-center justify-center rounded-lg bg-transparent border-0 cursor-pointer transition" id="burgerBtn" aria-label="Открыть меню">
+            <svg viewBox="0 0 32 32" fill="none" class="w-8 h-8"><rect y="6" width="32" height="4" rx="2" fill="#6B6397"/><rect y="14" width="32" height="4" rx="2" fill="#6B6397"/><rect y="22" width="32" height="4" rx="2" fill="#6B6397"/></svg>
+          </button>
+        </div>
+      </div>
+      <!-- Overlay меню для мобилки -->
+      <div class="fixed inset-0 z-[100] bg-[#7B7FD1]/[0.97] flex-col justify-start items-center hidden transition-all" id="mobileMenu">
+        <button class="absolute top-7 right-7 bg-none border-0 text-white text-[36px] cursor-pointer z-[101]" id="closeMenu" aria-label="Закрыть меню">&times;</button>
+        <nav class="flex flex-col gap-8 mt-[90px] w-full items-center">
+          <a href="/#demo" class="text-[24px] font-bold text-white hover:text-[#d1d5fa]">Demo</a>
+          <a href="/#how" class="text-[24px] font-bold text-white hover:text-[#d1d5fa]">How does it work?</a>
+          <a href="/#faq" class="text-[24px] font-bold text-white hover:text-[#d1d5fa]">FAQ</a>
+          <a href="/#testimonials" class="text-[24px] font-bold text-white hover:text-[#d1d5fa]">Testimonials</a>
+        </nav>
+        <div class="absolute bottom-12 left-0 right-0 flex justify-center">
+          <a href="/login" class="px-11 py-3 bg-[#88A6F0] rounded-[20px] text-white text-[20px] font-semibold shadow hover:bg-[#7B7FD1] transition">Sign in</a>
+        </div>
+      </div>
+      <!-- Hero-контент -->
+      <div class="firstscreen__content flex flex-col items-center justify-between max-w-[1200px] w-full mx-auto flex-1 mt-[80px] md:mt-0 mb-[40px] md:mb-[60px] lg:mb-[80px] gap-[20px] md:gap-[40px] px-[14px] md:px-[24px] xl:px-0 relative md:items-center md:justify-start">  
+        <div class="hero__image flex-1 min-w-0 flex items-center justify-center lg:max-w-[670px] md:w-full md:max-w-full md:mb-0">
+          <img src="/static/images/500.png" alt="ERROR 500" class="max-w-full" />
+        </div>
+		<p class="text-gray-700">{{ message }}</p>
+        <a href="/" class="flex-shrink-0 min-w-[85px] px-[20px] py-[10px] bg-[#88A6F0] rounded-[20px] shadow hover:bg-[#7B7FD1] transition text-[15px] text-white font-semibold leading-[18px] inline-block outline-none focus:outline-none">
+            Home
         </a>
-    </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-8 bg-gray-900 text-gray-400">
+      <div class="container max-w-[1200px] w-full mx-auto flex flex-wrap justify-around items-center gap-[20px] lg:gap-[40px] px-[14px] md:px-[24px] xl:px-0">
+        <div class="footer__copy mb-0">© 2024 AI Review Analyzer. All rights reserved.</div>
+        <div class="footer__policy"><a href="/policy" class="hover:text-white">Security Policy</a></div>
+      </div>
+    </footer> 
+
+    <script src="/static/js/public.js"></script>
+
 </body>
-</html>
+</html> 
