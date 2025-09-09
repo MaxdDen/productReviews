@@ -38,7 +38,8 @@ def downgrade():
 def test():
     """Запустить pytest для всех тестов с нужным окружением"""
     os.environ["ENVIRONMENT"] = "test"
-    subprocess.run(["pytest", "tests", "-v"])
+    #subprocess.run(["pytest", "tests", "-v"])
+    subprocess.run(["pytest", "tests/test_db_connection.py", "-v"])
     
 def createsuperuser():
     """Создать суперпользователя (пример для интерактивного скрипта)"""

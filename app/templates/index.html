@@ -27,12 +27,12 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/static/images/public/favicon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="/static/css/tailwind.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/static/css/public.css">
   </head>
   <body class="font-sans bg-white text-gray-900">
         
-    <svg class="hidden">
+    <svg style="display:none;">
       <symbol id="icon-query" viewBox="0 0 58 92">
         <path d="M36.9005 86.7621L20.9208 86.756L20.9317 71.2794L36.9113 71.2865L36.9005 86.7621ZM28.2525 1.44137C37.2491 1.43977 44.2833 3.277 49.4073 6.89842C54.4738 10.4793 57.0502 16.295 57.0487 24.4708L57.0488 24.4798C57.0881 26.8084 56.8156 29.1317 56.2384 31.388C55.7401 33.2783 54.9368 35.0745 53.86 36.706C52.7386 38.365 51.4112 39.8748 49.9097 41.1997L49.907 41.2031C48.3322 42.6143 46.5393 44.0832 44.5283 45.6108C43.1149 46.6734 41.7805 47.8368 40.5349 49.091L40.0074 49.6328C38.8976 50.7925 37.9915 52.1314 37.3276 53.5928L37.3252 53.5993C36.7181 54.9851 36.323 56.4543 36.1532 57.9577L36.1526 57.9606C35.9908 59.4641 35.907 60.9748 35.9014 62.4868L21.4474 62.4326C21.4002 58.6278 21.7802 54.8292 22.5824 51.1086C23.3603 48.1127 24.8307 45.3411 26.876 43.0178L26.8849 43.0088C28.0999 41.556 29.5083 40.2765 31.0722 39.2084L31.073 39.2096C32.6369 38.146 34.1244 36.9732 35.5238 35.7008L35.523 35.6997C36.8831 34.48 38.0585 33.0686 39.0096 31.5088L39.0194 31.4909C40.0631 29.6082 40.5671 27.4738 40.4762 25.3231C40.4656 21.1477 39.323 18.0855 36.8808 16.3152L36.8747 16.3109L36.4121 15.9979C34.0717 14.4866 31.3284 13.7076 28.5348 13.7675C24.019 13.7594 20.7488 14.9878 18.9504 17.6986L18.9414 17.7126C17.1186 20.6696 16.0288 24.0163 15.7562 27.4746L0.508931 27.4655C0.518908 23.8715 1.18999 20.3086 2.49224 16.9558L2.49149 16.9546C3.72514 13.7858 5.64075 10.9263 8.10069 8.57844L8.09994 8.57729C10.4558 6.36743 13.2226 4.64469 16.2399 3.50354L16.8469 3.28312C20.5093 2.00806 24.367 1.3844 28.2446 1.44071L28.2525 1.44137Z" stroke="black"/>
       </symbol>
@@ -78,9 +78,9 @@
         </div>
       </div>
       <!-- Hero-контент -->
-      <div class="firstscreen__content flex flex-col-reverse md:flex-col-reverse lg:flex-row items-center justify-between max-w-[1200px] w-full mx-auto flex-1 mt-[80px] md:mt-0 mb-[40px] md:mb-[60px] lg:mb-[80px] gap-[20px] md:gap-[40px] px-[14px] md:px-[24px] xl:px-0 relative md:items-center md:justify-start">  
+      <div class="firstscreen__content flex flex-col-reverse md:flex-col-reverse lg:flex-row md:items-center md:justify-around max-w-[1200px] w-full mx-auto flex-1 mt-[80px] md:mt-0 mb-[40px] md:mb-[60px] lg:mb-[80px] gap-[20px] md:gap-[40px] px-[14px] md:px-[24px] xl:px-0 relative">  
         <!-- Левая колонка (текст) -->
-        <div class="hero__content flex-1 min-w-0 lg:max-w-[520px] md:w-full md:max-w-full text-center lg:text-left md:mb-8">
+        <div class="hero__content flex-1 min-w-0 lg:max-w-[520px] md:w-full md:max-w-full text-center lg:text-left md:mb-8 relative">
           <h1 class="hero__title font-black text-[48px] leading-[59px] mb-[30px] text-gray-900 md:text-[36px] md:leading-[1.1] md:mb-[18px] sm:text-[24px] sm:mb-3">
             Analyze product reviews <span class="text-[#6B6397]">using AI</span>
           </h1>
@@ -89,57 +89,106 @@
           </p>
           <a href="/register" class="hero__try px-[40px] py-[15px] bg-[#88A6F0] rounded-[20px] shadow hover:bg-[#7B7FD1] transition block w-max mx-auto lg:mx-0 md:text-[20px] sm:text-[16px]">
             <span class="hero__try_btn text-[24px] text-[#FFFFFF] leading-[29px] font-semibold md:text-[20px] sm:text-[16px]"> 
-              To try
+              Try It Now
             </span>
           </a>
+          
+          <!-- Статистика с аватарками -->
+          <div class="hero__stats flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mt-8 relative">
+            <!-- 500+ reviews analyzed -->
+            <div class="flex items-center gap-2 relative">
+              <!-- Анимированный вопрос рядом со статистикой -->
+              <div class="question-mark-answer absolute -left-[35px] -top-[5px] w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] lg:w-[60px] lg:h-[60px]"
+                style="--fade-delay: 3s;">
+                <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full" />
+              </div>
+              
+              <div class="flex -space-x-2">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-r from-[#7B7FD1] to-[#88A6F0] border-2 border-white flex items-center justify-center">
+                  <span class="text-white text-xs font-bold">AI</span>
+                </div>
+                <div class="w-8 h-8 rounded-full bg-gradient-to-r from-[#88A6F0] to-[#7B7FD1] border-2 border-white flex items-center justify-center">
+                  <span class="text-white text-xs font-bold">+</span>
+                </div>
+                <div class="w-8 h-8 rounded-full bg-gradient-to-r from-[#7B7FD1] to-[#88A6F0] border-2 border-white flex items-center justify-center">
+                  <span class="text-white text-xs font-bold">5</span>
+                </div>
+              </div>
+              <span class="text-sm font-semibold text-gray-700">500+ reviews analyzed</span>
+            </div>
+            
+            <!-- Trusted by sellers -->
+            <div class="flex items-center gap-2">
+              <div class="flex -space-x-2">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-r from-[#FF6B6B] to-[#FF8E8E] border-2 border-white flex items-center justify-center">
+                  <span class="text-white text-xs font-bold">A</span>
+                </div>
+                <div class="w-8 h-8 rounded-full bg-gradient-to-r from-[#4ECDC4] to-[#6EDDD6] border-2 border-white flex items-center justify-center">
+                  <span class="text-white text-xs font-bold">E</span>
+                </div>
+                <div class="w-8 h-8 rounded-full bg-gradient-to-r from-[#45B7D1] to-[#6BC5D8] border-2 border-white flex items-center justify-center">
+                  <span class="text-white text-xs font-bold">✓</span>
+                </div>
+              </div>
+              <span class="text-sm font-semibold text-gray-700">Trusted by sellers on Amazon / eBay</span>
+            </div>
+          </div>
+          <!-- Плавающий вопрос (верхний правый угол левого блока) -->
+          <div class="question-mark-float absolute right-[5%] top-[35%] md:right-[8%] md:top-[8%] lg:right-[15%] lg:top-[10%] w-[45px] h-[45px] md:w-[50px] md:h-[50px] lg:w-[55px] lg:h-[55px]"
+              style="--fade-delay: 0s;">
+            <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full" />
+          </div>
         </div>
-        <!-- Правая колонка (картинка) -->
-        <div class="hero__image flex-1 min-w-0 flex items-center justify-center lg:max-w-[670px] md:w-full md:max-w-full md:mb-0">
-          <img src="/static/images/public/first_screen.png" alt="AI Illustration" class="max-w-full" />
+        
+        <!-- Правая колонка (картинка) - уменьшена до 1/3 -->
+        <div class="hero__image w-full lg:w-1/3 md:w-1/2 flex items-center justify-center">
+          <img src="/static/images/public/first_screen.png" alt="AI Illustration" class="max-w-full max-h-[400px] object-contain" />
         </div>
-        <!-- Декоративные элементы (placeholder) -->
-        <!-- Верхний левый вопрос -->
-        <div class="question-mark absolute left-[7%] top-[1%] w-[60px] h-[60px] opacity-0 animate-fade-in-out"
-            style="--fade-duration: 2s; --fade-delay: 0s;">
-          <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full transform -rotate-15" style="transform: rotate(-20deg) scale(0.7);" />
+        <!-- Декоративные элементы с разными анимациями -->
+        <!-- Вопрос: Пульсирующий поиск (свободное пространство справа) -->
+        <div class="question-mark-pulse absolute right-[5%] top-[15%] md:right-[8%] md:top-[20%] lg:right-[10%] lg:top-[25%] w-[50px] h-[50px] md:w-[55px] md:h-[55px] lg:w-[65px] lg:h-[65px]"
+          style="--fade-delay: 1.5s;">
+          <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full" />
         </div>
-        <!-- Нижний левый вопрос -->
-        <div class="question-mark absolute right-[5%] lg:bottom-[1%] lg:left-[20%] lg:bottom-[1%] w-[100px] h-[100px] opacity-0 animate-fade-in-out"
-          style="--fade-duration: 2.5s; --fade-delay: 1s;">
-          <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full transform rotate-25" style="transform: rotate(25deg) scale(0.7);" />
-        </div>
+        
       </div>
     </section>
 
     <!-- Advantages Section -->
     <section id="demo" class="advantages flex flex-col justify-between bg-[url('/static/images/public/img_bg_contrast.svg')] bg-center bg-cover p-0">
       <div class="advantages__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0"> 
-        <div class="advantages__list w-full mx-auto flex flex-wrap justify-around items-center gap-[40px] mb-[40px] md:mb-[60px] lg:mb-[80px]"> 
-          <div class="advantages__item flex flex-col items-center text-center max-w-[295px]">
-            <svg width="45" height="44" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="advantages__icon w-[56px] h-[56px] mb-[18px]">
-              <path d="M15.3681 21.7424C22.7587 28.7033 30.4072 32.8283 40.4619 34.3752M28.1633 14.7316C20.5244 9.79708 12.6181 13.3394 5.31342 5.60505C3.61186 3.80036 4.60014 25.8433 13.7439 34.1965C20.429 40.298 30.7509 39.6174 34.2314 33.6877C37.7119 27.758 35.8023 19.6653 28.1633 14.7316Z" stroke="#7D94CF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <h3 class="advantages__title text-[20px] font-bold mb-[8px]">Quick and convenient</h3>
-            <p class="advantages__desc text-[16px] text-gray-600">Automated analysis, minimal manual work.</p>
+        <div class="advantages__list w-full mx-auto flex flex-wrap justify-around items-stretch gap-[40px] mb-[40px] md:mb-[60px] lg:mb-[80px]"> 
+          <div class="advantages__item flex flex-col items-center text-center max-w-[295px] w-full bg-white rounded-[16px] shadow-lg p-[32px] hover:shadow-xl transition-shadow duration-300">
+            <div class="advantages__icon-container w-[80px] h-[80px] flex items-center justify-center mb-[24px] bg-gradient-to-br from-[#7B7FD1]/10 to-[#88A6F0]/10 rounded-[20px]">
+              <svg width="45" height="44" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-[48px] h-[48px]">
+                <path d="M15.3681 21.7424C22.7587 28.7033 30.4072 32.8283 40.4619 34.3752M28.1633 14.7316C20.5244 9.79708 12.6181 13.3394 5.31342 5.60505C3.61186 3.80036 4.60014 25.8433 13.7439 34.1965C20.429 40.298 30.7509 39.6174 34.2314 33.6877C37.7119 27.758 35.8023 19.6653 28.1633 14.7316Z" stroke="#7D94CF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="advantages__title text-[20px] font-bold mb-[12px] text-gray-900">Quick and convenient</h3>
+            <p class="advantages__desc text-[16px] text-gray-600 leading-relaxed">Automated analysis, minimal manual work.</p>
           </div>
-          <div class="advantages__item flex flex-col items-center text-center max-w-[295px]">
-            <svg width="45" height="44" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="advantages__icon w-[56px] h-[56px] mb-[18px]">
-              <path d="M3.93074 12.8262L20.8948 21.0177C21.3365 21.2283 21.9261 21.3383 22.5096 21.3383C23.0931 21.3383 23.6826 21.2283 24.1235 21.0177L41.0875 12.8262C41.9796 12.3965 41.9796 11.6935 41.0875 11.2621L24.1235 3.07055C23.6826 2.86 23.0922 2.75 22.5096 2.75C21.9269 2.75 21.3365 2.86 20.8948 3.07055L3.93074 11.2621C3.03871 11.6935 3.03871 12.3948 3.93074 12.8262Z" fill="#7D94CF"/>
-              <path d="M41.0884 21.2181C41.0884 21.2181 37.9904 19.7245 37.5796 19.5234C37.1688 19.3223 37.0579 19.3335 36.6265 19.5337C36.1951 19.7339 24.114 25.5691 24.114 25.5691C23.6048 25.789 23.0547 25.8985 22.5001 25.8905C21.9183 25.8905 21.3271 25.7796 20.8862 25.5691C20.8862 25.5691 9.12566 19.8972 8.57395 19.6239C7.97668 19.336 7.8048 19.336 7.26082 19.5938L3.90926 21.2078C3.01723 21.6374 3.01723 22.3413 3.90926 22.7718L20.8759 30.9634C21.3168 31.1739 21.9071 31.2839 22.4898 31.2839C23.0725 31.2839 23.6629 31.1739 24.1046 30.9634L41.0686 22.7735C41.9804 22.3507 41.9804 21.6495 41.0884 21.2181Z" fill="#7D94CF"/>
-              <path d="M41.0874 31.1738C41.0874 31.1738 37.9894 29.6802 37.5786 29.4765C37.1678 29.2728 37.0569 29.2866 36.6255 29.4868C36.1941 29.6871 24.1233 35.5351 24.1233 35.5351C23.614 35.7546 23.064 35.8639 22.5094 35.8557C21.9276 35.8557 21.3364 35.7457 20.8947 35.5351C20.8947 35.5351 9.13412 29.8632 8.58326 29.59C7.9817 29.2986 7.80982 29.2986 7.26928 29.5599L3.91771 31.1738C3.02482 31.6035 3.02482 32.3064 3.91771 32.7379L20.8818 40.9294C21.3226 41.1494 21.913 41.25 22.4957 41.25C23.0783 41.25 23.6687 41.14 24.1096 40.9294L41.0771 32.7421C41.9794 32.3064 41.9794 31.6052 41.0874 31.1738Z" fill="#7D94CF"/>
-            </svg>
-            <h3 class="advantages__title text-[20px] font-bold mb-[8px]">Insights for growth</h3>
-            <p class="advantages__desc text-[16px] text-gray-600">Find weaknesses, prioritize product fixes.</p>
+          <div class="advantages__item flex flex-col items-center text-center max-w-[295px] w-full bg-white rounded-[16px] shadow-lg p-[32px] hover:shadow-xl transition-shadow duration-300">
+            <div class="advantages__icon-container w-[80px] h-[80px] flex items-center justify-center mb-[24px] bg-gradient-to-br from-[#7B7FD1]/10 to-[#88A6F0]/10 rounded-[20px]">
+              <svg width="45" height="44" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-[48px] h-[48px]">
+                <path d="M3.93074 12.8262L20.8948 21.0177C21.3365 21.2283 21.9261 21.3383 22.5096 21.3383C23.0931 21.3383 23.6826 21.2283 24.1235 21.0177L41.0875 12.8262C41.9796 12.3965 41.9796 11.6935 41.0875 11.2621L24.1235 3.07055C23.6826 2.86 23.0922 2.75 22.5096 2.75C21.9269 2.75 21.3365 2.86 20.8948 3.07055L3.93074 11.2621C3.03871 11.6935 3.03871 12.3948 3.93074 12.8262Z" fill="#7D94CF"/>
+                <path d="M41.0884 21.2181C41.0884 21.2181 37.9904 19.7245 37.5796 19.5234C37.1688 19.3223 37.0579 19.3335 36.6265 19.5337C36.1951 19.7339 24.114 25.5691 24.114 25.5691C23.6048 25.789 23.0547 25.8985 22.5001 25.8905C21.9183 25.8905 21.3271 25.7796 20.8862 25.5691C20.8862 25.5691 9.12566 19.8972 8.57395 19.6239C7.97668 19.336 7.8048 19.336 7.26082 19.5938L3.90926 21.2078C3.01723 21.6374 3.01723 22.3413 3.90926 22.7718L20.8759 30.9634C21.3168 31.1739 21.9071 31.2839 22.4898 31.2839C23.0725 31.2839 23.6629 31.1739 24.1046 30.9634L41.0686 22.7735C41.9804 22.3507 41.9804 21.6495 41.0884 21.2181Z" fill="#7D94CF"/>
+                <path d="M41.0874 31.1738C41.0874 31.1738 37.9894 29.6802 37.5786 29.4765C37.1678 29.2728 37.0569 29.2866 36.6255 29.4868C36.1941 29.6871 24.1233 35.5351 24.1233 35.5351C23.614 35.7546 23.064 35.8639 22.5094 35.8557C21.9276 35.8557 21.3364 35.7457 20.8947 35.5351C20.8947 35.5351 9.13412 29.8632 8.58326 29.59C7.9817 29.2986 7.80982 29.2986 7.26928 29.5599L3.91771 31.1738C3.02482 31.6035 3.02482 32.3064 3.91771 32.7379L20.8818 40.9294C21.3226 41.1494 21.913 41.25 22.4957 41.25C23.0783 41.25 23.6687 41.14 24.1096 40.9294L41.0771 32.7421C41.9794 32.3064 41.9794 31.6052 41.0874 31.1738Z" fill="#7D94CF"/>
+              </svg>
+            </div>
+            <h3 class="advantages__title text-[20px] font-bold mb-[12px] text-gray-900">Insights for growth</h3>
+            <p class="advantages__desc text-[16px] text-gray-600 leading-relaxed">Find weaknesses, prioritize product fixes.</p>
           </div>
-          <div class="advantages__item flex flex-col items-center text-center max-w-[295px]">
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg class="advantages__icon w-[56px] h-[56px] mb-[18px]"">
-              <path d="M22 19.9375V13.0625" stroke="#7D94CF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M22 7.5625V6.1875M11.3438 11.3438L10.3125 10.3125" stroke="#7D94CF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M22 26.125C23.5188 26.125 24.75 24.8938 24.75 23.375C24.75 21.8562 23.5188 20.625 22 20.625C20.4812 20.625 19.25 21.8562 19.25 23.375C19.25 24.8938 20.4812 26.125 22 26.125Z" stroke="#7D94CF" stroke-width="2" stroke-miterlimit="10"/>
-              <path d="M22 8.25C19.0086 8.25 16.0843 9.13707 13.597 10.799C11.1097 12.461 9.1711 14.8232 8.02633 17.5869C6.88155 20.3506 6.58203 23.3918 7.16563 26.3257C7.74923 29.2597 9.18975 31.9547 11.305 34.07C13.4203 36.1853 16.1153 37.6258 19.0493 38.2094C21.9832 38.793 25.0244 38.4935 27.7881 37.3487C30.5518 36.2039 32.914 34.2653 34.576 31.778C36.2379 29.2907 37.125 26.3664 37.125 23.375C37.125 19.3636 35.5315 15.5165 32.695 12.68C29.8585 9.84352 26.0114 8.25 22 8.25Z" stroke="#7D94CF" stroke-width="2" stroke-miterlimit="10"/>
-            </svg>
-            <h3 class="advantages__title text-[20px] font-bold mb-[8px]">Time saving</h3>
-            <p class="advantages__desc text-[16px] text-gray-600">Don't waste time on manual review analysis.</p>
+          <div class="advantages__item flex flex-col items-center text-center max-w-[295px] w-full bg-white rounded-[16px] shadow-lg p-[32px] hover:shadow-xl transition-shadow duration-300">
+            <div class="advantages__icon-container w-[80px] h-[80px] flex items-center justify-center mb-[24px] bg-gradient-to-br from-[#7B7FD1]/10 to-[#88A6F0]/10 rounded-[20px]">
+              <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-[48px] h-[48px]">
+                <path d="M22 19.9375V13.0625" stroke="#7D94CF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M22 7.5625V6.1875M11.3438 11.3438L10.3125 10.3125" stroke="#7D94CF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M22 26.125C23.5188 26.125 24.75 24.8938 24.75 23.375C24.75 21.8562 23.5188 20.625 22 20.625C20.4812 20.625 19.25 21.8562 19.25 23.375C19.25 24.8938 20.4812 26.125 22 26.125Z" stroke="#7D94CF" stroke-width="2" stroke-miterlimit="10"/>
+                <path d="M22 8.25C19.0086 8.25 16.0843 9.13707 13.597 10.799C11.1097 12.461 9.1711 14.8232 8.02633 17.5869C6.88155 20.3506 6.58203 23.3918 7.16563 26.3257C7.74923 29.2597 9.18975 31.9547 11.305 34.07C13.4203 36.1853 16.1153 37.6258 19.0493 38.2094C21.9832 38.793 25.0244 38.4935 27.7881 37.3487C30.5518 36.2039 32.914 34.2653 34.576 31.778C36.2379 29.2907 37.125 26.3664 37.125 23.375C37.125 19.3636 35.5315 15.5165 32.695 12.68C29.8585 9.84352 26.0114 8.25 22 8.25Z" stroke="#7D94CF" stroke-width="2" stroke-miterlimit="10"/>
+              </svg>
+            </div>
+            <h3 class="advantages__title text-[20px] font-bold mb-[12px] text-gray-900">Time saving</h3>
+            <p class="advantages__desc text-[16px] text-gray-600 leading-relaxed">Don't waste time on manual review analysis.</p>
           </div>
         </div>
         <div class="advantages__app w-full mx-auto flex justify-center items-center">
@@ -162,7 +211,7 @@
             </p>
             <a href="/register" class="analyze__cta inline-block px-[40px] py-[15px] bg-[#88A6F0] rounded-[20px] shadow hover:bg-[#7B7FD1] transition">
               <span class="hero__signin_btn text-[15px] text-[#FFFFFF] leading-[18px] font-semibold"> 
-                Try
+                Get My Report
               </span>
             </a>
           </div>
@@ -170,16 +219,11 @@
           <div class="analyze__image flex-1 min-w-0 flex items-center justify-center">
             <img src="/static/images/public/analysis_without_code.png" alt="Analyze Illustration" class="w-[420px] max-w-full" />
           </div>
-          <!-- Декоративные элементы (placeholder) -->
-          <!-- Верхний левый вопрос -->
-          <div class="question-mark absolute left-[1%] lg:left-[15%] top-[5%] lg:top-[75%] w-[100px] h-[100px] opacity-0 animate-fade-in-out"
-              style="--fade-duration: 2s; --fade-delay: 0s;">
-            <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full transform rotate-20" style="transform: rotate(20deg) scale(0.7);" />
-          </div>
-          <!-- Нижний левый вопрос -->
-          <div class="question-mark absolute right-[5%] lg:right-[50%] bottom-[1%] lg:bottom-[80%] w-[60px] h-[60px] opacity-0 animate-fade-in-out"
-            style="--fade-duration: 2.5s; --fade-delay: 1s;">
-            <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full transform -rotate-25" style="transform: rotate(-25deg) scale(0.7);" />
+          <!-- Декоративные элементы -->
+          <!-- Один плавающий вопрос (тонкая анимация) -->
+          <div class="question-mark-float subtle absolute right-[3%] top-[20%] w-[50px] h-[50px]"
+            style="--fade-delay: 2s;">
+            <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full" />
           </div>
         </div>
       </div>
@@ -188,31 +232,95 @@
     <!-- How it works -->
     <section id="how" class="howitworks flex flex-col justify-between bg-[url('/static/images/public/img_bg_contrast.svg')] bg-center bg-cover pt-0">
       <div class="howitworks__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0"> 
-        <div class="howitworks__wrap w-full mx-auto flex flex-col md:flex-col lg:flex-row items-center justify-between gap-[40px]">
-          <!--  <div class="analyze__wrap w-full mx-auto flex flex-col-reverse md:flex-col-reverse lg:flex-row items-center justify-between gap-[40px] relative">
-          Левая колонка -->
-          <div class="howitworks__image flex-1 min-w-0 lg:max-w-[420px] flex items-center justify-center">
-            <img src="/static/images/public/how_it_works.png" alt="How it works Illustration" class="max-w-full" />
-          </div>
-          <!-- Правая колонка -->
-          <div class="howitworks__steps flex-1 min-w-0 lg:max-w-[500px]">
-            <h2 class="howitworks__title text-[36px] font-bold leading-tight mb-[32px] text-gray-900">
+        <div class="howitworks__wrap w-full mx-auto">
+          <!-- Заголовок -->
+          <div class="text-center mb-[60px]">
+            <h2 class="howitworks__title text-[36px] font-bold leading-tight mb-[16px] text-gray-900">
               How it works <span class="text-[#7B7FD1]">AI Review Analyzer?</span>
             </h2>
-            <ol class="howitworks__list space-y-[24px] text-[18px]">
-              <li>
-                <span class="font-bold text-[#7B7FD1] mr-2">1.</span>
-                <span class="font-semibold">Add a product</span> — upload a product or paste a store url for analysis.
-              </li>
-              <li>
-                <span class="font-bold text-[#7B7FD1] mr-2">2.</span>
-                <span class="font-semibold">Download the testimonials</span> — export reviews from marketplace (just one click – process for analysis).
-              </li>
-              <li>
-                <span class="font-bold text-[#7B7FD1] mr-2">3.</span>
-                <span class="font-semibold">AI-assisted analysis</span> — get valuable insights and recommendations.
-              </li>
-            </ol>
+            <p class="text-[18px] text-gray-600 max-w-[600px] mx-auto">
+              Get insights from product reviews in just 3 simple steps
+            </p>
+          </div>
+          
+          <!-- Шаги -->
+          <div class="howitworks__steps grid grid-cols-1 md:grid-cols-3 gap-[40px] lg:gap-[60px]">
+            <!-- Step 1 -->
+            <div class="step-item flex flex-col items-center text-center">
+              <div class="step-icon w-[80px] h-[80px] bg-gradient-to-br from-[#7B7FD1] to-[#88A6F0] rounded-full flex items-center justify-center mb-[24px] shadow-lg">
+                <span class="text-white text-[32px] font-bold">1</span>
+              </div>
+              <h3 class="step-title text-[20px] font-bold mb-[12px] text-gray-900">Add a product</h3>
+              <p class="step-desc text-[16px] text-gray-600 mb-[20px] leading-relaxed">
+                Upload a product or paste a store URL for analysis
+              </p>
+              <!-- Мини-скрин Step 1 -->
+              <div class="step-preview w-full max-w-[280px] bg-white rounded-[12px] shadow-md p-[16px] border border-gray-100">
+                <div class="bg-gray-50 rounded-[8px] p-[12px] mb-[12px]">
+                  <div class="text-[12px] text-gray-500 mb-[8px]">Product URL</div>
+                  <div class="bg-white border border-gray-200 rounded-[6px] h-[32px] flex items-center px-[8px]">
+                    <span class="text-[12px] text-gray-400">https://amazon.com/product...</span>
+                  </div>
+                </div>
+                <div class="bg-[#7B7FD1] text-white text-[12px] font-semibold py-[8px] px-[12px] rounded-[6px] text-center">
+                  Add Product
+                </div>
+              </div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="step-item flex flex-col items-center text-center">
+              <div class="step-icon w-[80px] h-[80px] bg-gradient-to-br from-[#7B7FD1] to-[#88A6F0] rounded-full flex items-center justify-center mb-[24px] shadow-lg">
+                <span class="text-white text-[32px] font-bold">2</span>
+              </div>
+              <h3 class="step-title text-[20px] font-bold mb-[12px] text-gray-900">Download reviews</h3>
+              <p class="step-desc text-[16px] text-gray-600 mb-[20px] leading-relaxed">
+                Export reviews from marketplace with one click
+              </p>
+              <!-- Мини-скрин Step 2 -->
+              <div class="step-preview w-full max-w-[280px] bg-white rounded-[12px] shadow-md p-[16px] border border-gray-100">
+                <div class="bg-gray-50 rounded-[8px] p-[12px] mb-[12px]">
+                  <div class="text-[12px] text-gray-500 mb-[8px]">Reviews found: 247</div>
+                  <div class="flex items-center space-x-[8px]">
+                    <div class="w-[4px] h-[4px] bg-green-500 rounded-full animate-pulse"></div>
+                    <span class="text-[12px] text-green-600">Downloading...</span>
+                  </div>
+                </div>
+                <div class="bg-[#88A6F0] text-white text-[12px] font-semibold py-[8px] px-[12px] rounded-[6px] text-center">
+                  Download Reviews
+                </div>
+              </div>
+            </div>
+            
+            <!-- Step 3 -->
+            <div class="step-item flex flex-col items-center text-center">
+              <div class="step-icon w-[80px] h-[80px] bg-gradient-to-br from-[#7B7FD1] to-[#88A6F0] rounded-full flex items-center justify-center mb-[24px] shadow-lg">
+                <span class="text-white text-[32px] font-bold">3</span>
+              </div>
+              <h3 class="step-title text-[20px] font-bold mb-[12px] text-gray-900">Get insights</h3>
+              <p class="step-desc text-[16px] text-gray-600 mb-[20px] leading-relaxed">
+                AI analyzes reviews and provides valuable insights
+              </p>
+              <!-- Мини-скрин Step 3 -->
+              <div class="step-preview w-full max-w-[280px] bg-white rounded-[12px] shadow-md p-[16px] border border-gray-100">
+                <div class="bg-gray-50 rounded-[8px] p-[12px] mb-[12px]">
+                  <div class="text-[12px] text-gray-500 mb-[8px]">Analysis complete</div>
+                  <div class="space-y-[4px]">
+                    <div class="flex justify-between text-[11px]">
+                      <span>Positive: 78%</span>
+                      <span class="text-green-600">✓</span>
+                    </div>
+                    <div class="flex justify-between text-[11px]">
+                      <span>Issues: 3 found</span>
+                      <span class="text-orange-500">!</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-[#7B7FD1] text-white text-[12px] font-semibold py-[8px] px-[12px] rounded-[6px] text-center">
+                  View Report
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -541,21 +649,15 @@
               </div>
             </details>
           </div>
-          <!-- Декоративные элементы (placeholder) -->
-          <!-- Верхний правый вопрос -->
-          <div class="question-mark absolute right-[5%] top-[5%] lg:top-[1%] w-[60px] h-[60px] opacity-0 animate-fade-in-out"
-              style="--fade-duration: 2s; --fade-delay: 0s;">
-            <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full transform -rotate-15" style="transform: rotate(-20deg) scale(0.7);" />
+          <!-- Декоративные элементы -->
+          <!-- Два вопроса с разными анимациями -->
+          <div class="question-mark-pulse subtle absolute right-[5%] top-[10%] w-[60px] h-[60px]"
+            style="--fade-delay: 1s;">
+            <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full" />
           </div>
-          <!-- Левый вопрос -->
-          <div class="question-mark absolute left-[3%] top-[35%] w-[100px] h-[100px] opacity-0 animate-fade-in-out hidden lg:block"
-            style="--fade-duration: 2.5s; --fade-delay: 1s;">
-            <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full transform rotate-25" style="transform: rotate(25deg) scale(0.7);" />
-          </div>
-          <!-- Правый вопрос -->
-          <div class="question-mark absolute right-[7%] top-[80%] w-[120px] h-[120px] opacity-0 animate-fade-in-out hidden lg:block"
-              style="--fade-duration: 2s; --fade-delay: 0s;">
-            <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full transform -rotate-15" style="transform: rotate(-15deg) scale(0.7);" />
+          <div class="question-mark-answer subtle absolute left-[3%] bottom-[15%] w-[50px] h-[50px]"
+            style="--fade-delay: 3s;">
+            <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full" />
           </div>
         </div>
       </div>
@@ -626,26 +728,60 @@
           </div>
           <!-- Правая колонка -->
           <div class="finalcta__content flex-1 h-full flex-1 min-w-0 max-w-[500px] text-center lg:text-left">
+            <!-- Бейдж ограниченности -->
+            <div class="finalcta__badge inline-flex items-center gap-2 bg-gradient-to-r from-[#FF6B6B] to-[#FF8E8E] text-white px-[16px] py-[8px] rounded-full text-[14px] font-semibold mb-[20px] shadow-lg">
+              <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+              <span>Free for first 100 users</span>
+            </div>
+            
             <h2 class="finalcta__title text-[36px] font-bold leading-tight mb-[20px] text-gray-900">
               One click and you know whether the product is worth buying or not
             </h2>
-            <p class="finalcta__desc text-[20px] text-gray-600 mb-[32px]">
+            <p class="finalcta__desc text-[20px] text-gray-600 mb-[24px]">
               Upload reviews and AI Review Analyzer will show you the key issues and strengths of the product.
             </p>
-            <a href="/register" class="analyze__cta px-[40px] py-[15px] bg-[#88A6F0] rounded-[20px] shadow hover:bg-[#7B7FD1] transition">
-              <span class="hero__signin_btn text-[15px] text-[#FFFFFF] leading-[18px] font-semibold"> 
-                Try
-              </span>
-            </a>
+            
+            <!-- CTA кнопка -->
+            <div class="finalcta__cta-container mb-[20px]">
+              <a href="/register" class="analyze__cta inline-block px-[40px] py-[15px] bg-[#88A6F0] rounded-[20px] shadow-lg hover:bg-[#7B7FD1] hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <span class="hero__signin_btn text-[15px] text-[#FFFFFF] leading-[18px] font-semibold"> 
+                  Analyze My Product
+                </span>
+              </a>
+            </div>
+            
+            <!-- Дополнительные преимущества -->
+            <div class="finalcta__benefits flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 text-[14px] text-gray-600">
+              <div class="flex items-center gap-2">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-green-500">
+                  <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" fill="currentColor"/>
+                </svg>
+                <span>No signup required</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-green-500">
+                  <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" fill="currentColor"/>
+                </svg>
+                <span>Instant results</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="text-green-500">
+                  <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" fill="currentColor"/>
+                </svg>
+                <span>100% free</span>
+              </div>
+            </div>
+            
+            <!-- Счетчик ограниченности -->
+            <div class="finalcta__counter mt-[16px] text-[12px] text-gray-500">
+              <span class="font-semibold text-[#FF6B6B]">73</span> spots remaining
+            </div>
           </div>
           <!-- Декор -->
-          <div class="question-mark absolute left-[7%] top-[1%] w-[60px] h-[60px] opacity-0 animate-fade-in-out"
-            style="--fade-duration: 2s; --fade-delay: 0s;">
-            <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full transform -rotate-15" style="transform: rotate(-20deg) scale(0.7);" />
-          </div>
-          <div class="question-mark absolute right-[1%] lg:right-[15%] bottom-[1%] lg:bottom-[5%] w-[100px] h-[100px] opacity-0 animate-fade-in-out"
-            style="--fade-duration: 2s; --fade-delay: 0s;">
-            <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full transform -rotate-15" style="transform: rotate(-20deg) scale(0.7);" />
+          <!-- Один тонкий вопрос для завершения -->
+          <div class="question-mark-float subtle absolute right-[2%] top-[15%] w-[45px] h-[45px]"
+            style="--fade-delay: 4s;">
+            <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full" />
           </div>
         </div>
       </div>

@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://cdn.tailwindcss.com">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="{{ url_for('static', path='css/tailwind.css') }}">
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{{ url_for('static', path='css/main.css') }}">
 </head>
 <body class="min-h-screen flex items-start lg:items-center justify-center font-sans bg-[#F5F6FA]" data-is-superuser="{{ 'true' if user.is_superuser else 'false' }}">

@@ -1,5 +1,25 @@
 <!DOCTYPE html>
 <html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>403</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', path='images/public/favicon.png') }}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', path='images/public/favicon.png') }}" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-red-50 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md max-w-md">
+        <form method="get" action="/login">
+            <h1>Сессия устарела или была нарушена</h1>
+            <p>Пожалуйста, повторите попытку входа.</p>
+            <button type="submit">На страницу входа</button>
+          </form>
+    </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -27,7 +47,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/static/images/public/favicon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <!-- Tailwind CSS -->
-  <link rel="stylesheet" href="{{ url_for('static', path='css/tailwind.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/static/css/public.css">
   </head>
   <body class="font-sans bg-white text-gray-900">

@@ -1,1 +1,0 @@
-from app.api.device.routes import router
