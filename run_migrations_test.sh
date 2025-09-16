@@ -4,7 +4,7 @@
 export ENVIRONMENT=test
 
 # Запустить только миграционный тест отдельно
-pytest tests/test_migrations.py -v
+pytest tests/migration_tests/test_migrations.py -v
 
 # Сохранить exit code
 exit_code=$?

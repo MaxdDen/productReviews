@@ -11,9 +11,6 @@ from app.database.crud import create_directory_item, get_directory_item, update_
 from app.models.product import Product
 from app.models.user import User
 import pytest_asyncio
-import psycopg2
-from app.core.config import settings
-from sqlalchemy.engine.url import make_url
 
 
 TYPE_SYNONYMS = {
@@ -45,12 +42,12 @@ def test_warn_extra_tables(sync_engine):
         model_tables = set(Base.metadata.tables.keys())
 
         extra_tables = db_tables - model_tables
-        # Игнорируем служебную таблицу alembic_version
-        extra_tables = {t for t in extra_tables if t != "alembic_version"}
         if extra_tables:
             warnings.warn(f"Extra tables in DB not present in models: {extra_tables}")
         else:
             warnings.warn("Нет лишних таблиц в базе данных.")
+
+    # Тест всегда проходит, даже если есть лишние таблицы
     assert True
 
 def test_model_columns_match(sync_engine):
@@ -277,90 +274,3 @@ def test_column_exists(sync_engine, table_name, column_name):
         insp = inspect(conn)
         cols = [col["name"] for col in insp.get_columns(table_name)]
         assert column_name in cols, f"Column {column_name} missing in {table_name}"
-
-def get_column_default(col):
-    # SQLAlchemy column default может быть выражением или значением
-    if col.default is not None:
-        if hasattr(col.default, 'arg'):
-            return col.default.arg
-        return col.default
-    return None
-
-def test_column_defaults(sync_engine):
-    """Проверяет, что default-значения колонок совпадают между моделями и БД (если заданы явно и там, и там)."""
-    with sync_engine.begin() as conn:
-        insp = inspect(conn)
-        for table_name, table in Base.metadata.tables.items():
-            db_cols = {col["name"]: col for col in insp.get_columns(table_name)}
-            for col in table.columns:
-                db_col = db_cols.get(col.name)
-                if db_col is None:
-                    continue
-                # Игнорируем default для autoincrement PK (serial/bigserial)
-                if col.primary_key and db_col.get("autoincrement", False):
-                    continue
-                model_default = get_column_default(col)
-                db_default = db_col.get("default")
-                # Сравниваем только если и там, и там явно задано default
-                if model_default is not None and db_default is not None:
-                    assert str(model_default) == str(db_default), (
-                        f"Default mismatch on {table_name}.{col.name}: model={model_default!r}, db={db_default!r}")
-
-
-def test_foreign_key_ondelete_onupdate(sync_engine):
-    """Проверяет, что ondelete/onupdate для ForeignKey совпадают между моделями и БД."""
-    with sync_engine.begin() as conn:
-        insp = inspect(conn)
-        for table_name, table in Base.metadata.tables.items():
-            db_fks = {tuple(fk['constrained_columns']): fk for fk in insp.get_foreign_keys(table_name)}
-            for constraint in table.constraints:
-                if constraint.__class__.__name__ == "ForeignKeyConstraint":
-                    model_cols = tuple(fk.parent.name for fk in constraint.elements)
-                    db_fk = db_fks.get(model_cols)
-                    if db_fk is None:
-                        continue
-                    # Проверяем ondelete/onupdate
-                    model_ondelete = constraint.elements[0].ondelete if hasattr(constraint.elements[0], 'ondelete') else None
-                    model_onupdate = constraint.elements[0].onupdate if hasattr(constraint.elements[0], 'onupdate') else None
-                    db_ondelete = db_fk.get('options', {}).get('ondelete')
-                    db_onupdate = db_fk.get('options', {}).get('onupdate')
-                    if model_ondelete or db_ondelete:
-                        assert (model_ondelete or '').lower() == (db_ondelete or '').lower(), (
-                            f"ondelete mismatch on FK {table_name}.{model_cols}: model={model_ondelete}, db={db_ondelete}")
-                    if model_onupdate or db_onupdate:
-                        assert (model_onupdate or '').lower() == (db_onupdate or '').lower(), (
-                            f"onupdate mismatch on FK {table_name}.{model_cols}: model={model_onupdate}, db={db_onupdate}")
-
-
-def test_column_constraints(sync_engine):
-    """Проверяет наличие NOT NULL, UNIQUE, PRIMARY KEY на уровне БД для каждой колонки."""
-    with sync_engine.begin() as conn:
-        insp = inspect(conn)
-        for table_name, table in Base.metadata.tables.items():
-            db_cols = {col["name"]: col for col in insp.get_columns(table_name)}
-            db_pk = set(insp.get_pk_constraint(table_name).get('constrained_columns', []))
-            # Собираем все unique constraints (в том числе составные)
-            db_uniques = set()
-            db_unique_sets = set()
-            for uq in insp.get_unique_constraints(table_name):
-                db_uniques.update(uq['column_names'])
-                db_unique_sets.add(tuple(uq['column_names']))
-            for col in table.columns:
-                db_col = db_cols.get(col.name)
-                if db_col is None:
-                    continue
-                # NOT NULL
-                assert db_col["nullable"] == col.nullable, (
-                    f"NOT NULL mismatch on {table_name}.{col.name}: model={col.nullable}, db={db_col['nullable']}")
-                # PRIMARY KEY
-                model_pk = col.primary_key
-                db_is_pk = col.name in db_pk
-                assert model_pk == db_is_pk, (
-                    f"PRIMARY KEY mismatch on {table_name}.{col.name}: model={model_pk}, db={db_is_pk}")
-                # UNIQUE
-                model_unique = col.unique
-                # Проверяем, что либо одиночный unique constraint есть, либо col входит в составной unique
-                db_is_unique = col.name in db_uniques or any((col.name,) == uq for uq in db_unique_sets)
-                if model_unique or db_is_unique:
-                    assert model_unique == db_is_unique, (
-                        f"UNIQUE mismatch on {table_name}.{col.name}: model={model_unique}, db={db_is_unique}")

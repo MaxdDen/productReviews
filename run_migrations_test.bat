@@ -5,7 +5,7 @@ REM Установить переменную окружения для тест
 set ENVIRONMENT=test
 
 REM Запустить только миграционный тест отдельно
-pytest tests/test_migrations.py -v
+pytest tests/migration_tests/test_migrations.py -v
 set exit_code=%ERRORLEVEL%
 
 if %exit_code%==0 (
