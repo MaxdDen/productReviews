@@ -42,7 +42,13 @@
     </svg>
 
     <!-- Первый экран: Header + Hero -->
-    <section class="min-h-[700px] flex flex-col justify-between bg-[url('/static/images/public/img_bg_default.svg')] bg-center bg-cover pt-0">
+    <section class="min-h-[700px] flex flex-col justify-between pt-0 relative">
+       
+      <!-- SVG фон -->
+      <div class="absolute inset-0 -z-10">
+        <img src="/static/images/public/bg-circles.svg" alt="background" class="w-full h-full object-cover">
+      </div>
+        
       <!-- Header внутри первого экрана -->
       <div class="w-full py-[22px] fixed md:static md:top-0 md:left-0 bg-[url('/static/images/public/bg_menu_mob.png')] bg-center bg-cover md:bg-none z-50 transition-all">
         <div class="max-w-[1200px] w-full mx-auto flex items-center justify-between px-[14px] md:px-[24px] xl:px-0">
@@ -154,9 +160,15 @@
       </div>
     </section>
 
-    <!-- Advantages Section -->
-    <section id="demo" class="advantages flex flex-col justify-between bg-[url('/static/images/public/img_bg_contrast.svg')] bg-center bg-cover p-0">
-      <div class="advantages__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0"> 
+    <!-- Advantages Section img_bg_contrast.svg-->
+    <section id="demo" class="advantages flex flex-col justify-between relative">
+       
+      <!-- SVG фон -->
+      <div class="absolute inset-0 -z-10">
+        <img src="/static/images/public/img_bg_first.svg" alt="background" class="w-full h-full object-cover">
+      </div>
+        
+      <div class="advantages__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0 z-50"> 
         <div class="advantages__list w-full mx-auto flex flex-wrap justify-around items-stretch gap-[40px] mb-[40px] md:mb-[60px] lg:mb-[80px]"> 
           <div class="advantages__item flex flex-col items-center text-center max-w-[295px] w-full bg-white rounded-[16px] shadow-lg p-[32px] hover:shadow-xl transition-shadow duration-300">
             <div class="advantages__icon-container w-[80px] h-[80px] flex items-center justify-center mb-[24px] bg-gradient-to-br from-[#7B7FD1]/10 to-[#88A6F0]/10 rounded-[20px]">
@@ -198,8 +210,14 @@
     </section>
 
     <!-- Analyze reviews without code... -->
-    <section class="analyze flex flex-col justify-between bg-[url('/static/images/public/img_bg_default.svg')] bg-center bg-cover pt-0">
-      <div class="analyze__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0"> 
+    <section class="analyze flex flex-col justify-between pt-0 relative">
+
+      <!-- SVG фон -->
+      <div class="absolute inset-0 -z-10">
+        <img src="/static/images/public/bg-gradient.svg" alt="background" class="w-full h-full object-cover">
+      </div>
+        
+      <div class="analyze__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0  z-50"> 
         <div class="analyze__wrap w-full mx-auto flex flex-col-reverse md:flex-col-reverse lg:flex-row items-center justify-between gap-[40px] relative">
           <!-- Левая колонка -->
           <div class="analyze__content flex-1 min-w-0 max-w-[450px] text-center lg:text-left">
@@ -230,8 +248,14 @@
     </section>
 
     <!-- How it works -->
-    <section id="how" class="howitworks flex flex-col justify-between bg-[url('/static/images/public/img_bg_contrast.svg')] bg-center bg-cover pt-0">
-      <div class="howitworks__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0"> 
+    <section id="how" class="howitworks flex flex-col justify-between pt-0 relative">
+
+      <!-- SVG фон -->
+      <div class="absolute inset-0 -z-10">
+        <img src="/static/images/public/img_bg_first.svg" alt="background" class="w-full h-full object-cover">
+      </div>
+        
+      <div class="howitworks__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0 z-50"> 
         <div class="howitworks__wrap w-full mx-auto">
           <!-- Заголовок -->
           <div class="text-center mb-[60px]">
@@ -327,8 +351,14 @@
     </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="faq flex flex-col justify-between bg-[url('/static/images/public/img_bg_default.svg')] bg-center bg-cover pt-0">
-      <div class="faq__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0"> 
+    <section id="faq" class="faq flex flex-col justify-between pt-0 relative">
+
+      <!-- SVG фон -->
+      <div class="absolute inset-0 -z-10">
+        <img src="/static/images/public/bg-gradient.svg" alt="background" class="w-full h-full object-cover">
+      </div>
+        
+      <div class="faq__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0 z-50"> 
         <div class="faq__container w-full mx-auto flex flex-col items-center justify-between relative">
           <h2 class="faq__title text-[40px] font-bold text-center mb-[40px]">Frequently Asked Questions</h2>
           <div class="faq__list space-y-[18px] max-w-[760px] w-full mx-auto">
@@ -664,8 +694,14 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials flex flex-col justify-between bg-[url('/static/images/public/img_bg_contrast.svg')] bg-center bg-cover pt-0">
-      <div class="testimonials__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0"> 
+    <section id="testimonials" class="testimonials flex flex-col justify-between pt-0 relative">
+
+      <!-- SVG фон -->
+      <div class="absolute inset-0 -z-10">
+        <img src="/static/images/public/img_bg_first.svg" alt="background" class="w-full h-full object-cover">
+      </div>
+        
+      <div class="testimonials__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0 z-50"> 
         <div class="testimonials__container w-full mx-auto flex flex-col items-center justify-between">
           <div id="testimonialsSlider" class="testimonials__list flex flex-row">
             <div class="testimonials__item border-l border-r border-[rgba(100,119,168,0.8)] max-w-[592px] w-full p-[25px] flex flex-col items-center text-center">
@@ -719,8 +755,14 @@
     </section>
 
     <!-- Final CTA Section -->
-    <section class="finalcta flex flex-col justify-between bg-[url('/static/images/public/img_bg_default.svg')] bg-center bg-cover pt-0">
-      <div class="finalcta__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0"> 
+    <section class="finalcta flex flex-col justify-between pt-0 relative">
+
+      <!-- SVG фон -->
+      <div class="absolute inset-0 -z-10">
+        <img src="/static/images/public/bg-gradient.svg" alt="background" class="w-full h-full object-cover">
+      </div>
+        
+      <div class="finalcta__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0 z-50"> 
         <div class="finalcta__container w-full mx-auto flex flex-col md:flex-col lg:flex-row items-center justify-between gap-[40px] relative">
           <!-- Левая колонка -->
           <div class="finalcta__image flex-1 flex min-w-0 items-center justify-center">
