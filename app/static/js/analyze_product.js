@@ -1295,45 +1295,6 @@ AnalyzeProductManager.prototype.initMobileResize = function(textarea) {
   `;
   container.appendChild(resizeHandle);
 
-  // Добавляем стили для мобильного resize handle
-  const style = document.createElement('style');
-  style.textContent = `
-    .mobile-resize-handle {
-      position: absolute;
-      bottom: 8px;
-      right: 8px;
-      width: 32px;
-      height: 32px;
-      background: rgba(163, 184, 248, 0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: ns-resize;
-      z-index: 15;
-      transition: background-color 0.2s ease;
-    }
-    
-    .mobile-resize-handle:hover,
-    .mobile-resize-handle:active {
-      background: rgba(163, 184, 248, 0.2);
-    }
-    
-    .resize-indicator {
-      transform: rotate(45deg);
-    }
-    
-    @media (max-width: 768px) {
-      .mobile-resize-handle {
-        width: 40px;
-        height: 40px;
-        bottom: 12px;
-        right: 12px;
-      }
-    }
-  `;
-  document.head.appendChild(style);
-
   // Обработчики для touch событий
   resizeHandle.addEventListener('touchstart', (e) => {
     e.preventDefault();
