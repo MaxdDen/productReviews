@@ -508,3 +508,7 @@ label[for="promt_id"] {
 .pointer-events-auto {
   pointer-events: auto;
 }
+
+#analysis_result {
+  min-height: 120px;
+} 
