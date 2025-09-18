@@ -331,7 +331,7 @@ class AnalyzeProductManager {
             Edit
           </button>
           <div class="flex items-center gap-2">
-            <button class="rounded-full hover:bg-red-100 transition p-1 delete-btn relative z-50 cursor-pointer" title="Delete" data-id="${review.id}" style="pointer-events: auto;">
+            <button class="rounded-full hover:bg-red-100 transition p-1 delete-btn relative z-50 cursor-pointer" title="Delete" data-id="${review.id}">
               <svg width="24" height="24" viewBox="0 0 33 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.5" y="1" width="32" height="34" rx="9.5" stroke="#6B6397" stroke-opacity="0.2"/>
                 <path d="M11 12.5L11.7639 24.3182C11.8002 25.0011 12.3139 25.5 12.9861 25.5H20.0139M21.4844 21.142L22 12.5" stroke="#6B6397" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>

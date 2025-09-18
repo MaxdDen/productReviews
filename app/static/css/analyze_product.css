@@ -504,3 +504,7 @@ label[for="promt_id"] {
     right: 12px;
   }
 }
+
+.pointer-events-auto {
+  pointer-events: auto;
+}
