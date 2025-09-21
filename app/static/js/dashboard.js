@@ -258,8 +258,6 @@ TableUtils.init({
     const newCreated = params.get('new_created');
     let found = false;
   
-    console.log('[highlight]', { highlightId, newCreated });
-  
     if (highlightId) {
       const row = document.getElementById(`product-row-${highlightId}`);
       const card = document.querySelector(`#product-cards .card[data-id='${highlightId}']`);

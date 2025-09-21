@@ -50,7 +50,7 @@
       </div>
         
       <!-- Header внутри первого экрана -->
-      <div class="w-full py-[22px] fixed md:static md:top-0 md:left-0 bg-[url('/static/images/public/bg_menu_mob.png')] bg-center bg-cover md:bg-none z-50 transition-all">
+      <div class="w-full z-[100] py-[22px] fixed md:static md:top-0 md:left-0 bg-[url('/static/images/public/bg_menu_mob.png')] bg-center bg-cover md:bg-none transition-all">
         <div class="max-w-[1200px] w-full mx-auto flex items-center justify-between px-[14px] md:px-[24px] xl:px-0">
           <div class="font-black text-[24px] text-[#6B6397] text-balance">
             AI Review Analyzer
@@ -104,8 +104,7 @@
             <!-- 500+ reviews analyzed -->
             <div class="flex items-center gap-2 relative">
               <!-- Анимированный вопрос рядом со статистикой -->
-              <div class="question-mark-answer absolute -left-[35px] -top-[5px] w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] lg:w-[60px] lg:h-[60px]"
-                style="--fade-delay: 3s;">
+              <div class="question-mark-answer absolute -left-[35px] -top-[5px] w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] lg:w-[60px] lg:h-[60px] question-mark-style-3">
                 <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full" />
               </div>
               
@@ -140,8 +139,7 @@
             </div>
           </div>
           <!-- Плавающий вопрос (верхний правый угол левого блока) -->
-          <div class="question-mark-float absolute right-[5%] top-[35%] md:right-[8%] md:top-[8%] lg:right-[15%] lg:top-[10%] w-[45px] h-[45px] md:w-[50px] md:h-[50px] lg:w-[55px] lg:h-[55px]"
-              style="--fade-delay: 0s;">
+          <div class="question-mark-float absolute right-[5%] top-[35%] md:right-[8%] md:top-[8%] lg:right-[15%] lg:top-[10%] w-[45px] h-[45px] md:w-[50px] md:h-[50px] lg:w-[55px] lg:h-[55px] question-mark-style-0">
             <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full" />
           </div>
         </div>
@@ -152,15 +150,14 @@
         </div>
         <!-- Декоративные элементы с разными анимациями -->
         <!-- Вопрос: Пульсирующий поиск (свободное пространство справа) -->
-        <div class="question-mark-pulse absolute right-[5%] top-[15%] md:right-[8%] md:top-[20%] lg:right-[10%] lg:top-[25%] w-[50px] h-[50px] md:w-[55px] md:h-[55px] lg:w-[65px] lg:h-[65px]"
-          style="--fade-delay: 1.5s;">
+        <div class="question-mark-pulse absolute right-[5%] top-[15%] md:right-[8%] md:top-[20%] lg:right-[10%] lg:top-[25%] w-[50px] h-[50px] md:w-[55px] md:h-[55px] lg:w-[65px] lg:h-[65px] question-mark-style-1_5">
           <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full" />
         </div>
         
       </div>
     </section>
 
-    <!-- Advantages Section img_bg_contrast.svg-->
+    <!-- Advantages Section -->
     <section id="demo" class="advantages flex flex-col justify-between relative">
        
       <!-- SVG фон -->
@@ -168,8 +165,8 @@
         <img src="/static/images/public/img_bg_first.svg" alt="background" class="w-full h-full object-cover">
       </div>
         
-      <div class="advantages__container max-w-[1200px] w-full mx-auto py-[40px] md:py-[60px] lg:py-[80px] px-[14px] md:px-[24px] xl:px-0 z-50"> 
-        <div class="advantages__list w-full mx-auto flex flex-wrap justify-around items-stretch gap-[40px] mb-[40px] md:mb-[60px] lg:mb-[80px]"> 
+      <div class="advantages__container max-w-[1200px] w-full mx-auto px-[14px] md:px-[24px] xl:px-0 z-50"> 
+        <div class="advantages__list w-full mx-auto flex flex-wrap justify-around items-stretch gap-[40px] py-[40px] md:py-[60px] lg:py-[80px]"> 
           <div class="advantages__item flex flex-col items-center text-center max-w-[295px] w-full bg-white rounded-[16px] shadow-lg p-[32px] hover:shadow-xl transition-shadow duration-300">
             <div class="advantages__icon-container w-[80px] h-[80px] flex items-center justify-center mb-[24px] bg-gradient-to-br from-[#7B7FD1]/10 to-[#88A6F0]/10 rounded-[20px]">
               <svg width="45" height="44" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-[48px] h-[48px]">
@@ -202,9 +199,6 @@
             <h3 class="advantages__title text-[20px] font-bold mb-[12px] text-gray-900">Time saving</h3>
             <p class="advantages__desc text-[16px] text-gray-600 leading-relaxed">Don't waste time on manual review analysis.</p>
           </div>
-        </div>
-        <div class="advantages__app w-full mx-auto flex justify-center items-center">
-          <img src="/static/images/public/advantages.png" alt="App Screenshot" class="advantages__image w-full max-w-[900px]" />
         </div>
       </div>
     </section>
@@ -239,8 +233,7 @@
           </div>
           <!-- Декоративные элементы -->
           <!-- Один плавающий вопрос (тонкая анимация) -->
-          <div class="question-mark-float subtle absolute right-[3%] top-[20%] w-[50px] h-[50px]"
-            style="--fade-delay: 2s;">
+          <div class="question-mark-float subtle absolute right-[3%] top-[20%] w-[50px] h-[50px] question-mark-style-2">
             <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full" />
           </div>
         </div>
@@ -281,9 +274,8 @@
               <!-- Мини-скрин Step 1 -->
               <div class="step-preview w-full max-w-[280px] bg-white rounded-[12px] shadow-md p-[16px] border border-gray-100">
                 <div class="bg-gray-50 rounded-[8px] p-[12px] mb-[12px]">
-                  <div class="text-[12px] text-gray-500 mb-[8px]">Product URL</div>
-                  <div class="bg-white border border-gray-200 rounded-[6px] h-[32px] flex items-center px-[8px]">
-                    <span class="text-[12px] text-gray-400">https://amazon.com/product...</span>
+                  <div class="flex-1 min-w-0 flex items-center justify-center mb-[4px]">
+                    <img src="/static/images/public/how_works_1.png" alt="Step 1" class="w-[420px] max-w-full" />
                   </div>
                 </div>
                 <div class="bg-[#7B7FD1] text-white text-[12px] font-semibold py-[8px] px-[12px] rounded-[6px] text-center">
@@ -303,12 +295,8 @@
               </p>
               <!-- Мини-скрин Step 2 -->
               <div class="step-preview w-full max-w-[280px] bg-white rounded-[12px] shadow-md p-[16px] border border-gray-100">
-                <div class="bg-gray-50 rounded-[8px] p-[12px] mb-[12px]">
-                  <div class="text-[12px] text-gray-500 mb-[8px]">Reviews found: 247</div>
-                  <div class="flex items-center space-x-[8px]">
-                    <div class="w-[4px] h-[4px] bg-green-500 rounded-full animate-pulse"></div>
-                    <span class="text-[12px] text-green-600">Downloading...</span>
-                  </div>
+                <div class="flex-1 min-w-0 flex items-center justify-center mb-[4px]">
+                  <img src="/static/images/public/how_works_2.png" alt="Step 2" class="w-[420px] max-w-full" />
                 </div>
                 <div class="bg-[#88A6F0] text-white text-[12px] font-semibold py-[8px] px-[12px] rounded-[6px] text-center">
                   Download Reviews
@@ -327,18 +315,8 @@
               </p>
               <!-- Мини-скрин Step 3 -->
               <div class="step-preview w-full max-w-[280px] bg-white rounded-[12px] shadow-md p-[16px] border border-gray-100">
-                <div class="bg-gray-50 rounded-[8px] p-[12px] mb-[12px]">
-                  <div class="text-[12px] text-gray-500 mb-[8px]">Analysis complete</div>
-                  <div class="space-y-[4px]">
-                    <div class="flex justify-between text-[11px]">
-                      <span>Positive: 78%</span>
-                      <span class="text-green-600">✓</span>
-                    </div>
-                    <div class="flex justify-between text-[11px]">
-                      <span>Issues: 3 found</span>
-                      <span class="text-orange-500">!</span>
-                    </div>
-                  </div>
+                <div class="flex-1 min-w-0 flex items-center justify-center mb-[4px]">
+                  <img src="/static/images/public/how_works_3.png" alt="Step 3" class="w-[420px] max-w-full" />
                 </div>
                 <div class="bg-[#7B7FD1] text-white text-[12px] font-semibold py-[8px] px-[12px] rounded-[6px] text-center">
                   View Report
@@ -681,12 +659,10 @@
           </div>
           <!-- Декоративные элементы -->
           <!-- Два вопроса с разными анимациями -->
-          <div class="question-mark-pulse subtle absolute right-[5%] top-[10%] w-[60px] h-[60px]"
-            style="--fade-delay: 1s;">
+          <div class="question-mark-pulse subtle absolute right-[5%] top-[10%] w-[60px] h-[60px] question-mark-style-1">
             <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full" />
           </div>
-          <div class="question-mark-answer subtle absolute left-[3%] bottom-[15%] w-[50px] h-[50px]"
-            style="--fade-delay: 3s;">
+          <div class="question-mark-answer subtle absolute left-[3%] bottom-[15%] w-[50px] h-[50px] question-mark-style-3">
             <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full" />
           </div>
         </div>
@@ -821,8 +797,7 @@
           </div>
           <!-- Декор -->
           <!-- Один тонкий вопрос для завершения -->
-          <div class="question-mark-float subtle absolute right-[2%] top-[15%] w-[45px] h-[45px]"
-            style="--fade-delay: 4s;">
+          <div class="question-mark-float subtle absolute right-[2%] top-[15%] w-[45px] h-[45px] question-mark-style-4">
             <img src="/static/images/public/icon_query.svg" alt="?" class="w-full h-full" />
           </div>
         </div>
